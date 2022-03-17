@@ -14,6 +14,8 @@ enum state {
 	swing
 }
 
+var player_state = state.normal
+
 #A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
 
@@ -23,7 +25,7 @@ onready var animation = $AnimationPlayer
 
 #Built in function from KinematicBody2D
 func _physics_process(delta):
-	match state:
+	match player_state:
 		state.normal:
 			var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 			var y_input = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
