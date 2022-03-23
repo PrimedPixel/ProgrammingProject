@@ -8,6 +8,12 @@ const air_frict = 0.02
 const grav = 200
 const jump_force = 128
 
+var key_jump = "ui_select"	#Spacebar is mapped to UI Select (to begin with)
+var key_up = "button_w"
+var key_down = "button_s"
+var key_left = "button_a"
+var key_right = "button_d"
+
 #Gross
 enum state {
 	normal,
@@ -25,10 +31,16 @@ onready var animation = $AnimationPlayer
 
 #Built in function from KinematicBody2D
 func _physics_process(delta):
+	var input_jump = Input.is_action_just_pressed(key_jump)
+	var input_up = Input.get_action_strength(key_up)
+	var input_down = Input.get_action_strength(key_down)
+	var input_left = Input.get_action_strength(key_left)
+	var input_right = Input.get_action_strength(key_right)
+	
 	match player_state:
 		state.normal:
-			var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-			var y_input = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+			var x_input = input_right - input_left
+			var y_input = input_up - input_down
 			
 			if x_input != 0:
 				motion.x += x_input * accel * delta		#Multiply by delta since occuring every frame
@@ -39,19 +51,19 @@ func _physics_process(delta):
 			
 			motion.y += grav * delta	#Multiply by delta since occuring every frame
 			
-			if floor(motion.x) == 0:
+			if floor(abs(motion.x)) == 0:
 				animation.play("Idle")
 			else:
 				animation.play("Run")
 			
 			if is_on_floor():
-				if Input.is_action_just_pressed("ui_up"):
+				if input_jump:
 					motion.y = -jump_force
 				
 				if x_input == 0:
 					motion.x = lerp(motion.x, 0, ground_frict)
 			else:												#checks that we're moving up quickly
-				if Input.is_action_just_released("ui_up") and motion.y < -jump_force / 2:#variable jump height
+				if Input.is_action_just_released("ui_select") and motion.y < -jump_force / 2:#variable jump height
 					motion.y = -jump_force / 2
 				
 				if x_input == 0:
@@ -67,3 +79,8 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, Vector2.UP)	#Moves the player node by the vector + automatically collides
 												#Also returns left over motion, meaning if collided
 												#It will return no movement, and stop for the next frame
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_R:
+			get_tree().reload_current_scene()
