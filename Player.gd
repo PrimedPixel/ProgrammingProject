@@ -29,6 +29,8 @@ var cast = -1
 var rope_angle_vel = 0
 var rope_angle = 0
 var rope_len = 0
+var local_cast_prev = Vector2.ZERO
+var d = 0
 
 #A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
@@ -37,6 +39,7 @@ var motion = Vector2.ZERO
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
 onready var rope_cast = $RopeCast
+onready var line = get_parent().get_node("RopeLine")
 
 #Built in function from KinematicBody2D
 func _physics_process(delta):
@@ -80,36 +83,21 @@ func _physics_process(delta):
 					
 				animation.play("Jump")
 		state.swing:
-			var local_cast_prev = local_cast
-			local_cast = -local_cast
-			print(local_cast)
-			local_cast = local_cast.rotated(deg2rad(10))
-			print(local_cast)
-			motion = local_cast + local_cast_prev
-#			print(local_cast_prev)
-#			print(local_cast)
-#			print("###")
+			local_cast_prev = local_cast
 			
-			local_cast = -local_cast
-#			print(rope_angle)
-#			var rope_angle_accel = -0.2 * cos(rope_angle)
-#			rope_angle_vel += rope_angle_accel
-#			rope_angle += rope_angle_vel
-#			rope_angle *= 0.99
-#			print(rad2deg(rope_angle))
-#
-#			print("START###########")
-#			print(grapple_pos)
-#			print(rope_len)
-#			print(rope_angle)
-#			rope_pos = Vector2(rope_len, 0).rotated(rope_angle)
-#			new_cast = Vector2(rope_len, 0).rotated(rope_angle)
-#			print(rope_pos, Vector2(rope_len, 0).rotated(rope_angle))
-#			motion.x = rope_pos[0] - position[0]
-#			motion.y = rope_pos[1] - position[1]
-#			print(new_cast)
-#			motion = local_cast - new_cast
-#			print(motion)
+			d += delta
+			var radius = rope_len
+			var speed = 0.5
+			
+			position = Vector2(
+				sin(d * speed) * radius,
+				cos(d * speed) * radius
+			) + local_cast
+			
+			line.clear_points()
+			line.add_point(position)
+			line.add_point(local_cast)
+#			motion = local_cast - local_cast_prev
 		
 	
 	motion = move_and_slide(motion, Vector2.UP)	#Moves the player node by the vector + automatically collides
@@ -132,14 +120,14 @@ func _unhandled_input(event):
 			#Initialise rope swing
 			cast = rope_cast.cast_to_coordinate(get_global_mouse_position())
 			if typeof(cast) == TYPE_VECTOR2:
-				local_cast = to_local(cast)
-				
+				local_cast = cast
+				rope_pos = position
 #				print(local_cast)
 #				rope_angle_vel = 0
-				rope_angle = local_cast.angle()
+#				rope_angle = local_cast.angle()
 #				print(rad2deg(local_cast.angle()))
-				rope_len = local_cast.length()
+				rope_len = to_local(local_cast).length()
 				player_state = state.swing
 
 func _draw():
-	draw_line(Vector2(0, 0), local_cast, Color(1,0,0,1))
+	draw_line(Vector2.ZERO, local_cast, Color(1,0,0,1))
