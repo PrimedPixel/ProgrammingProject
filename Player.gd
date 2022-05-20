@@ -3,6 +3,7 @@ extends KinematicBody2D
 #Equivalent to macros, I suppose
 const accel = 512
 const max_spd = 64
+const term_vel = 192
 const ground_frict = 0.35
 const air_frict = 0.02
 const grav = 200
@@ -22,15 +23,11 @@ enum state {
 
 var player_state = state.normal
 
-var local_cast = Vector2(0, 0)
-var rope_pos = Vector2.ZERO
-var new_cast = Vector2.ZERO
+#Variables for the rope that cannot be re-initialised
 var cast = -1
-var rope_angle_vel = 0
-var rope_angle = 0
 var rope_len = 0
-var local_cast_prev = Vector2.ZERO
-var d = 0
+var angle_to = 0
+var rope_pos = Vector2.ZERO
 
 #A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
@@ -62,6 +59,7 @@ func _physics_process(delta):
 				
 			
 			motion.y += grav * delta	#Multiply by delta since occuring every frame
+			motion.y = clamp(motion.y, -term_vel, term_vel)
 			
 			if floor(abs(motion.x)) == 0:
 				animation.play("Idle")
@@ -83,22 +81,38 @@ func _physics_process(delta):
 					
 				animation.play("Jump")
 		state.swing:
-			local_cast_prev = local_cast
 			
-			d += delta
-			var radius = rope_len
-			var speed = 0.5
+			#Changes the length of the rope based on up / down
+			rope_len = clamp(rope_len + ((input_down - input_up) * 5), 50, 500)
 			
-			position = Vector2(
-				sin(d * speed) * radius,
-				cos(d * speed) * radius
-			) + local_cast
+			#If not colliding with something
+			if get_slide_count() == 0:
+				#Changes the angle of the rope based on left / right
+				angle_to = angle_to + ((input_right - input_left) * 0.05)
+			else:
+				#Inverse the change of angle while colliding
+				angle_to = angle_to - ((input_right - input_left) * 0.07)
 			
+			#Calculates new rope position
+			var position_to = Vector2(
+				sin(angle_to),
+				cos(angle_to)
+			) * rope_len + rope_pos
+			
+			#Adds rope points to the line
 			line.clear_points()
 			line.add_point(position)
-			line.add_point(local_cast)
-#			motion = local_cast - local_cast_prev
-		
+			line.add_point(rope_pos)
+			
+			#Calculates the movement from the current position to the new one
+			motion = position_to - position
+			
+			#Resets player state out of rope state
+			if Input.is_action_just_released("ui_select"):
+#					motion.x *= 10
+					motion.y *= 0.75
+					line.clear_points()
+					player_state = state.normal
 	
 	motion = move_and_slide(motion, Vector2.UP)	#Moves the player node by the vector + automatically collides
 												#Also returns left over motion, meaning if collided
@@ -115,19 +129,15 @@ func _unhandled_input(event):
 				KEY_ESCAPE:
 					get_tree().quit()
 	
+	#If mouse button pressed
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
+			
 			#Initialise rope swing
 			cast = rope_cast.cast_to_coordinate(get_global_mouse_position())
 			if typeof(cast) == TYPE_VECTOR2:
-				local_cast = cast
-				rope_pos = position
-#				print(local_cast)
-#				rope_angle_vel = 0
-#				rope_angle = local_cast.angle()
-#				print(rad2deg(local_cast.angle()))
-				rope_len = to_local(local_cast).length()
+				rope_pos = cast
+				#Take properties of rope len
+				rope_len = to_local(cast).length()
+				angle_to = cast.angle()
 				player_state = state.swing
-
-func _draw():
-	draw_line(Vector2.ZERO, local_cast, Color(1,0,0,1))
