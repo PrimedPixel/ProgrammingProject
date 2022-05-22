@@ -3,6 +3,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Grass_Detailed.png" type="Texture" id=2]
 [ext_resource path="res://RayCast2D.gd" type="Script" id=3]
+[ext_resource path="res://Cam.gd" type="Script" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -583,38 +584,10 @@ points = PoolVector2Array( 0, 4, 8, 0, 8, 8, 0, 8 )
 } ]
 1/z_index = 0
 
-[sub_resource type="GDScript" id=61]
-script/source = "extends Line2D
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-#	print(points)
-	pass
-"
-
 [node name="DebugRoom" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 19, 152 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( -19, -152 )
-offset = Vector2( 19, 90 )
-current = true
-limit_left = -19
-limit_top = -90
-smoothing_enabled = true
 
 [node name="RopeCast" type="RayCast2D" parent="Player"]
 script = ExtResource( 3 )
@@ -627,4 +600,9 @@ tile_data = PoolIntArray( 852019, 1, 327680, 852020, 1, 327681, 852021, 0, 6, 85
 
 [node name="RopeLine" type="Line2D" parent="."]
 width = 2.0
-script = SubResource( 61 )
+default_color = Color( 0.619608, 0.403922, 0.176471, 1 )
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2( 19, 152 )
+current = true
+script = ExtResource( 4 )
