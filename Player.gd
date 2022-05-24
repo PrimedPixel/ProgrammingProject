@@ -9,7 +9,7 @@ const air_frict = 0.02
 const grav = 200
 const jump_force = 128
 
-const max_rope_len = 500
+const max_rope_len = 250
 const min_rope_len = 50
 
 var key_jump = "button_w"	#Spacebar is mapped to UI Select (to begin with)
@@ -33,6 +33,8 @@ var angle_to = 0
 var rope_pos = Vector2.ZERO
 
 var rope_angle_vel = 0
+
+var offset = Vector2(3, -7)
 
 #A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
@@ -86,6 +88,7 @@ func _physics_process(delta):
 					
 				animation.play("Jump")
 		state.swing:
+			animation.play("Swing")
 			
 			#Changes the length of the rope based on up / down
 			rope_len = clamp(rope_len + ((input_down - input_up) * 2), min_rope_len, max_rope_len)
@@ -113,6 +116,10 @@ func _physics_process(delta):
 			#Calculates the movement from the current position to the new one
 			motion = position_to - position
 			
+			#Change speed of players animation depending on speed of movement in x axis
+			if abs(motion.x) > 1.5:			#Minimum animation speed
+				animation.playback_speed = abs(motion.x) * 0.03
+			
 			#Will move quicker to the target position if not colliding
 			if get_slide_count() == 0:
 				motion *= 5
@@ -121,18 +128,30 @@ func _physics_process(delta):
 			if Input.is_action_just_released("ui_select"):
 					motion *= 2					#Increase motion to make swing feel more significant
 					line.clear_points()
+					animation.playback_speed = 1 	#Reset animation speed
 					player_state = state.normal
 	
 	motion = move_and_slide(motion, Vector2.UP)	#Moves the player node by the vector + automatically collides
 												#Also returns left over motion, meaning if collided
 												#It will return no movement, and stop for the next frame
-			
+	
+	#Rope animation	
 	if player_state == state.swing:
 		#Adds rope points to the line
 		#This has to be after the move_and_slide so the position has been updated
-			line.clear_points()
-			line.add_point(position)
-			line.add_point(rope_pos)
+		var x_input = (input_right - input_left)
+		
+		if x_input != 0:
+			sprite.flip_h = x_input < 0
+			
+			if x_input > 0:
+				offset = Vector2(3, -7)
+			else:
+				offset = Vector2(-3, -7)
+		
+		line.clear_points()
+		line.add_point(position + offset)
+		line.add_point(rope_pos)
 
 func _unhandled_input(event):
 	if event is InputEventKey:
