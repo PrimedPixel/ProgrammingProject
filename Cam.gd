@@ -17,4 +17,7 @@ func _process(delta):
 	var mid_x = (target.x + get_global_mouse_position().x) / 2
 	var mid_y = (target.y + get_global_mouse_position().y) / 2
 
-	global_position = lerp(global_position, Vector2(mid_x,mid_y), interpolate_val * delta) 
+	global_position = lerp(global_position, Vector2(mid_x,mid_y), interpolate_val * delta)
+#
+#	global_position.x = round(global_position.x)
+#	global_position.y = round(global_position.y)

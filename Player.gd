@@ -96,7 +96,7 @@ func _physics_process(delta):
 			var rope_angle_accel = 0.03 * cos((rope_pos - position).angle())
 			rope_angle_vel += rope_angle_accel
 			rope_angle_vel *= 0.5
-			
+
 			angle_to += rope_angle_vel
 			
 			#If not colliding with something
@@ -115,6 +115,7 @@ func _physics_process(delta):
 			
 			#Calculates the movement from the current position to the new one
 			motion = position_to - position
+#			position = position_to
 			
 			#Change speed of players animation depending on speed of movement in x axis
 			if abs(motion.x) > 1.5:			#Minimum animation speed
@@ -130,6 +131,10 @@ func _physics_process(delta):
 					line.clear_points()
 					animation.playback_speed = 1 	#Reset animation speed
 					player_state = state.normal
+#
+#			line.clear_points()
+#			line.add_point(position_to + offset)
+#			line.add_point(rope_pos)
 	
 	motion = move_and_slide(motion, Vector2.UP)	#Moves the player node by the vector + automatically collides
 												#Also returns left over motion, meaning if collided
@@ -176,10 +181,16 @@ func _unhandled_input(event):
 					#Take properties of rope len
 					rope_len = to_local(cast).length()
 					
-					if rope_pos > position:
-						angle_to = (rope_pos - position).angle()
+					if position.x > cast.x:
+						if position.y < cast.y:
+							angle_to = deg2rad(180) - cast.angle()
+						else:
+							angle_to = deg2rad(90) - cast.angle()
 					else:
-						angle_to = (position - rope_pos).angle()
+						if position.y < cast.y:
+							angle_to = deg2rad(270) - cast.angle()
+						else:
+							angle_to = deg2rad(360) - cast.angle()
 					
 					motion = Vector2.ZERO		#Dunno if this is needed
 					player_state = state.swing
