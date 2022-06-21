@@ -175,22 +175,14 @@ func _unhandled_input(event):
 			
 			#Initialise rope swing
 			cast = rope_cast.cast_to_coordinate(get_global_mouse_position())
+			
 			if typeof(cast) == TYPE_VECTOR2:
 				if to_local(cast).length() <= max_rope_len:
-					rope_pos = cast
 					#Take properties of rope len
-					rope_len = to_local(cast).length()
+					rope_pos = cast
+					rope_len = (position - rope_pos).length()
 					
-					if position.x > cast.x:
-						if position.y < cast.y:
-							angle_to = deg2rad(180) - cast.angle()
-						else:
-							angle_to = deg2rad(90) - cast.angle()
-					else:
-						if position.y < cast.y:
-							angle_to = deg2rad(270) - cast.angle()
-						else:
-							angle_to = deg2rad(360) - cast.angle()
+					angle_to = deg2rad(90) - (position - rope_pos).angle()
 					
-					motion = Vector2.ZERO		#Dunno if this is needed
+#					motion = Vector2.ZERO		#Dunno if this is needed
 					player_state = state.swing
