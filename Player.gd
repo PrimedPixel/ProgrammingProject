@@ -2,10 +2,11 @@ extends KinematicBody2D
 
 #Equivalent to macros, I suppose
 const accel = 512
-const max_spd = 64
+const max_air_spd = 128
+const max_ground_spd = 64
 const term_vel = 192
-const ground_frict = 0.35
-const air_frict = 0.02
+const ground_frict = 0.5
+const air_frict = 0.04
 const grav = 200
 const jump_force = 128
 
@@ -56,11 +57,9 @@ func _physics_process(delta):
 	match player_state:
 		state.normal:
 			var x_input = input_right - input_left
-			var y_input = input_up - input_down
 			
 			if x_input != 0:
 				motion.x += x_input * accel * delta		#Multiply by delta since occuring every frame
-				motion.x = clamp(motion.x, -max_spd, max_spd)
 				
 				sprite.flip_h = x_input < 0
 				
@@ -74,17 +73,21 @@ func _physics_process(delta):
 				animation.play("Run")
 			
 			if is_on_floor():
+				motion.x = clamp(motion.x, -max_ground_spd, max_ground_spd)
+				
 				if input_jump:
 					motion.y = -jump_force
 				
 				if x_input == 0:
 					motion.x = lerp(motion.x, 0, ground_frict)
 			else:												#checks that we're moving up quickly
+				motion.x = clamp(motion.x, -max_air_spd, max_air_spd)
+				
 				if Input.is_action_just_released("ui_select") and motion.y < -jump_force / 2:#variable jump height
 					motion.y = -jump_force / 2
 				
-				if x_input == 0:
-					motion.x = lerp(motion.x, 0, air_frict)
+#				if x_input == 0:
+				motion.x = lerp(motion.x, 0, air_frict)
 					
 				animation.play("Jump")
 		state.swing:
@@ -127,7 +130,7 @@ func _physics_process(delta):
 			
 			#Resets player state out of rope state
 			if Input.is_action_just_released("ui_select"):
-					motion *= 2					#Increase motion to make swing feel more significant
+#					motion *= 2	3				#Increase motion to make swing feel more significant
 					line.clear_points()
 					animation.playback_speed = 1 	#Reset animation speed
 					player_state = state.normal
@@ -172,17 +175,16 @@ func _unhandled_input(event):
 	#If mouse button pressed
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			
 			#Initialise rope swing
 			cast = rope_cast.cast_to_coordinate(get_global_mouse_position())
 			
 			if typeof(cast) == TYPE_VECTOR2:
-				if to_local(cast).length() <= max_rope_len:
-					#Take properties of rope len
-					rope_pos = cast
-					rope_len = (position - rope_pos).length()
-					
-					angle_to = deg2rad(90) - (position - rope_pos).angle()
-					
+#				if to_local(cast).length() <= max_rope_len:
+				#Take properties of rope len
+				rope_pos = cast
+				rope_len = (position - rope_pos).length()
+				
+				angle_to = deg2rad(90) - (position - rope_pos).angle()
+				
 #					motion = Vector2.ZERO		#Dunno if this is needed
-					player_state = state.swing
+				player_state = state.swing
