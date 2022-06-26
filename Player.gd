@@ -47,7 +47,9 @@ onready var rope_cast = $RopeCast
 onready var line = get_parent().get_node("RopeLine")
 
 #Built in function from KinematicBody2D
-func _physics_process(delta):
+#_physics_process causes jitter issues on !=60Hz monitors
+#_process seems to eliminate this issue without any caveats
+func _process(delta):
 	var input_jump = Input.is_action_just_pressed(key_jump)
 	var input_up = Input.get_action_strength(key_up)
 	var input_down = Input.get_action_strength(key_down)
