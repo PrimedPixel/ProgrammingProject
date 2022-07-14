@@ -162,6 +162,9 @@ func _process(delta):
 		line.clear_points()
 		line.add_point(position + offset)
 		line.add_point(rope_pos)
+	
+func _on_spike_body_entered(body):
+	pass
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -190,3 +193,6 @@ func _unhandled_input(event):
 				
 #					motion = Vector2.ZERO		#Dunno if this is needed
 				player_state = state.swing
+
+func die():
+	print("die!")
