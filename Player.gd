@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 #Equivalent to macros, I suppose
 const accel = 512
@@ -195,4 +196,4 @@ func _unhandled_input(event):
 				player_state = state.swing
 
 func die():
-	print("die!")
+	position = GlobalVariables.checkpoint_pos

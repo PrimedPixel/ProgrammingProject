@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
+} ]
 _global_script_class_icons={
+"Player": ""
 }
 
 [application]
@@ -17,6 +23,10 @@ _global_script_class_icons={
 config/name="Programming Project"
 run/main_scene="res://DebugRoom.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalVariables="*res://GlobalVariables.gd"
 
 [display]
 
