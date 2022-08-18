@@ -14,6 +14,7 @@ func _process(delta):
 		interpolate_val = 2
 	
 	var target = player.get_global_position()
+	
 	var mid_x = (target.x + get_global_mouse_position().x) / 2
 	var mid_y = (target.y + get_global_mouse_position().y) / 2
 
