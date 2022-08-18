@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Grass_Detailed.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Spikes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Checkpoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Coin_Animation.png" type="Texture" id=9]
+[ext_resource path="res://UI.gd" type="Script" id=10]
+[ext_resource path="res://Kenney Mini Square.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://ALL_PLAYER.png" type="Texture" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -588,6 +592,9 @@ points = PoolVector2Array( 0, 4, 8, 0, 8, 8, 0, 8 )
 } ]
 1/z_index = 0
 
+[sub_resource type="DynamicFont" id=61]
+font_data = ExtResource( 11 )
+
 [node name="DebugRoom" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -620,7 +627,7 @@ script = ExtResource( 4 )
 [node name="Blue" type="ParallaxLayer" parent="Parallax"]
 
 [node name="Sprite" type="Sprite" parent="Parallax/Blue"]
-position = Vector2( 19, 152 )
+position = Vector2( 81, 162 )
 scale = Vector2( 320, 180 )
 texture = ExtResource( 5 )
 region_enabled = true
@@ -655,3 +662,52 @@ position = Vector2( 192, 176 )
 
 [node name="Coin3" parent="Coins" instance=ExtResource( 8 )]
 position = Vector2( 232, 176 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+
+[node name="CanvasUI" type="CanvasLayer" parent="UI"]
+
+[node name="CoinUI" type="Control" parent="UI/CanvasUI"]
+
+[node name="CoinCount" type="Label" parent="UI/CanvasUI/CoinUI"]
+anchor_bottom = 0.404
+margin_left = 21.0
+margin_right = 137.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 61 )
+text = "Hi, I am a label"
+
+[node name="Coin" type="Sprite" parent="UI/CanvasUI/CoinUI"]
+position = Vector2( 11, 11 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+hframes = 4
+
+[node name="CoinTimer" type="Timer" parent="UI/CanvasUI/CoinUI"]
+wait_time = 2.5
+one_shot = true
+
+[node name="DeathUI" type="Control" parent="UI/CanvasUI"]
+
+[node name="DeathSkull" type="Sprite" parent="UI/CanvasUI/DeathUI"]
+position = Vector2( 309, 11 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+hframes = 16
+vframes = 3
+frame = 5
+
+[node name="DeathCount" type="Label" parent="UI/CanvasUI/DeathUI"]
+margin_left = 183.0
+margin_right = 299.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 61 )
+text = "Hi, I am a label"
+align = 2
+
+[node name="DeathTimer" type="Timer" parent="UI/CanvasUI/DeathUI"]
+wait_time = 2.5
+one_shot = true

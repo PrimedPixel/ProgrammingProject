@@ -134,6 +134,7 @@ func initialise_rope():
 
 func die():
 	position = GlobalVariables.checkpoint_pos
+	GlobalVariables.death_count += 1
 	
 	reset_rope()
 
@@ -174,6 +175,7 @@ func _process(delta):
 				if !jump_buffer_timer.is_stopped():
 					motion.y = -jump_force
 					jump_buffer_timer.stop()
+					coyote_timer.stop()
 			
 			if !is_on_floor():
 				air_speed_modifiers()

@@ -120,9 +120,9 @@ anims/Run = SubResource( 5 )
 anims/Swing = SubResource( 6 )
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.15
 one_shot = true
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
