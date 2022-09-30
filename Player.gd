@@ -12,7 +12,7 @@ const grav = 200
 const jump_force = 128
 
 const max_rope_len = 250
-const min_rope_len = 50
+const min_rope_len = 20
 
 var key_jump = "button_w"	# Spacebar is mapped to UI Select (to begin with)
 var key_up = "button_w"
@@ -84,6 +84,9 @@ func rope_angle_changes(colliding, x_input):
 		var rope_angle_accel = 0.03 * cos((rope_pos - position).angle())
 		rope_angle_vel += rope_angle_accel
 		rope_angle_vel *= 0.5
+		
+		# Limits the velocity of swinging on the rope
+		rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
 
 		angle_to += rope_angle_vel
 		
@@ -133,6 +136,7 @@ func initialise_rope():
 			player_state = state.swing
 
 func die():
+	Transition.exit_level_transition()
 	position = GlobalVariables.checkpoint_pos
 	GlobalVariables.death_count += 1
 	
@@ -239,6 +243,10 @@ func _unhandled_input(event):
 			match event.scancode:
 				KEY_R:
 					get_tree().reload_current_scene()
+				KEY_T:
+					Transition.exit_level_transition()
+				KEY_Y:
+					Transition.enter_level_transition()
 				KEY_F11:
 					OS.window_fullscreen = !OS.window_fullscreen
 				KEY_ESCAPE:
