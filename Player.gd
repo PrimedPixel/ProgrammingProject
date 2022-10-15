@@ -79,17 +79,17 @@ func air_speed_modifiers():
 	motion.x = lerp(motion.x, 0, air_frict)
 
 func rope_angle_changes(colliding, x_input):
-	if !colliding:
-		# Pendulum
-		var rope_angle_accel = 0.03 * cos((rope_pos - position).angle())
-		rope_angle_vel += rope_angle_accel
-		rope_angle_vel *= 0.5
-		
-		# Limits the velocity of swinging on the rope
-		rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
+	# Pendulum
+	var rope_angle_accel = 0.03 * cos((rope_pos - position).angle())
+	rope_angle_vel += rope_angle_accel
+	rope_angle_vel *= 0.5
+	
+	# Limits the velocity of swinging on the rope
+	rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
 
-		angle_to += rope_angle_vel
+	angle_to += rope_angle_vel
 		
+	if !colliding:
 		# Changes the angle of the rope based on left / right
 		angle_to = angle_to + (x_input * 0.04)
 	else:
@@ -136,9 +136,12 @@ func initialise_rope():
 			player_state = state.swing
 
 func die():
+	animation.play("Die")
+	
 	Transition.exit_level_transition()
 	yield(Transition, "transition_completed")
 	
+	animation.play("Idle")
 	position = GlobalVariables.checkpoint_pos
 	GlobalVariables.death_count += 1
 	
@@ -150,6 +153,9 @@ func die():
 # _physics_process causes jitter issues on !=60Hz monitors
 # _process seems to eliminate this issue without any caveats?
 func _process(delta):
+	if Transition.rect_animation.is_playing():
+		return
+	
 	var input_jump = Input.is_action_just_pressed(key_jump)
 	var input_up = Input.get_action_strength(key_up)
 	var input_down = Input.get_action_strength(key_down)
