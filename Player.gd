@@ -137,10 +137,14 @@ func initialise_rope():
 
 func die():
 	Transition.exit_level_transition()
+	yield(Transition, "transition_completed")
+	
 	position = GlobalVariables.checkpoint_pos
 	GlobalVariables.death_count += 1
 	
 	reset_rope()
+	
+	Transition.enter_level_transition()
 
 # Built in function from KinematicBody2D
 # _physics_process causes jitter issues on !=60Hz monitors

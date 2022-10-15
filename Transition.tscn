@@ -45,6 +45,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 320.0, 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackRectangle:margin_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -86,3 +98,5 @@ color = Color( 0, 0, 0, 1 )
 anims/EnterLevel = SubResource( 1 )
 anims/ExitLevel = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[connection signal="animation_finished" from="RectAnimation" to="." method="_on_RectAnimation_animation_finished"]
