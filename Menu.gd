@@ -21,4 +21,3 @@ func _on_Options_pressed():
 func _on_Exit_pressed():
 	get_tree().quit()
 
-

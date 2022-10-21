@@ -7,5 +7,7 @@ func _process(_delta):
 		animation.play("RedStill")
 
 func _on_Checkpoint_body_entered(_body):
-	animation.play("RedActive")
-	GlobalVariables.checkpoint_pos = position
+	if animation.get_assigned_animation() == "RedStill":
+		SoundPlayer.play_sound(SoundPlayer.Checkpoint)
+		animation.play("RedActive")
+		GlobalVariables.checkpoint_pos = position

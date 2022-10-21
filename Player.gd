@@ -14,6 +14,8 @@ const jump_force = 128
 const max_rope_len = 250
 const min_rope_len = 20
 
+const max_rope_spd = 250
+
 var key_jump = "button_w"	# Spacebar is mapped to UI Select (to begin with)
 var key_up = "button_w"
 var key_down = "button_s"
@@ -85,16 +87,21 @@ func rope_angle_changes(colliding, x_input):
 	rope_angle_vel *= 0.5
 	
 	# Limits the velocity of swinging on the rope
-	rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
+	if colliding:
+		rope_angle_vel = clamp(rope_angle_vel, -0.5, 0.5)
+	else:
+		rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
 
 	angle_to += rope_angle_vel
-		
-	if !colliding:
-		# Changes the angle of the rope based on left / right
-		angle_to = angle_to + (x_input * 0.04)
-	else:
-		# Inverse the change of angle while colliding
-		angle_to = angle_to - (x_input * 0.07)
+	
+	angle_to = angle_to + (x_input * 0.04)
+	
+#	if !colliding:
+#		# Changes the angle of the rope based on left / right
+#		angle_to = angle_to + (x_input * 0.04)
+#	else:
+#		# Inverse the change of angle while colliding
+#		angle_to = angle_to - (x_input * 0.07)
 
 func reset_rope():
 	line.clear_points()
@@ -133,10 +140,16 @@ func initialise_rope():
 			
 			angle_to = deg2rad(90) - (position - rope_pos).angle()
 			
+			SoundPlayer.stop_sound(SoundPlayer.Swing)
+			SoundPlayer.play_sound(SoundPlayer.Grapple)
+			SoundPlayer.play_sound(SoundPlayer.Swing)
 			player_state = state.swing
 
 func die():
 	animation.play("Die")
+	
+	SoundPlayer.stop_sound(SoundPlayer.Swing)
+	SoundPlayer.play_sound(SoundPlayer.Damage)
 	
 	Transition.exit_level_transition()
 	yield(Transition, "transition_completed")
@@ -156,11 +169,10 @@ func _process(delta):
 	if Transition.rect_animation.is_playing():
 		return
 	
-	var input_jump = Input.is_action_just_pressed(key_jump)
-	var input_up = Input.get_action_strength(key_up)
-	var input_down = Input.get_action_strength(key_down)
-	var input_left = Input.get_action_strength(key_left)
-	var input_right = Input.get_action_strength(key_right)
+	var input_up = Input.get_action_strength("button_w")
+	var input_down = Input.get_action_strength("button_s")
+	var input_left = Input.get_action_strength("button_a")
+	var input_right = Input.get_action_strength("button_d")
 	
 	var x_input = input_right - input_left
 	
@@ -179,14 +191,18 @@ func _process(delta):
 			# True if the player is on the floor, or was in the last 0.15 seconds
 			var coyote_on_floor = is_on_floor() || !coyote_timer.is_stopped()
 			
-			if input_jump:
+			if input_up:
 				jump_buffer_timer.start()
 			
 			if coyote_on_floor:
+				if SoundPlayer.stop_sound(SoundPlayer.Swing):
+					SoundPlayer.play_sound(SoundPlayer.Land)
+					
 				ground_speed_modifiers(x_input)
 				
 				# Allows the player to jump if the jump buffer timer has not stopped
 				if !jump_buffer_timer.is_stopped():
+					SoundPlayer.play_sound(SoundPlayer.Jump)
 					motion.y = -jump_force
 					jump_buffer_timer.stop()
 					coyote_timer.stop()
@@ -222,7 +238,11 @@ func _process(delta):
 			# Calculates the movement from the current position to the new one
 			motion = position_to - position
 			
+			if motion.length() > max_rope_spd:
+				motion = motion.normalized() * max_rope_spd
+			
 			# Will move quicker to the target position if not colliding
+			# (since KinematicBody2D slowly approaches, like a bungee chord)
 			if get_slide_count() == 0:
 				motion *= 5
 			
@@ -245,6 +265,11 @@ func _process(delta):
 	# Rope animation	
 	if player_state == state.swing:
 		rope_animation(x_input)
+	
+	# Sound thingy
+	var sound_channel = SoundPlayer.is_playing(SoundPlayer.Swing)
+	if sound_channel && SoundPlayer.get_channel_pitch_scale(sound_channel):
+		SoundPlayer.set_channel_pitch_scale(sound_channel, (pow(motion.length() / 250, 1.01)))
 
 func _unhandled_input(event):
 	# These should probably move somewhere else

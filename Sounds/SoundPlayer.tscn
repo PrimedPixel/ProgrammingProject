@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sounds/SoundPlayer.gd" type="Script" id=1]
+
+[node name="SoundPlayer" type="Node"]
+script = ExtResource( 1 )
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="AudioChannel" type="AudioStreamPlayer" parent="AudioPlayers"]
+volume_db = -10.0
+
+[node name="AudioChannel2" type="AudioStreamPlayer" parent="AudioPlayers"]
+volume_db = -10.0
+
+[node name="AudioChannel3" type="AudioStreamPlayer" parent="AudioPlayers"]
+volume_db = -10.0
+
+[node name="AudioChannel4" type="AudioStreamPlayer" parent="AudioPlayers"]
+volume_db = -10.0
