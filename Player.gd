@@ -269,7 +269,7 @@ func _process(delta):
 	# Sound thingy
 	var sound_channel = SoundPlayer.is_playing(SoundPlayer.Swing)
 	if sound_channel && SoundPlayer.get_channel_pitch_scale(sound_channel):
-		SoundPlayer.set_channel_pitch_scale(sound_channel, (pow(motion.length() / 250, 1.01)))
+		SoundPlayer.set_channel_pitch_scale(sound_channel, (pow(motion.length() / 100, 1.01)))
 
 func _unhandled_input(event):
 	# These should probably move somewhere else

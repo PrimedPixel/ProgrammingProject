@@ -6,7 +6,11 @@ const Damage = preload("res://Sounds/Damage.wav")
 const Grapple = preload("res://Sounds/Grapple.wav")
 const Jump = preload("res://Sounds/Jump.wav")
 const Menu = preload("res://Sounds/Menu.wav")
-const Swing = preload("res://Sounds/Swing.wav")
+#const Swing = preload("res://Sounds/Swing.wav")
+#const Swing = preload("res://Sounds/White Noise.wav")
+#const Swing = preload("res://Sounds/Pink Noise.wav")
+const Swing = preload("res://Sounds/Brown Noise.wav")
+#const Swing = preload("res://Sounds/Whiter Noise.wav")
 const Land = preload("res://Sounds/Land.wav")
 
 onready var audio_player = $AudioPlayers
