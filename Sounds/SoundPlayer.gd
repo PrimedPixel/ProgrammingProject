@@ -9,7 +9,7 @@ const Menu = preload("res://Sounds/Menu.wav")
 #const Swing = preload("res://Sounds/Swing.wav")
 #const Swing = preload("res://Sounds/White Noise.wav")
 #const Swing = preload("res://Sounds/Pink Noise.wav")
-const Swing = preload("res://Sounds/Brown Noise.wav")
+const Wind = preload("res://Sounds/Brown Noise.wav")
 #const Swing = preload("res://Sounds/Whiter Noise.wav")
 const Land = preload("res://Sounds/Land.wav")
 
@@ -23,7 +23,13 @@ func play_sound(sound):
 		if !channel.playing:
 			channel.stream = sound
 			channel.play()
-			break
+			
+			# Resets the pitch and volume since they
+			# might have been altered previously
+			channel.set_pitch_scale(1)
+			channel.set_volume_db(0)
+			return channel
+			
 
 func is_playing(sound):
 	# Loops through each audio channel
@@ -48,3 +54,9 @@ func get_channel_pitch_scale(channel):
 
 func set_channel_pitch_scale(channel, value):
 	channel.set_pitch_scale(value)
+
+func get_channel_vol(channel):
+	return channel.get_volume_db()
+	
+func set_channel_vol(channel, value):
+	channel.set_volume_db(value)

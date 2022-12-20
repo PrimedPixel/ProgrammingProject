@@ -51,6 +51,9 @@ onready var coyote_timer = $CoyoteTimer
 onready var jump_buffer_timer = $JumpBufferTimer
 onready var line = get_parent().get_node("RopeLine")
 
+func log_base(value, base):
+	return log(value) / log(base)
+
 func horizontal_movement(x_input, delta):
 	motion.x += x_input * accel * delta
 	sprite.flip_h = x_input < 0
@@ -140,15 +143,13 @@ func initialise_rope():
 			
 			angle_to = deg2rad(90) - (position - rope_pos).angle()
 			
-			SoundPlayer.stop_sound(SoundPlayer.Swing)
 			SoundPlayer.play_sound(SoundPlayer.Grapple)
-			SoundPlayer.play_sound(SoundPlayer.Swing)
 			player_state = state.swing
 
 func die():
 	animation.play("Die")
 	
-	SoundPlayer.stop_sound(SoundPlayer.Swing)
+	SoundPlayer.stop_sound(SoundPlayer.Wind)
 	SoundPlayer.play_sound(SoundPlayer.Damage)
 	
 	Transition.exit_level_transition()
@@ -161,6 +162,14 @@ func die():
 	reset_rope()
 	
 	Transition.enter_level_transition()
+
+func wind_noise():
+	# Gets the channel in which the wind sound is playing
+	var sound_channel = SoundPlayer.is_playing(SoundPlayer.Wind)
+	var vel = motion.length()
+	if sound_channel && SoundPlayer.get_channel_pitch_scale(sound_channel) && vel > 40:
+		SoundPlayer.set_channel_pitch_scale(sound_channel, 0.6 * pow(vel / 100, 1.01))
+		SoundPlayer.set_channel_vol(sound_channel, -100 / pow(4, vel / 100))
 
 # Built in function from KinematicBody2D
 # _physics_process causes jitter issues on !=60Hz monitors
@@ -195,8 +204,6 @@ func _process(delta):
 				jump_buffer_timer.start()
 			
 			if coyote_on_floor:
-				if SoundPlayer.stop_sound(SoundPlayer.Swing):
-					SoundPlayer.play_sound(SoundPlayer.Land)
 					
 				ground_speed_modifiers(x_input)
 				
@@ -218,6 +225,8 @@ func _process(delta):
 				
 				# Sets the player's animation to jump / in air
 				animation.play("Jump")
+			elif SoundPlayer.stop_sound(SoundPlayer.Wind):
+				SoundPlayer.play_sound(SoundPlayer.Land)
 			
 		state.swing:
 			animation.play("Swing")
@@ -258,18 +267,18 @@ func _process(delta):
 												# Also returns left over motion, meaning if collided
 												# It will return no movement, and stop for the next frame
 	
-	# If the player's new position is not on the floor, but it was the previous frame								
+	# If the player's new position is not on the floor, but it was the previous frame
 	if floor_before_move && !is_on_floor():
+		var channel = SoundPlayer.play_sound(SoundPlayer.Wind)
+		SoundPlayer.set_channel_vol(channel, -100)
 		coyote_timer.start()
 	
-	# Rope animation	
+	# Rope animation
 	if player_state == state.swing:
 		rope_animation(x_input)
 	
-	# Sound thingy
-	var sound_channel = SoundPlayer.is_playing(SoundPlayer.Swing)
-	if sound_channel && SoundPlayer.get_channel_pitch_scale(sound_channel):
-		SoundPlayer.set_channel_pitch_scale(sound_channel, (pow(motion.length() / 100, 1.01)))
+	# Wind noise
+	wind_noise()
 
 func _unhandled_input(event):
 	# These should probably move somewhere else
