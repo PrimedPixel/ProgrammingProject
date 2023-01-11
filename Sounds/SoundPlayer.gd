@@ -53,10 +53,12 @@ func get_channel_pitch_scale(channel):
 	return channel.get_pitch_scale()
 
 func set_channel_pitch_scale(channel, value):
-	channel.set_pitch_scale(value)
+	if channel.is_playing():
+		channel.set_pitch_scale(value)
 
 func get_channel_vol(channel):
 	return channel.get_volume_db()
 	
 func set_channel_vol(channel, value):
-	channel.set_volume_db(value)
+	if channel.is_playing():
+		channel.set_volume_db(value)
