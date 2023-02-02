@@ -1,5 +1,8 @@
 extends RayCast2D
 
+onready var rope_able = get_parent().get_parent().get_node("RopeAble")
+onready var non_rope_able = get_parent().get_parent().get_node("NonRopeAble")
+
 var point = Vector2(0, 0)
 #var ray_length = 160
 
@@ -12,5 +15,13 @@ func _physics_process(_delta):
 	point = -1
 	
 	if is_colliding():
-		if get_collider() is TileMap:
-			point = get_collision_point()
+		var tile = get_collider()
+		if tile is TileMap:
+			# switch statement depending on the tile type
+			match tile:
+				rope_able:
+					point = get_collision_point()
+					
+				non_rope_able:
+					pass;
+					
