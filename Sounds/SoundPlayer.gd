@@ -60,5 +60,6 @@ func get_channel_vol(channel):
 	return channel.get_volume_db()
 	
 func set_channel_vol(channel, value):
-	if channel.is_playing() != null:
-		channel.set_volume_db(value)
+	if channel != null:
+		if channel.is_playing():
+			channel.set_volume_db(value)
