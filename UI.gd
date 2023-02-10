@@ -20,6 +20,9 @@ var ui_offscreen = 0
 func _ready():
 	ui_onscreen = coin_ui.rect_position.y
 	ui_offscreen = -coin_count.rect_size.y
+	
+	coin_ui.rect_position.y = ui_offscreen
+	death_ui.rect_position.y = ui_offscreen
 
 func update_count(count_node, count_var, ui_node, timer_node, previous):
 	count_node.text = str(count_var)

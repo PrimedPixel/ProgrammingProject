@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://RayCast2D.gd" type="Script" id=1]
+
+[node name="Rope" type="Node"]
+
+[node name="RopeCast" type="RayCast2D" parent="."]
+position = Vector2( 19, 155 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+script = ExtResource( 1 )
+
+[node name="RopeLine" type="Line2D" parent="."]
+points = PoolVector2Array( 253, 147 )
+width = 2.0
+default_color = Color( 0.454902, 0.184314, 0.160784, 1 )

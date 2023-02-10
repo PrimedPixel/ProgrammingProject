@@ -11,5 +11,5 @@ func enter_level_transition():
 	rect_animation.play("EnterLevel")
 
 
-func _on_RectAnimation_animation_finished(anim_name):
+func _on_RectAnimation_animation_finished(_anim_name):
 	emit_signal("transition_completed")

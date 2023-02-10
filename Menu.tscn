@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Blue.png" type="Texture" id=4]
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Logos/Double Pixel Shadow.png" type="Texture" id=6]
+[ext_resource path="res://GlobalKeys.tscn" type="PackedScene" id=7]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -120,6 +121,8 @@ custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
 text = "Exit"
+
+[node name="GlobalKeys" parent="." instance=ExtResource( 7 )]
 
 [connection signal="pressed" from="VerticalContainer/NewGame" to="." method="_on_NewGame_pressed"]
 [connection signal="pressed" from="VerticalContainer/Continue" to="." method="_on_Continue_pressed"]

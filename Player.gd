@@ -46,13 +46,11 @@ var motion = Vector2.ZERO
 # onready makes sure that the nodes have been initialised and loaded into the scene
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
-onready var rope_cast = $RopeCast
 onready var coyote_timer = $CoyoteTimer
 onready var jump_buffer_timer = $JumpBufferTimer
-onready var line = get_parent().get_node("RopeLine")
 
-func log_base(value, base):
-	return log(value) / log(base)
+onready var rope_cast = $RopeCast
+onready var line = $RopeLine
 
 func horizontal_movement(x_input, delta):
 	motion.x += x_input * accel * delta
@@ -129,8 +127,8 @@ func rope_animation(x_input):
 		# Adds rope points to the line
 		# This has to be after the move_and_slide so the position has been updated
 		line.clear_points()
-		line.add_point(position + offset)
-		line.add_point(rope_pos)
+		line.add_point(offset)
+		line.add_point(to_local(rope_pos))
 
 func initialise_rope():
 		# Initialise rope swing
@@ -281,21 +279,6 @@ func _process(delta):
 	wind_noise()
 
 func _unhandled_input(event):
-	# These should probably move somewhere else
-	if event is InputEventKey:
-		if event.pressed:
-			match event.scancode:
-				KEY_R:
-					get_tree().reload_current_scene()
-				KEY_T:
-					Transition.exit_level_transition()
-				KEY_Y:
-					Transition.enter_level_transition()
-				KEY_F11:
-					OS.window_fullscreen = !OS.window_fullscreen
-				KEY_ESCAPE:
-					get_tree().quit()
-	
 	# If mouse button pressed
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:

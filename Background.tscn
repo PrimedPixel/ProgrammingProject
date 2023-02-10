@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Blue.png" type="Texture" id=1]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Blue" type="ParallaxLayer" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Blue"]
+position = Vector2( -32, 56 )
+scale = Vector2( 320, 180 )
+texture = ExtResource( 1 )
+offset = Vector2( -4.53125, -3.22778 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 180 )
