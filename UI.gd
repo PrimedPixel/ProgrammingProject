@@ -9,7 +9,7 @@ onready var death_ui = $CanvasUI/DeathUI
 onready var coin_timer = $CanvasUI/CoinUI/CoinTimer
 onready var death_timer = $CanvasUI/DeathUI/DeathTimer
 
-onready var player = get_parent().get_node("Player")
+onready var player = get_parent().get_node("ViewportContainer/Viewport/Level/Player")
 
 var previous_coin = 0
 var previous_death = 0
@@ -18,8 +18,10 @@ var ui_onscreen = 0
 var ui_offscreen = 0
 
 func _ready():
-	ui_onscreen = coin_ui.rect_position.y
-	ui_offscreen = -coin_count.rect_size.y
+	# Multiply by 6 since the UI is 6 times the scale of the in game resolution
+	# (320, 180) * 6 = (1920, 1080)
+	ui_onscreen = coin_ui.rect_position.y * 6
+	ui_offscreen = -coin_count.rect_size.y * 6
 	
 	coin_ui.rect_position.y = ui_offscreen
 	death_ui.rect_position.y = ui_offscreen

@@ -3,6 +3,10 @@ extends RayCast2D
 onready var rope_able = get_parent().get_parent().get_node("Tiles").get_node("RopeAble")
 onready var non_rope_able = get_parent().get_parent().get_node("Tiles").get_node("NonRopeAble")
 
+var game_size = Vector2(320, 180)
+onready var window_scale = (OS.window_size / game_size).x
+onready var viewport = get_parent().get_parent().get_parent()
+
 var point = Vector2(0, 0)
 #var ray_length = 160
 
@@ -11,7 +15,9 @@ var point = Vector2(0, 0)
 # Once the left mouse button has been pressed
 func _physics_process(_delta):
 	
-	set_cast_to(get_local_mouse_position())
+	var val = get_global_mouse_position() / window_scale
+	print(val)
+	set_cast_to(to_local(val))
 	
 	point = -1
 	

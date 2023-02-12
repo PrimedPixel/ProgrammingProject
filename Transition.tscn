@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, -320.0 ]
+"values": [ 0, -1920 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BlackRectangle:margin_left")
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 320.0, 0.0 ]
+"values": [ 1920, 0.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BlackRectangle:margin_right")
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 320.0 ]
+"values": [ 1920 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BlackRectangle:margin_right")
@@ -91,7 +91,7 @@ script = ExtResource( 1 )
 [node name="BlackRectangle" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 320.0
+margin_left = 1920.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="RectAnimation" type="AnimationPlayer" parent="."]

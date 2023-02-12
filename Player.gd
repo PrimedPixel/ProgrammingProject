@@ -181,6 +181,8 @@ func _process(delta):
 	var input_left = Input.get_action_strength("button_a")
 	var input_right = Input.get_action_strength("button_d")
 	
+	var input_mouse = Input.is_action_just_pressed("mouse_left")
+	
 	var x_input = input_right - input_left
 	
 	match player_state:
@@ -277,9 +279,6 @@ func _process(delta):
 	
 	# Wind noise
 	wind_noise()
-
-func _unhandled_input(event):
-	# If mouse button pressed
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			initialise_rope()
+	
+	if input_mouse:
+		initialise_rope()
