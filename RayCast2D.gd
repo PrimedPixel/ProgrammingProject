@@ -15,9 +15,9 @@ var point = Vector2(0, 0)
 # Once the left mouse button has been pressed
 func _physics_process(_delta):
 	
-	var val = get_global_mouse_position() / window_scale
-	print(val)
-	set_cast_to(to_local(val))
+#	var val = viewport.get_mouse_position() / window_scale
+#	print(val)
+#	set_cast_to(to_local(val))
 	
 	point = -1
 	
