@@ -10,7 +10,7 @@ var game_size = Vector2(320, 180)
 onready var window_scale = (OS.window_size / game_size).x
 onready var actual_cam_pos = global_position
 
-func _process(delta):
+func _faprocess(delta):
 	#Use player's velocity as the lerp value to stop player from going off screen
 	#But keep the minimum at 2 (any lower velocity will still allow camera to move)
 	var player_vel = player.motion.length() * 0.03

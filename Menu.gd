@@ -3,7 +3,7 @@ extends Control
 onready var sound_player = $SoundPlayer
 
 func _ready():
-	$VerticalContainer/NewGame.grab_focus()
+	$Viewport/VerticalContainer/NewGame.grab_focus()
 
 
 func _on_NewGame_pressed():
