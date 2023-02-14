@@ -49,7 +49,7 @@ onready var animation = $AnimationPlayer
 onready var coyote_timer = $CoyoteTimer
 onready var jump_buffer_timer = $JumpBufferTimer
 
-onready var rope_cast = $RopeCast
+onready var rope_cast = get_parent().get_node("RopeCast")
 onready var line = $RopeLine
 
 func horizontal_movement(x_input, delta):

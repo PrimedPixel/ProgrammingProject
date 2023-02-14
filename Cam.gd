@@ -3,6 +3,7 @@ extends Camera2D
 onready var player = get_parent().get_node("Player")
 onready var viewpoint_container = get_parent().get_parent().get_parent()
 onready var viewport = get_parent().get_parent()
+onready var camera = get_parent().get_node("Cam")
 
 var interpolate_val = 2
 
