@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var raycast = $RopeCast
+onready var raycast = $Player/RopeCast
 
 func _fprocess(_delta):
 #	var local_to_viewport = get_viewport_transform() * get_global_transform()

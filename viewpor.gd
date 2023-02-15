@@ -1,6 +1,6 @@
 extends Viewport
 
-onready var raycast = $Level/RopeCast
+onready var raycast = $Level/Player/RopeCast
 
 func _fprocess(_delta):
 #	var local_to_viewport = get_viewport_transform() * get_global_transform()

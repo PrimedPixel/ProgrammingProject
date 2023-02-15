@@ -1,10 +1,10 @@
 extends RayCast2D
 
-onready var rope_able = get_parent().get_node("Tiles").get_node("RopeAble")
-onready var non_rope_able = get_parent().get_node("Tiles").get_node("NonRopeAble")
+onready var rope_able = get_parent().get_parent().get_node("Tiles").get_node("RopeAble")
+onready var non_rope_able = get_parent().get_parent().get_node("Tiles").get_node("NonRopeAble")
 onready var sprite = $Sprite
 
-onready var camera = get_parent().get_node("Cam")
+onready var cam = get_parent().get_parent().get_node("Cam")
 
 var game_size = Vector2(320, 180)
 var start_pos = Vector2(160, 128)
@@ -24,9 +24,12 @@ func _ready():
 # Once the left mouse button has been pressed
 func _physics_process(_delta):
 	
-#	var val = viewport.get_mouse_position()
-#	print(val)
-#	set_cast_to(to_local(val))
+	var val = viewport.get_mouse_position()
+	var offset = Vector2(850, -370) #+ cam.position
+	val -= offset
+	print(val)
+	sprite.global_position = val / 6
+	set_cast_to(to_local(val / 6))
 #	set_cast_to(to_local(Vector2(20, 44)))
 	
 #	var view_container = viewport.get_parent()
@@ -61,7 +64,7 @@ func _physics_process(_delta):
 					pass;
 					
 func update_pos(pos):
-	sprite.global_position = pos
-#
-	set_cast_to(to_local(pos))
+#	sprite.global_position = pos
+##
+#	set_cast_to(to_local(pos))
 	pass

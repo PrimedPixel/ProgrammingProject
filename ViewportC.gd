@@ -1,6 +1,6 @@
 extends ViewportContainer
 
-onready var raycast = $Viewport/Level/RopeCast
+onready var raycast = $Viewport/Level/Player/RopeCast
 onready var viewport = $Viewport
 
 func _process(_delta):
