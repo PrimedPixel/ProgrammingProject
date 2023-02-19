@@ -5,6 +5,7 @@ onready var non_rope_able = get_parent().get_parent().get_node("Tiles").get_node
 onready var sprite = $Sprite
 
 onready var cam = get_parent().get_parent().get_node("Cam")
+onready var cam_sprite = cam.get_node("Sprite")
 
 var game_size = Vector2(320, 180)
 var start_pos = Vector2(160, 128)
@@ -24,12 +25,12 @@ func _ready():
 # Once the left mouse button has been pressed
 func _physics_process(_delta):
 	
-	var val = viewport.get_mouse_position()
-	var offset = Vector2(850, -370) #+ cam.position
-	val -= offset
-	print(val)
-	sprite.global_position = val / 6
-	set_cast_to(to_local(val / 6))
+#	var val = viewport.get_mouse_position()
+#	var offset = Vector2(850, -370) #+ cam.position
+#	val -= offset
+#	print(val)
+#	sprite.global_position = val / 6
+#	set_cast_to(to_local(val / 6))
 #	set_cast_to(to_local(Vector2(20, 44)))
 	
 #	var view_container = viewport.get_parent()
@@ -63,8 +64,14 @@ func _physics_process(_delta):
 				non_rope_able:
 					pass;
 					
-func update_pos(pos):
-#	sprite.global_position = pos
-##
-#	set_cast_to(to_local(pos))
-	pass
+var mouse_poss := Vector2()
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		mouse_poss =  get_canvas_transform().affine_inverse() * event.position
+		print(mouse_poss)
+		print(game_size)
+		print(mouse_poss + game_size)
+		sprite.global_position = mouse_poss + cam.global_position
+		
+		set_cast_to(to_local(cam_sprite.global_position))

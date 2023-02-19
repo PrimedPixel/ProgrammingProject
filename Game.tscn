@@ -29,6 +29,7 @@ margin_top = -6.0
 margin_right = 316.0
 margin_bottom = 176.0
 rect_scale = Vector2( 6, 6 )
+mouse_filter = 2
 script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]

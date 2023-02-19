@@ -4,6 +4,7 @@ onready var player = get_parent().get_node("Player")
 onready var viewpoint_container = get_parent().get_parent().get_parent()
 onready var viewport = get_parent().get_parent()
 onready var camera = get_parent().get_node("Cam")
+onready var sprite = $Sprite
 
 var interpolate_val = 2
 
@@ -11,7 +12,7 @@ var game_size = Vector2(320, 180)
 onready var window_scale = (OS.window_size / game_size).x
 onready var actual_cam_pos = global_position
 
-func _fprocess(delta):
+func _process(delta):
 	#Use player's velocity as the lerp value to stop player from going off screen
 	#But keep the minimum at 2 (any lower velocity will still allow camera to move)
 	var player_vel = player.motion.length() * 0.03
@@ -36,3 +37,13 @@ func _fprocess(delta):
 	viewpoint_container.material.set_shader_param("camera_offset", subpixel_pos)
 	
 	global_position = actual_cam_pos.round()
+
+var mouse_poss := Vector2()
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		mouse_poss =  get_canvas_transform().affine_inverse() * event.position
+		print(mouse_poss)
+		print(game_size)
+		print(mouse_poss + game_size)
+		sprite.global_position = mouse_poss
