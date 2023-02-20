@@ -1,20 +1,28 @@
 extends Control
 
 onready var sound_player = $SoundPlayer
+const level_2 = preload("res://Level2.tscn")
 
 func _ready():
-	$Viewport/VerticalContainer/NewGame.grab_focus()
+	$VerticalContainer/NewGame.grab_focus()
 
 
 func _on_NewGame_pressed():
 	Transition.exit_level_transition()
 	yield(Transition, "transition_completed")
 	
-	get_tree().change_scene("res://DebugRoom.tscn")
+	get_tree().change_scene("res://Game.tscn")
 	
 	Transition.enter_level_transition()
 
 func _on_Continue_pressed():
+	Transition.exit_level_transition()
+	yield(Transition, "transition_completed")
+	
+	GlobalVariables.level_to = level_2
+	get_tree().change_scene("res://Game.tscn")
+	
+	Transition.enter_level_transition()
 	pass # Replace with function body.
 
 func _on_Options_pressed():

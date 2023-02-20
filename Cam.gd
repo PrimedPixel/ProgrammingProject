@@ -3,8 +3,8 @@ extends Camera2D
 onready var player = get_parent().get_node("Player")
 onready var viewpoint_container = get_parent().get_parent().get_parent()
 onready var viewport = get_parent().get_parent()
-onready var camera = get_parent().get_node("Cam")
-onready var sprite = $Sprite
+
+var mouse_pos = Vector2.ZERO
 
 var interpolate_val = 2
 
@@ -37,13 +37,3 @@ func _process(delta):
 	viewpoint_container.material.set_shader_param("camera_offset", subpixel_pos)
 	
 	global_position = actual_cam_pos.round()
-
-var mouse_poss := Vector2()
-
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		mouse_poss =  get_canvas_transform().affine_inverse() * event.position
-		print(mouse_poss)
-		print(game_size)
-		print(mouse_poss + game_size)
-		sprite.global_position = mouse_poss

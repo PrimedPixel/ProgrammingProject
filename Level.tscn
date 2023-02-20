@@ -5,11 +5,10 @@
 [ext_resource path="res://GlobalKeys.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Cam.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
-[ext_resource path="res://circle cross.png" type="Texture" id=6]
-[ext_resource path="res://lvl.gd" type="Script" id=8]
+[ext_resource path="res://NextLevelCollider.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Level2.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Node2D"]
-script = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
@@ -17,11 +16,13 @@ script = ExtResource( 8 )
 
 [node name="Cam" parent="." instance=ExtResource( 4 )]
 
-[node name="Sprite" type="Sprite" parent="Cam"]
-texture = ExtResource( 6 )
-
 [node name="Background" parent="." instance=ExtResource( 5 )]
 
 [node name="GlobalKeys" parent="." instance=ExtResource( 3 )]
+
+[node name="NextLevelCollider" parent="." instance=ExtResource( 6 )]
+position = Vector2( 240, 192 )
+scale = Vector2( 1, 16.162 )
+target_level_path = ExtResource( 7 )
 
 [editable path="Tiles"]
