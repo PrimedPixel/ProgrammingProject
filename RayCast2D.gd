@@ -7,6 +7,7 @@ onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor"
 
 const rope_able_texture = preload("res://Cross.png")
 const non_rope_able_texture = preload("res://cross 2.png")
+const no_block_texture = preload("res://circle cross.png")
 
 var point = Vector2(0, 0)
 
@@ -30,7 +31,7 @@ func _physics_process(_delta):
 				non_rope_able:
 					mouse_cursor.set_texture(non_rope_able_texture)
 	else:
-		mouse_cursor.set_texture(rope_able_texture)
+		mouse_cursor.set_texture(no_block_texture)
 
 # Sets the raycast to the mouse_position
 # The viewport mode in Godot transforms
