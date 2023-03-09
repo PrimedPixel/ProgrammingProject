@@ -24,15 +24,15 @@ script = ExtResource( 3 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 2 )
-margin_left = -6.0
-margin_top = -6.0
-margin_right = 316.0
-margin_bottom = 176.0
-rect_scale = Vector2( 6, 6 )
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 637.0
+margin_bottom = 357.0
+rect_scale = Vector2( 3, 3 )
 mouse_filter = 2
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 322, 182 )
+size = Vector2( 642, 362 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -41,4 +41,4 @@ render_target_update_mode = 3
 [node name="UI" parent="." instance=ExtResource( 6 )]
 
 [node name="MouseCursor" parent="." instance=ExtResource( 1 )]
-scale = Vector2( 6, 6 )
+scale = Vector2( 3, 3 )

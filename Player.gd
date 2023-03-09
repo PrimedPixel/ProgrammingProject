@@ -38,7 +38,7 @@ var rope_pos = Vector2.ZERO
 
 var rope_angle_vel = 0
 
-var offset = Vector2(3, -7)
+var offset = Vector2(9, -9)
 
 # A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
@@ -83,7 +83,7 @@ func air_speed_modifiers():
 
 func rope_angle_changes(colliding, x_input):
 	# Pendulum
-	var rope_angle_accel = 0.03 * cos((rope_pos - position).angle())
+	var rope_angle_accel = 0.03 * cos((rope_pos - (position + offset)).angle())
 	rope_angle_vel += rope_angle_accel
 	rope_angle_vel *= 0.5
 	
@@ -119,10 +119,10 @@ func rope_animation(x_input):
 		if x_input != 0:
 			sprite.flip_h = x_input < 0
 			
-			if x_input > 0:
-				offset = Vector2(3, -7)
-			else:
-				offset = Vector2(-3, -7)
+		if !sprite.flip_h:
+			offset = Vector2(-9, -9)
+		else:
+			offset = Vector2(9, -9)
 		
 		# Adds rope points to the line
 		# This has to be after the move_and_slide so the position has been updated
