@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sub Bass.wav-e1cfa078a85529a56ea4c169d1d790d7.sample"
+
+[deps]
+
+source_file="res://Music/Sub Bass.wav"
+dest_files=[ "res://.import/Sub Bass.wav-e1cfa078a85529a56ea4c169d1d790d7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=1587600
+edit/loop_end=4410000
+compress/mode=0

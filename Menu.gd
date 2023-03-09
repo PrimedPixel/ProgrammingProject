@@ -1,6 +1,8 @@
 extends Control
 
 onready var sound_player = $SoundPlayer
+onready var music = $Music
+
 const level_2 = preload("res://Level2.tscn")
 
 func _ready():
@@ -10,6 +12,7 @@ func _ready():
 func _on_NewGame_pressed():
 	Transition.exit_level_transition()
 	yield(Transition, "transition_completed")
+	music.fade_out()
 	
 	get_tree().change_scene("res://Game.tscn")
 	

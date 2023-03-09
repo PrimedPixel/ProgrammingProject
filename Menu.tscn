@@ -1,18 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=2]
 [ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Static Assets/Skyline Moon.png" type="Texture" id=4]
 [ext_resource path="res://Static Assets/Skyline Blank.png" type="Texture" id=5]
-[ext_resource path="res://Logos/bd6a49f1-982c-4277-8585-339eda7b02e6.png" type="Texture" id=6]
+[ext_resource path="res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png" type="Texture" id=6]
 [ext_resource path="res://GlobalKeys.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sounds/Select.wav" type="AudioStream" id=8]
+[ext_resource path="res://Music/Soft and Sweet.wav" type="AudioStream" id=8]
 [ext_resource path="res://Cursor.gd" type="Script" id=9]
 [ext_resource path="res://circle cross.png" type="Texture" id=10]
 [ext_resource path="res://Static Assets/Near Buildings.png" type="Texture" id=11]
 [ext_resource path="res://Static Assets/Far Buildings.png" type="Texture" id=12]
 [ext_resource path="res://Static Assets/Dark Blue.png" type="Texture" id=13]
+[ext_resource path="res://Logo.gd" type="Script" id=14]
+[ext_resource path="res://Music.gd" type="Script" id=15]
 
 [node name="GUI" type="ViewportContainer"]
 anchor_right = 1.0
@@ -23,7 +25,13 @@ script = ExtResource( 1 )
 [node name="GlobalKeys" parent="." instance=ExtResource( 7 )]
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+autoplay = true
+script = ExtResource( 15 )
+
+[node name="FadeOut" type="Tween" parent="Music"]
 
 [node name="Cursor" type="Sprite" parent="."]
 z_index = 10
@@ -64,8 +72,10 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 640, 209 )
 
 [node name="Logo" type="Sprite" parent="."]
-position = Vector2( 320, 45 )
+position = Vector2( 320, 53.3333 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
+script = ExtResource( 14 )
 
 [node name="VerticalContainer" type="VBoxContainer" parent="."]
 anchor_bottom = 1.0
@@ -165,6 +175,7 @@ custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
 text = "Exit"
 
+[connection signal="tween_all_completed" from="Music/FadeOut" to="Music" method="_on_FadeOut_tween_all_completed"]
 [connection signal="focus_entered" from="VerticalContainer/NewGame" to="." method="_on_focus_entered"]
 [connection signal="mouse_entered" from="VerticalContainer/NewGame" to="." method="_on_focus_entered"]
 [connection signal="pressed" from="VerticalContainer/NewGame" to="." method="_on_NewGame_pressed"]

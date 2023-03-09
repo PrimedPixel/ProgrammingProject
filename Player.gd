@@ -43,6 +43,8 @@ var offset = Vector2(9, -9)
 # A vector - magnitude and direction (essentially velocity)
 var motion = Vector2.ZERO
 
+var colliding = false
+
 # onready makes sure that the nodes have been initialised and loaded into the scene
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
@@ -81,28 +83,34 @@ func air_speed_modifiers():
 	# Air friction - slowly decelerating the player
 	motion.x = lerp(motion.x, 0, air_frict)
 
-func rope_angle_changes(colliding, x_input):
+func rope_angle_changes(x_input):
 	# Pendulum
-	var rope_angle_accel = 0.03 * cos((rope_pos - (position + offset)).angle())
-	rope_angle_vel += rope_angle_accel
-	rope_angle_vel *= 0.5
+	if !colliding:
+		var rope_angle_accel = 0.03 * cos((rope_pos - (position + offset)).angle())
+		rope_angle_vel += rope_angle_accel
+		rope_angle_vel *= 0.5
 	
-	# Limits the velocity of swinging on the rope
-	if colliding:
-		rope_angle_vel = clamp(rope_angle_vel, -0.5, 0.5)
-	else:
-		rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
-
-	angle_to += rope_angle_vel
-	
-	angle_to = angle_to + (x_input * 0.04)
-	
-#	if !colliding:
-#		# Changes the angle of the rope based on left / right
-#		angle_to = angle_to + (x_input * 0.04)
+#	# Limits the velocity of swinging on the rope
+#	if colliding:
+#		rope_angle_vel = clamp(rope_angle_vel, -0.5, 0.5)
 #	else:
-#		# Inverse the change of angle while colliding
-#		angle_to = angle_to - (x_input * 0.07)
+#		rope_angle_vel = clamp(rope_angle_vel, -1.5, 1.5)
+
+		angle_to += rope_angle_vel
+	else:
+		angle_to -= rope_angle_vel
+		rope_angle_vel = 0
+	
+#	angle_to = angle_to + (x_input * 0.04)
+	
+	if !colliding:
+		# Changes the angle of the rope based on left / right
+		angle_to += x_input * 0.04
+	else:
+		# Inverse the change of angle while colliding
+		angle_to -= x_input * 0.2
+	
+	print(angle_to)
 
 func reset_rope():
 	line.clear_points()
@@ -111,14 +119,14 @@ func reset_rope():
 
 func rope_animation(x_input):
 	# Change speed of players animation depending on speed of movement in x axis
-		if abs(motion.x) > 1.5:			# Minimum animation speed
-			animation.playback_speed = abs(motion.x) * 0.005
+#		if abs(motion.x) > 1.5:			# Minimum animation speed
+#			animation.playback_speed = abs(motion.x) * 0.005
 		
 		# Updates the rope's offset if the player's sprite has flipped
-		# This make it line up with the player's hand
-		if x_input != 0:
+		# This makes it line up with the player's hand
+		if x_input != 0 && !colliding:
 			sprite.flip_h = x_input < 0
-			
+		
 		if !sprite.flip_h:
 			offset = Vector2(-9, -9)
 		else:
@@ -225,18 +233,21 @@ func _process(delta):
 				
 				# Sets the player's animation to jump / in air
 				animation.play("Jump")
-			elif SoundPlayer.stop_sound(SoundPlayer.Wind):
+			elif SoundPlayer.stop_sound(SoundPlayer.Wind) && !SoundPlayer.is_playing(SoundPlayer.Land):
 				SoundPlayer.play_sound(SoundPlayer.Land)
 			
 		state.swing:
 			animation.play("Swing")
 			
-			var colliding = get_slide_count() != 0
+			colliding = get_slide_count() != 0
 			
-			rope_angle_changes(colliding, x_input)
+			rope_angle_changes(x_input)
 			
-			# Changes the length of the rope based on up / down
-			rope_len = clamp(rope_len + ((input_down - input_up) * 2), min_rope_len, max_rope_len)
+			if !colliding:
+				# Changes the length of the rope based on up / down
+				rope_len = clamp(rope_len + ((input_down - input_up) * 2), min_rope_len, max_rope_len)
+			else:
+				rope_len = clamp(rope_len - (abs(input_down - input_up) * 2), min_rope_len, max_rope_len)
 						
 			# Calculates new rope position
 			var position_to = Vector2(
@@ -252,11 +263,11 @@ func _process(delta):
 			
 			# Will move quicker to the target position if not colliding
 			# (since KinematicBody2D slowly approaches, like a bungee chord)
-			if get_slide_count() == 0:
+			if !colliding:
 				motion *= 5
 			
 			# Resets player state out of rope state
-			if Input.is_action_just_released("ui_select"):
+			if Input.is_action_just_released("ui_select") || is_on_floor():
 				reset_rope()
 	
 	# Checks to see if the player is on the floor before the move_and_slide

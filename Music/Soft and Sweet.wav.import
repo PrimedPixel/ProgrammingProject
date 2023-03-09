@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample"
+
+[deps]
+
+source_file="res://Music/Soft and Sweet.wav"
+dest_files=[ "res://.import/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=3492720
+edit/loop_end=5186160
+compress/mode=0
