@@ -1,0 +1,190 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png" type="Texture" id=1]
+[ext_resource path="res://Scenes and Scripts/Menus/Menu.gd" type="Script" id=2]
+[ext_resource path="res://Scenes and Scripts/Menus/Logo.gd" type="Script" id=3]
+[ext_resource path="res://Music/Soft and Sweet.wav" type="AudioStream" id=4]
+[ext_resource path="res://Scenes and Scripts/Menus/Music.gd" type="Script" id=5]
+[ext_resource path="res://Scenes and Scripts/GlobalKeys.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Static Assets/Skyline Moon.png" type="Texture" id=7]
+[ext_resource path="res://Static Assets/Dark Blue.png" type="Texture" id=8]
+[ext_resource path="res://Static Assets/Far Buildings.png" type="Texture" id=9]
+[ext_resource path="res://Static Assets/Near Buildings.png" type="Texture" id=10]
+[ext_resource path="res://Static Assets/Skyline Blank.png" type="Texture" id=11]
+[ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Scenes and Scripts/Menus/Cursor.gd" type="Script" id=13]
+[ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=14]
+[ext_resource path="res://Dynamic Assets/No Tile Cursor.png" type="Texture" id=15]
+
+[node name="GUI" type="ViewportContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 3, 3 )
+script = ExtResource( 2 )
+
+[node name="GlobalKeys" parent="." instance=ExtResource( 6 )]
+
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+script = ExtResource( 5 )
+
+[node name="FadeOut" type="Tween" parent="Music"]
+
+[node name="Cursor" type="Sprite" parent="."]
+z_index = 10
+texture = ExtResource( 15 )
+script = ExtResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 360 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 0, 32 )
+texture = ExtResource( 11 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 240 )
+
+[node name="MoonBackground" type="Sprite" parent="."]
+position = Vector2( 128, 32 )
+texture = ExtResource( 7 )
+centered = false
+region_rect = Rect2( 0, 0, 128, 240 )
+
+[node name="FarBuildings" type="Sprite" parent="."]
+position = Vector2( 2.83122e-07, 174.667 )
+texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 124 )
+
+[node name="NearBuildings" type="Sprite" parent="."]
+position = Vector2( 2.83122e-07, 151 )
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 209 )
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 320, 53.3333 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="VerticalContainer" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_top = 128.0
+margin_right = 640.0
+margin_bottom = -752.0
+custom_constants/separation = 0
+
+[node name="NewGame" type="Button" parent="VerticalContainer"]
+margin_right = 640.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../Exit")
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_right = NodePath("../Continue")
+focus_neighbour_bottom = NodePath("../Continue")
+focus_next = NodePath("../Continue")
+focus_previous = NodePath("../Exit")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/focus = ExtResource( 14 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "New Game"
+
+[node name="Continue" type="Button" parent="VerticalContainer"]
+margin_top = 20.0
+margin_right = 640.0
+margin_bottom = 40.0
+focus_neighbour_left = NodePath("../NewGame")
+focus_neighbour_top = NodePath("../NewGame")
+focus_neighbour_right = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../NewGame")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/focus = ExtResource( 14 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Continue"
+
+[node name="Options" type="Button" parent="VerticalContainer"]
+margin_top = 40.0
+margin_right = 640.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Continue")
+focus_neighbour_top = NodePath("../Continue")
+focus_neighbour_right = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Continue")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/focus = ExtResource( 14 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Options"
+
+[node name="Exit" type="Button" parent="VerticalContainer"]
+margin_top = 60.0
+margin_right = 640.0
+margin_bottom = 80.0
+focus_neighbour_left = NodePath("../Options")
+focus_neighbour_top = NodePath("../Options")
+focus_neighbour_right = NodePath("../NewGame")
+focus_neighbour_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+focus_previous = NodePath("../Options")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 12 )
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 14 )
+custom_styles/focus = ExtResource( 14 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Exit"
+
+[connection signal="tween_all_completed" from="Music/FadeOut" to="Music" method="_on_FadeOut_tween_all_completed"]
+[connection signal="focus_entered" from="VerticalContainer/NewGame" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="VerticalContainer/NewGame" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="VerticalContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="focus_entered" from="VerticalContainer/Continue" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="VerticalContainer/Continue" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="VerticalContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="focus_entered" from="VerticalContainer/Options" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="VerticalContainer/Options" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="VerticalContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="focus_entered" from="VerticalContainer/Exit" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="VerticalContainer/Exit" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="VerticalContainer/Exit" to="." method="_on_Exit_pressed"]

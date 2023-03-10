@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Static Assets/Skyline Blank.png" type="Texture" id=1]
+[ext_resource path="res://Static Assets/Near Buildings.png" type="Texture" id=2]
+[ext_resource path="res://Static Assets/Far Buildings.png" type="Texture" id=3]
+[ext_resource path="res://Static Assets/Dark Blue.png" type="Texture" id=4]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Blue" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Blue"]
+texture = ExtResource( 4 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 768, 640 )
+
+[node name="Skyline" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 128, 0 )
+
+[node name="Sprite" type="Sprite" parent="Skyline"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 240 )
+
+[node name="Far Buildings" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.1, 1 )
+motion_mirroring = Vector2( 144, 0 )
+
+[node name="Sprite" type="Sprite" parent="Far Buildings"]
+position = Vector2( 0, 144 )
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 124 )
+
+[node name="NearBuildings" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.2, 1 )
+motion_mirroring = Vector2( 493, 0 )
+
+[node name="Sprite" type="Sprite" parent="NearBuildings"]
+position = Vector2( 0, 232 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 209 )

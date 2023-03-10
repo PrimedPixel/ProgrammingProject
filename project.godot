@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Player.gd"
+"path": "res://Scenes and Scripts/Level/Player.gd"
 } ]
 _global_script_class_icons={
 "Player": ""
@@ -21,14 +21,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Programming Project"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://Scenes and Scripts/Game/Game.tscn"
 config/icon="res://Icons/Icon 512x.png"
 config/windows_native_icon="res://Icons/Icon Windows.ico"
 
 [autoload]
 
-GlobalVariables="*res://GlobalVariables.gd"
-Transition="*res://Transition.tscn"
+GlobalVariables="*res://Scenes and Scripts/GlobalVariables.gd"
+Transition="*res://Scenes and Scripts/Transition.tscn"
 SoundPlayer="*res://Sounds/SoundPlayer.tscn"
 
 [display]
@@ -111,6 +111,11 @@ mouse_left={
 button_lctrl={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+button_pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
