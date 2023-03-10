@@ -109,8 +109,6 @@ func rope_angle_changes(x_input):
 	else:
 		# Inverse the change of angle while colliding
 		angle_to -= x_input * 0.2
-	
-	print(angle_to)
 
 func reset_rope():
 	line.clear_points()

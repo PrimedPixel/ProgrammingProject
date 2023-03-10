@@ -1,9 +1,9 @@
 extends Area2D
 
-onready var animation = $CoinAnimation
+onready var sprite = $Sprite
 
-func _ready():
-	animation.play("CoinAnimation")
+func _process(_delta):
+	sprite.offset = Vector2(0, sin(float(Time.get_ticks_msec()) / 100) * 2)
 
 func _on_Coin_body_entered(_body):
 	GlobalVariables.coin_count += 1

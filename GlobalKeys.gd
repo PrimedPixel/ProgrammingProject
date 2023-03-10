@@ -10,6 +10,9 @@ func _unhandled_input(event):
 					Transition.exit_level_transition()
 				KEY_Y:
 					Transition.enter_level_transition()
+				KEY_F:
+					GlobalVariables.write_savegame()
+					print("Saved game!")
 				KEY_F11:
 					OS.window_fullscreen = !OS.window_fullscreen
 				KEY_ESCAPE:

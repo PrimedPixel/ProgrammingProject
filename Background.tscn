@@ -14,7 +14,7 @@ motion_mirroring = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 640, 640 )
+region_rect = Rect2( 0, 0, 768, 640 )
 
 [node name="Skyline" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2( 128, 0 )

@@ -22,7 +22,8 @@ _global_script_class_icons={
 
 config/name="Programming Project"
 run/main_scene="res://Game.tscn"
-config/icon="res://icon.png"
+config/icon="res://Icons/Icon 512x.png"
+config/windows_native_icon="res://Icons/Icon Windows.ico"
 
 [autoload]
 

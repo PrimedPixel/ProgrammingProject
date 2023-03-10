@@ -3,7 +3,7 @@
 [ext_resource path="res://UI.gd" type="Script" id=1]
 [ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ALL_PLAYER.png" type="Texture" id=3]
-[ext_resource path="res://Coin_Animation.png" type="Texture" id=4]
+[ext_resource path="res://Dynamic Assets/Pellet.png" type="Texture" id=4]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -29,7 +29,6 @@ text = "Hi, I am a label"
 position = Vector2( 56, 56 )
 scale = Vector2( 12, 12 )
 texture = ExtResource( 4 )
-hframes = 4
 
 [node name="CoinTimer" type="Timer" parent="CanvasUI/CoinUI"]
 wait_time = 2.5
