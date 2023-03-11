@@ -9,12 +9,16 @@ script = ExtResource( 1 )
 
 [node name="AudioChannel" type="AudioStreamPlayer" parent="AudioPlayers"]
 volume_db = -10.0
+bus = "Sound Effects"
 
 [node name="AudioChannel2" type="AudioStreamPlayer" parent="AudioPlayers"]
 volume_db = -10.0
+bus = "Sound Effects"
 
 [node name="AudioChannel3" type="AudioStreamPlayer" parent="AudioPlayers"]
 volume_db = -10.0
+bus = "Sound Effects"
 
 [node name="AudioChannel4" type="AudioStreamPlayer" parent="AudioPlayers"]
 volume_db = -10.0
+bus = "Sound Effects"

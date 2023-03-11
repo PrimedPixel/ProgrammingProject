@@ -32,6 +32,7 @@ tile_data = PoolIntArray(  )
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 autoplay = true
+bus = "Music"
 
 [node name="Coin" parent="." instance=ExtResource( 7 )]
 position = Vector2( 192, 120 )

@@ -16,8 +16,8 @@ const min_rope_len = 20
 
 const max_rope_spd = 250
 
-var key_jump = "button_w"	# Spacebar is mapped to UI Select (to begin with)
-var key_up = "button_w"
+var key_jump = "button_jump"	# Spacebar is mapped to UI Select (to begin with)
+var key_up = "button_up"
 var key_down = "button_s"
 var key_left = "button_a"
 var key_right = "button_d"
@@ -186,10 +186,11 @@ func _process(delta):
 	if Transition.rect_animation.is_playing():
 		return
 	
-	var input_up = Input.get_action_strength("button_w")
-	var input_down = Input.get_action_strength("button_s")
-	var input_left = Input.get_action_strength("button_a")
-	var input_right = Input.get_action_strength("button_d")
+	var input_up = Input.get_action_strength("button_up")
+	var input_down = Input.get_action_strength("button_down")
+	var input_left = Input.get_action_strength("button_left")
+	var input_right = Input.get_action_strength("button_right")
+	var input_jump = Input.get_action_strength("button_jump")
 	
 	var input_mouse = Input.is_action_just_pressed("mouse_left")
 	
@@ -210,7 +211,7 @@ func _process(delta):
 			# True if the player is on the floor, or was in the last 0.15 seconds
 			var coyote_on_floor = is_on_floor() || !coyote_timer.is_stopped()
 			
-			if input_up:
+			if input_jump:
 				jump_buffer_timer.start()
 			
 			if coyote_on_floor:
@@ -269,7 +270,7 @@ func _process(delta):
 				motion *= 5
 			
 			# Resets player state out of rope state
-			if Input.is_action_just_released("ui_select") || is_on_floor():
+			if Input.is_action_just_released(key_jump) || is_on_floor():
 				reset_rope()
 	
 	# Checks to see if the player is on the floor before the move_and_slide
