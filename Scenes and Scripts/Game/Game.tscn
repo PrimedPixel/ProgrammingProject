@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Game/MouseCursor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=2]
@@ -7,15 +7,7 @@
 [ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scenes and Scripts/Game/LevelGUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes and Scripts/Game/PauseMenu.gd" type="Script" id=7]
-[ext_resource path="res://Theme Assets/Theme.tres" type="Theme" id=8]
-[ext_resource path="res://Scenes and Scripts/Game/MasterVolS.gd" type="Script" id=9]
-[ext_resource path="res://Scenes and Scripts/Game/MusicVolS.gd" type="Script" id=10]
-[ext_resource path="res://Scenes and Scripts/Game/SFXVolS.gd" type="Script" id=11]
-[ext_resource path="res://Scenes and Scripts/Game/UpButton.gd" type="Script" id=12]
-[ext_resource path="res://Scenes and Scripts/Game/RightButton.gd" type="Script" id=13]
-[ext_resource path="res://Scenes and Scripts/Game/DownButton.gd" type="Script" id=14]
-[ext_resource path="res://Scenes and Scripts/Game/LeftButton.gd" type="Script" id=15]
-[ext_resource path="res://Scenes and Scripts/Game/JumpButton.gd" type="Script" id=16]
+[ext_resource path="res://Scenes and Scripts/Menus/OptionsMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -64,22 +56,44 @@ margin_right = 642.0
 margin_bottom = 362.0
 color = Color( 0, 0, 0, 0.588235 )
 
-[node name="PauseContainer" type="VBoxContainer" parent="ViewportContainer/PauseMenu"]
+[node name="FirstMenu" type="VBoxContainer" parent="ViewportContainer/PauseMenu"]
 anchor_bottom = 1.0
 margin_left = 1.0
 margin_top = 128.0
 margin_right = 640.0
 custom_constants/separation = 0
 
-[node name="Options" type="Button" parent="ViewportContainer/PauseMenu/PauseContainer"]
+[node name="Resume" type="Button" parent="ViewportContainer/PauseMenu/FirstMenu"]
 margin_right = 639.0
 margin_bottom = 20.0
 focus_neighbour_left = NodePath("../Exit")
 focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_right = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Exit")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 5 )
+custom_styles/normal = ExtResource( 5 )
+text = "Resume"
+
+[node name="Options" type="Button" parent="ViewportContainer/PauseMenu/FirstMenu"]
+margin_right = 639.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../Resume")
+focus_neighbour_top = NodePath("../Resume")
 focus_neighbour_right = NodePath("../Exit")
 focus_neighbour_bottom = NodePath("../Exit")
 focus_next = NodePath("../Exit")
-focus_previous = NodePath("../Exit")
+focus_previous = NodePath("../Resume")
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -93,15 +107,15 @@ custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Options"
 
-[node name="Exit" type="Button" parent="ViewportContainer/PauseMenu/PauseContainer"]
+[node name="Exit" type="Button" parent="ViewportContainer/PauseMenu/FirstMenu"]
 margin_top = 20.0
 margin_right = 639.0
 margin_bottom = 40.0
 focus_neighbour_left = NodePath("../Options")
 focus_neighbour_top = NodePath("../Options")
-focus_neighbour_right = NodePath("../Options")
-focus_neighbour_bottom = NodePath("../Options")
-focus_next = NodePath("../Options")
+focus_neighbour_right = NodePath("../Resume")
+focus_neighbour_bottom = NodePath("../Resume")
+focus_next = NodePath("../Resume")
 focus_previous = NodePath("../Options")
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
@@ -116,343 +130,7 @@ custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 5 )
 text = "Exit"
 
-[node name="OptionsContainer" type="VBoxContainer" parent="ViewportContainer/PauseMenu"]
-visible = false
-anchor_bottom = 1.0
-margin_left = 192.0
-margin_top = 128.0
-margin_right = 448.0
-custom_constants/separation = 0
-
-[node name="Back" type="Button" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_right = 256.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../SFXVolS")
-focus_neighbour_top = NodePath("../SFXVolS")
-focus_neighbour_right = NodePath("../Controls")
-focus_neighbour_bottom = NodePath("../Controls")
-focus_next = NodePath("../Controls")
-focus_previous = NodePath("../SFXVolS")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-text = "Back"
-
-[node name="Controls" type="Button" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 20.0
-margin_right = 256.0
-margin_bottom = 40.0
-focus_neighbour_left = NodePath("../Back")
-focus_neighbour_top = NodePath("../Back")
-focus_neighbour_right = NodePath("../MasterVolS")
-focus_neighbour_bottom = NodePath("../MasterVolS")
-focus_next = NodePath("../MasterVolS")
-focus_previous = NodePath("../Back")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-text = "Controls"
-
-[node name="HSeparator" type="HSeparator" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 40.0
-margin_right = 256.0
-margin_bottom = 44.0
-theme = ExtResource( 8 )
-
-[node name="MasterVolL" type="Label" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 44.0
-margin_right = 256.0
-margin_bottom = 64.0
-theme = ExtResource( 8 )
-text = "MASTER VOLUME"
-align = 1
-
-[node name="MasterVolS" type="HSlider" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 64.0
-margin_right = 256.0
-margin_bottom = 80.0
-focus_neighbour_left = NodePath("../Controls")
-focus_neighbour_top = NodePath("../Controls")
-focus_neighbour_right = NodePath("../MusicVolS")
-focus_neighbour_bottom = NodePath("../MusicVolS")
-focus_next = NodePath("../MusicVolS")
-focus_previous = NodePath("../Controls")
-theme = ExtResource( 8 )
-max_value = 1.0
-step = 0.01
-script = ExtResource( 9 )
-
-[node name="MusicVolL" type="Label" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 80.0
-margin_right = 256.0
-margin_bottom = 100.0
-theme = ExtResource( 8 )
-text = "MUSIC VOLUME"
-align = 1
-
-[node name="MusicVolS" type="HSlider" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 100.0
-margin_right = 256.0
-margin_bottom = 116.0
-focus_neighbour_left = NodePath("../MasterVolS")
-focus_neighbour_top = NodePath("../MasterVolS")
-focus_neighbour_right = NodePath("../SFXVolS")
-focus_neighbour_bottom = NodePath("../SFXVolS")
-focus_next = NodePath("../SFXVolS")
-focus_previous = NodePath("../MasterVolS")
-theme = ExtResource( 8 )
-max_value = 1.0
-step = 0.01
-script = ExtResource( 10 )
-
-[node name="SFXVolL" type="Label" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 116.0
-margin_right = 256.0
-margin_bottom = 136.0
-theme = ExtResource( 8 )
-text = "SOUND EFFECTS VOLUME"
-align = 1
-
-[node name="SFXVolS" type="HSlider" parent="ViewportContainer/PauseMenu/OptionsContainer"]
-margin_top = 136.0
-margin_right = 256.0
-margin_bottom = 152.0
-focus_neighbour_left = NodePath("../MusicVolS")
-focus_neighbour_top = NodePath("../MusicVolS")
-focus_neighbour_right = NodePath("../Back")
-focus_neighbour_bottom = NodePath("../Back")
-focus_next = NodePath("../Back")
-focus_previous = NodePath("../MusicVolS")
-theme = ExtResource( 8 )
-max_value = 1.0
-step = 0.01
-script = ExtResource( 11 )
-
-[node name="ControlsContainer" type="VBoxContainer" parent="ViewportContainer/PauseMenu"]
-visible = false
-anchor_bottom = 1.0
-margin_left = 192.0
-margin_top = 128.0
-margin_right = 448.0
-custom_constants/separation = 0
-
-[node name="Back" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_right = 256.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../JumpContainer/JumpButton")
-focus_neighbour_top = NodePath("../JumpContainer/JumpButton")
-focus_neighbour_right = NodePath("../UpContainer/UpButton")
-focus_neighbour_bottom = NodePath("../UpContainer/UpButton")
-focus_next = NodePath("../UpContainer/UpButton")
-focus_previous = NodePath("../JumpContainer/JumpButton")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-text = "Back"
-
-[node name="UpContainer" type="HBoxContainer" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_top = 20.0
-margin_right = 256.0
-margin_bottom = 40.0
-alignment = 1
-
-[node name="UpLabel" type="Label" parent="ViewportContainer/PauseMenu/ControlsContainer/UpContainer"]
-margin_left = 101.0
-margin_right = 121.0
-margin_bottom = 20.0
-theme = ExtResource( 8 )
-text = "Up"
-
-[node name="UpButton" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer/UpContainer"]
-margin_left = 125.0
-margin_right = 155.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../../Back")
-focus_neighbour_top = NodePath("../../Back")
-focus_neighbour_right = NodePath("../../DownContainer/DownButton")
-focus_neighbour_bottom = NodePath("../../DownContainer/DownButton")
-focus_next = NodePath("../../DownContainer/DownButton")
-focus_previous = NodePath("../../Back")
-theme = ExtResource( 8 )
-toggle_mode = true
-text = "Key"
-script = ExtResource( 12 )
-
-[node name="DownContainer" type="HBoxContainer" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_top = 40.0
-margin_right = 256.0
-margin_bottom = 60.0
-alignment = 1
-
-[node name="DownLabel" type="Label" parent="ViewportContainer/PauseMenu/ControlsContainer/DownContainer"]
-margin_left = 90.0
-margin_right = 132.0
-margin_bottom = 20.0
-theme = ExtResource( 8 )
-text = "Down"
-
-[node name="DownButton" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer/DownContainer"]
-margin_left = 136.0
-margin_right = 166.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../../UpContainer/UpButton")
-focus_neighbour_top = NodePath("../../UpContainer/UpButton")
-focus_neighbour_right = NodePath("../../LeftContainer/LeftButton")
-focus_neighbour_bottom = NodePath("../../LeftContainer/LeftButton")
-focus_next = NodePath("../../LeftContainer/LeftButton")
-focus_previous = NodePath("../../UpContainer/UpButton")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-toggle_mode = true
-text = "Key"
-script = ExtResource( 14 )
-
-[node name="LeftContainer" type="HBoxContainer" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_top = 60.0
-margin_right = 256.0
-margin_bottom = 80.0
-alignment = 1
-
-[node name="LeftLabel" type="Label" parent="ViewportContainer/PauseMenu/ControlsContainer/LeftContainer"]
-margin_left = 93.0
-margin_right = 129.0
-margin_bottom = 20.0
-theme = ExtResource( 8 )
-text = "Left"
-
-[node name="LeftButton" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer/LeftContainer"]
-margin_left = 133.0
-margin_right = 163.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../../DownContainer/DownButton")
-focus_neighbour_top = NodePath("../../DownContainer/DownButton")
-focus_neighbour_right = NodePath("../../RightContainer/RightButton")
-focus_neighbour_bottom = NodePath("../../RightContainer/RightButton")
-focus_next = NodePath("../../RightContainer/RightButton")
-focus_previous = NodePath("../../DownContainer/DownButton")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-toggle_mode = true
-text = "Key"
-script = ExtResource( 15 )
-
-[node name="RightContainer" type="HBoxContainer" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_top = 80.0
-margin_right = 256.0
-margin_bottom = 100.0
-alignment = 1
-
-[node name="RightLabel" type="Label" parent="ViewportContainer/PauseMenu/ControlsContainer/RightContainer"]
-margin_left = 90.0
-margin_right = 132.0
-margin_bottom = 20.0
-theme = ExtResource( 8 )
-text = "Right"
-
-[node name="RightButton" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer/RightContainer"]
-margin_left = 136.0
-margin_right = 166.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../../LeftContainer/LeftButton")
-focus_neighbour_top = NodePath("../../LeftContainer/LeftButton")
-focus_neighbour_right = NodePath("../../JumpContainer/JumpButton")
-focus_neighbour_bottom = NodePath("../../JumpContainer/JumpButton")
-focus_next = NodePath("../../JumpContainer/JumpButton")
-focus_previous = NodePath("../../LeftContainer/LeftButton")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-toggle_mode = true
-text = "Key"
-script = ExtResource( 13 )
-
-[node name="JumpContainer" type="HBoxContainer" parent="ViewportContainer/PauseMenu/ControlsContainer"]
-margin_top = 100.0
-margin_right = 256.0
-margin_bottom = 120.0
-alignment = 1
-
-[node name="JumpLabel" type="Label" parent="ViewportContainer/PauseMenu/ControlsContainer/JumpContainer"]
-margin_left = 91.0
-margin_right = 131.0
-margin_bottom = 20.0
-theme = ExtResource( 8 )
-text = "Jump"
-
-[node name="JumpButton" type="Button" parent="ViewportContainer/PauseMenu/ControlsContainer/JumpContainer"]
-margin_left = 135.0
-margin_right = 165.0
-margin_bottom = 20.0
-focus_neighbour_left = NodePath("../../RightContainer/RightButton")
-focus_neighbour_top = NodePath("../../RightContainer/RightButton")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath("../../RightContainer/RightButton")
-custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
-custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
-custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 5 )
-toggle_mode = true
-text = "Key"
-script = ExtResource( 16 )
+[node name="OptionsMenu" parent="ViewportContainer/PauseMenu" instance=ExtResource( 8 )]
 
 [node name="UI" parent="." instance=ExtResource( 6 )]
 
@@ -460,15 +138,6 @@ script = ExtResource( 16 )
 pause_mode = 2
 scale = Vector2( 3, 3 )
 
-[connection signal="pressed" from="ViewportContainer/PauseMenu/PauseContainer/Options" to="ViewportContainer/PauseMenu" method="_on_Options_pressed"]
-[connection signal="pressed" from="ViewportContainer/PauseMenu/PauseContainer/Exit" to="ViewportContainer/PauseMenu" method="_on_Exit_pressed"]
-[connection signal="pressed" from="ViewportContainer/PauseMenu/OptionsContainer/Back" to="ViewportContainer/PauseMenu" method="_on_Back_pressed"]
-[connection signal="pressed" from="ViewportContainer/PauseMenu/OptionsContainer/Controls" to="ViewportContainer/PauseMenu" method="_on_Controls_pressed"]
-[connection signal="value_changed" from="ViewportContainer/PauseMenu/OptionsContainer/MasterVolS" to="ViewportContainer/PauseMenu" method="_on_MasterVolS_value_changed"]
-[connection signal="value_changed" from="ViewportContainer/PauseMenu/OptionsContainer/MusicVolS" to="ViewportContainer/PauseMenu" method="_on_MusicVolS_value_changed"]
-[connection signal="value_changed" from="ViewportContainer/PauseMenu/OptionsContainer/SFXVolS" to="ViewportContainer/PauseMenu" method="_on_SFXVolS_value_changed"]
-[connection signal="button_down" from="ViewportContainer/PauseMenu/ControlsContainer/UpContainer/UpButton" to="ViewportContainer/PauseMenu" method="_on_UpButton_button_down"]
-[connection signal="button_down" from="ViewportContainer/PauseMenu/ControlsContainer/DownContainer/DownButton" to="ViewportContainer/PauseMenu" method="_on_DownButton_button_down"]
-[connection signal="button_down" from="ViewportContainer/PauseMenu/ControlsContainer/LeftContainer/LeftButton" to="ViewportContainer/PauseMenu" method="_on_LeftButton_button_down"]
-[connection signal="button_down" from="ViewportContainer/PauseMenu/ControlsContainer/RightContainer/RightButton" to="ViewportContainer/PauseMenu" method="_on_RightButton_button_down"]
-[connection signal="button_down" from="ViewportContainer/PauseMenu/ControlsContainer/JumpContainer/JumpButton" to="ViewportContainer/PauseMenu" method="_on_JumpButton_button_down"]
+[connection signal="pressed" from="ViewportContainer/PauseMenu/FirstMenu/Resume" to="ViewportContainer/PauseMenu" method="_on_Resume_pressed"]
+[connection signal="pressed" from="ViewportContainer/PauseMenu/FirstMenu/Options" to="ViewportContainer/PauseMenu" method="_on_Options_pressed"]
+[connection signal="pressed" from="ViewportContainer/PauseMenu/FirstMenu/Exit" to="ViewportContainer/PauseMenu" method="_on_Exit_pressed"]

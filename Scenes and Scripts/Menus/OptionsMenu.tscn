@@ -1,0 +1,387 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes and Scripts/Game/LeftButton.gd" type="Script" id=1]
+[ext_resource path="res://Scenes and Scripts/Game/DownButton.gd" type="Script" id=2]
+[ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Scenes and Scripts/Game/JumpButton.gd" type="Script" id=4]
+[ext_resource path="res://Scenes and Scripts/Game/MasterVolS.gd" type="Script" id=5]
+[ext_resource path="res://Scenes and Scripts/Game/MusicVolS.gd" type="Script" id=6]
+[ext_resource path="res://Scenes and Scripts/Game/RightButton.gd" type="Script" id=7]
+[ext_resource path="res://Scenes and Scripts/Game/SFXVolS.gd" type="Script" id=8]
+[ext_resource path="res://Scenes and Scripts/Game/UpButton.gd" type="Script" id=9]
+[ext_resource path="res://Scenes and Scripts/Game/Fullscreen.gd" type="Script" id=10]
+[ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=11]
+[ext_resource path="res://Theme Assets/Theme.tres" type="Theme" id=12]
+[ext_resource path="res://Scenes and Scripts/Game/OptionsMenu.gd" type="Script" id=13]
+
+[node name="OptionsMenu" type="Control"]
+margin_left = 1.0
+margin_top = 128.0
+margin_right = 41.0
+margin_bottom = 168.0
+script = ExtResource( 13 )
+
+[node name="OptionsContainer" type="VBoxContainer" parent="."]
+visible = false
+anchor_bottom = 1.0
+margin_left = 191.0
+margin_right = 447.0
+margin_bottom = 132.0
+custom_constants/separation = 0
+
+[node name="OptionsBack" type="Button" parent="OptionsContainer"]
+margin_right = 256.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../SFXVolS")
+focus_neighbour_top = NodePath("../SFXVolS")
+focus_neighbour_right = NodePath("../Controls")
+focus_neighbour_bottom = NodePath("../Controls")
+focus_next = NodePath("../Controls")
+focus_previous = NodePath("../SFXVolS")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Back"
+
+[node name="Controls" type="Button" parent="OptionsContainer"]
+margin_top = 20.0
+margin_right = 256.0
+margin_bottom = 40.0
+focus_neighbour_left = NodePath("../OptionsBack")
+focus_neighbour_top = NodePath("../OptionsBack")
+focus_neighbour_right = NodePath("../Fullscreen")
+focus_neighbour_bottom = NodePath("../Fullscreen")
+focus_next = NodePath("../Fullscreen")
+focus_previous = NodePath("../OptionsBack")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Controls"
+
+[node name="Fullscreen" type="Button" parent="OptionsContainer"]
+margin_top = 40.0
+margin_right = 256.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Controls")
+focus_neighbour_top = NodePath("../Controls")
+focus_neighbour_right = NodePath("../MasterVolS")
+focus_neighbour_bottom = NodePath("../MasterVolS")
+focus_next = NodePath("../MasterVolS")
+focus_previous = NodePath("../Controls")
+theme = ExtResource( 12 )
+text = "Fullscreen On"
+script = ExtResource( 10 )
+
+[node name="HSeparator" type="HSeparator" parent="OptionsContainer"]
+margin_top = 60.0
+margin_right = 256.0
+margin_bottom = 64.0
+theme = ExtResource( 12 )
+
+[node name="MasterVolL" type="Label" parent="OptionsContainer"]
+margin_top = 64.0
+margin_right = 256.0
+margin_bottom = 84.0
+theme = ExtResource( 12 )
+text = "MASTER VOLUME"
+align = 1
+
+[node name="MasterVolS" type="HSlider" parent="OptionsContainer"]
+margin_top = 84.0
+margin_right = 256.0
+margin_bottom = 100.0
+focus_neighbour_left = NodePath("../Controls")
+focus_neighbour_top = NodePath("../Controls")
+focus_neighbour_right = NodePath("../MusicVolS")
+focus_neighbour_bottom = NodePath("../MusicVolS")
+focus_next = NodePath("../MusicVolS")
+focus_previous = NodePath("../Controls")
+theme = ExtResource( 12 )
+max_value = 1.0
+step = 0.01
+script = ExtResource( 5 )
+
+[node name="MusicVolL" type="Label" parent="OptionsContainer"]
+margin_top = 100.0
+margin_right = 256.0
+margin_bottom = 120.0
+theme = ExtResource( 12 )
+text = "MUSIC VOLUME"
+align = 1
+
+[node name="MusicVolS" type="HSlider" parent="OptionsContainer"]
+margin_top = 120.0
+margin_right = 256.0
+margin_bottom = 136.0
+focus_neighbour_left = NodePath("../MasterVolS")
+focus_neighbour_top = NodePath("../MasterVolS")
+focus_neighbour_right = NodePath("../SFXVolS")
+focus_neighbour_bottom = NodePath("../SFXVolS")
+focus_next = NodePath("../SFXVolS")
+focus_previous = NodePath("../MasterVolS")
+theme = ExtResource( 12 )
+max_value = 1.0
+step = 0.01
+script = ExtResource( 6 )
+
+[node name="SFXVolL" type="Label" parent="OptionsContainer"]
+margin_top = 136.0
+margin_right = 256.0
+margin_bottom = 156.0
+theme = ExtResource( 12 )
+text = "SOUND EFFECTS VOLUME"
+align = 1
+
+[node name="SFXVolS" type="HSlider" parent="OptionsContainer"]
+margin_top = 156.0
+margin_right = 256.0
+margin_bottom = 172.0
+focus_neighbour_left = NodePath("../MusicVolS")
+focus_neighbour_top = NodePath("../MusicVolS")
+focus_neighbour_right = NodePath("../OptionsBack")
+focus_neighbour_bottom = NodePath("../OptionsBack")
+focus_next = NodePath("../OptionsBack")
+focus_previous = NodePath("../MusicVolS")
+theme = ExtResource( 12 )
+max_value = 1.0
+step = 0.01
+script = ExtResource( 8 )
+
+[node name="ControlsContainer" type="VBoxContainer" parent="."]
+visible = false
+anchor_bottom = 1.0
+margin_left = 191.0
+margin_right = 447.0
+margin_bottom = 80.0
+custom_constants/separation = 0
+
+[node name="ControlsBack" type="Button" parent="ControlsContainer"]
+margin_right = 256.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../JumpContainer/JumpButton")
+focus_neighbour_top = NodePath("../JumpContainer/JumpButton")
+focus_neighbour_right = NodePath("../UpContainer/UpButton")
+focus_neighbour_bottom = NodePath("../UpContainer/UpButton")
+focus_next = NodePath("../UpContainer/UpButton")
+focus_previous = NodePath("../JumpContainer/JumpButton")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Back"
+
+[node name="UpContainer" type="HBoxContainer" parent="ControlsContainer"]
+margin_top = 20.0
+margin_right = 256.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="UpLabel" type="Label" parent="ControlsContainer/UpContainer"]
+margin_left = 101.0
+margin_right = 121.0
+margin_bottom = 20.0
+theme = ExtResource( 12 )
+text = "Up"
+
+[node name="UpButton" type="Button" parent="ControlsContainer/UpContainer"]
+margin_left = 125.0
+margin_right = 155.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../../ControlsBack")
+focus_neighbour_top = NodePath("../../ControlsBack")
+focus_neighbour_right = NodePath("../../DownContainer/DownButton")
+focus_neighbour_bottom = NodePath("../../DownContainer/DownButton")
+focus_next = NodePath("../../DownContainer/DownButton")
+focus_previous = NodePath("../../ControlsBack")
+theme = ExtResource( 12 )
+toggle_mode = true
+text = "Key"
+script = ExtResource( 9 )
+
+[node name="DownContainer" type="HBoxContainer" parent="ControlsContainer"]
+margin_top = 40.0
+margin_right = 256.0
+margin_bottom = 60.0
+alignment = 1
+
+[node name="DownLabel" type="Label" parent="ControlsContainer/DownContainer"]
+margin_left = 90.0
+margin_right = 132.0
+margin_bottom = 20.0
+theme = ExtResource( 12 )
+text = "Down"
+
+[node name="DownButton" type="Button" parent="ControlsContainer/DownContainer"]
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../../UpContainer/UpButton")
+focus_neighbour_top = NodePath("../../UpContainer/UpButton")
+focus_neighbour_right = NodePath("../../LeftContainer/LeftButton")
+focus_neighbour_bottom = NodePath("../../LeftContainer/LeftButton")
+focus_next = NodePath("../../LeftContainer/LeftButton")
+focus_previous = NodePath("../../UpContainer/UpButton")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+toggle_mode = true
+text = "Key"
+script = ExtResource( 2 )
+
+[node name="LeftContainer" type="HBoxContainer" parent="ControlsContainer"]
+margin_top = 60.0
+margin_right = 256.0
+margin_bottom = 80.0
+alignment = 1
+
+[node name="LeftLabel" type="Label" parent="ControlsContainer/LeftContainer"]
+margin_left = 93.0
+margin_right = 129.0
+margin_bottom = 20.0
+theme = ExtResource( 12 )
+text = "Left"
+
+[node name="LeftButton" type="Button" parent="ControlsContainer/LeftContainer"]
+margin_left = 133.0
+margin_right = 163.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../../DownContainer/DownButton")
+focus_neighbour_top = NodePath("../../DownContainer/DownButton")
+focus_neighbour_right = NodePath("../../RightContainer/RightButton")
+focus_neighbour_bottom = NodePath("../../RightContainer/RightButton")
+focus_next = NodePath("../../RightContainer/RightButton")
+focus_previous = NodePath("../../DownContainer/DownButton")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+toggle_mode = true
+text = "Key"
+script = ExtResource( 1 )
+
+[node name="RightContainer" type="HBoxContainer" parent="ControlsContainer"]
+margin_top = 80.0
+margin_right = 256.0
+margin_bottom = 100.0
+alignment = 1
+
+[node name="RightLabel" type="Label" parent="ControlsContainer/RightContainer"]
+margin_left = 90.0
+margin_right = 132.0
+margin_bottom = 20.0
+theme = ExtResource( 12 )
+text = "Right"
+
+[node name="RightButton" type="Button" parent="ControlsContainer/RightContainer"]
+margin_left = 136.0
+margin_right = 166.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../../LeftContainer/LeftButton")
+focus_neighbour_top = NodePath("../../LeftContainer/LeftButton")
+focus_neighbour_right = NodePath("../../JumpContainer/JumpButton")
+focus_neighbour_bottom = NodePath("../../JumpContainer/JumpButton")
+focus_next = NodePath("../../JumpContainer/JumpButton")
+focus_previous = NodePath("../../LeftContainer/LeftButton")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+toggle_mode = true
+text = "Key"
+script = ExtResource( 7 )
+
+[node name="JumpContainer" type="HBoxContainer" parent="ControlsContainer"]
+margin_top = 100.0
+margin_right = 256.0
+margin_bottom = 120.0
+alignment = 1
+
+[node name="JumpLabel" type="Label" parent="ControlsContainer/JumpContainer"]
+margin_left = 91.0
+margin_right = 131.0
+margin_bottom = 20.0
+theme = ExtResource( 12 )
+text = "Jump"
+
+[node name="JumpButton" type="Button" parent="ControlsContainer/JumpContainer"]
+margin_left = 135.0
+margin_right = 165.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../../RightContainer/RightButton")
+focus_neighbour_top = NodePath("../../RightContainer/RightButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../../RightContainer/RightButton")
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 1, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 11 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+toggle_mode = true
+text = "Key"
+script = ExtResource( 4 )
+
+[connection signal="pressed" from="OptionsContainer/OptionsBack" to="." method="_on_OptionsBack_pressed"]
+[connection signal="pressed" from="OptionsContainer/Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="OptionsContainer/Fullscreen" to="." method="_on_Fullscreen_pressed"]
+[connection signal="value_changed" from="OptionsContainer/MasterVolS" to="." method="_on_MasterVolS_value_changed"]
+[connection signal="value_changed" from="OptionsContainer/MusicVolS" to="." method="_on_MusicVolS_value_changed"]
+[connection signal="value_changed" from="OptionsContainer/SFXVolS" to="." method="_on_SFXVolS_value_changed"]
+[connection signal="pressed" from="ControlsContainer/ControlsBack" to="." method="_on_ControlsBack_pressed"]
+[connection signal="button_down" from="ControlsContainer/UpContainer/UpButton" to="." method="_on_UpButton_button_down"]
+[connection signal="button_down" from="ControlsContainer/DownContainer/DownButton" to="." method="_on_DownButton_button_down"]
+[connection signal="button_down" from="ControlsContainer/LeftContainer/LeftButton" to="." method="_on_LeftButton_button_down"]
+[connection signal="button_down" from="ControlsContainer/RightContainer/RightButton" to="." method="_on_RightButton_button_down"]
+[connection signal="button_down" from="ControlsContainer/JumpContainer/JumpButton" to="." method="_on_JumpButton_button_down"]

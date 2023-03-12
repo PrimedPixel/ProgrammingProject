@@ -6,6 +6,10 @@ export var death_count = 0
 
 export var level_to = -1
 
+onready var master_bus = AudioServer.get_bus_index("Master")
+onready var music_bus = AudioServer.get_bus_index("Music")
+onready var sfx_bus = AudioServer.get_bus_index("Sound Effects")
+
 var save_file = File.new()
 var save_file_path = "user://save.json"
 
@@ -39,6 +43,23 @@ func write_savegame():
 		},
 		
 		"continue_level": current_level_path,
+		
+		"options":
+		{
+			"fullscreen": OS.window_fullscreen,
+			"master_vol": AudioServer.get_bus_volume_db(master_bus),
+			"music_vol": AudioServer.get_bus_volume_db(music_bus),
+			"sfx_vol": AudioServer.get_bus_volume_db(sfx_bus),
+			
+			"controls":
+			{
+				"up": InputMap.get_action_list("button_up")[0].scancode,
+				"down": InputMap.get_action_list("button_down")[0].scancode,
+				"left": InputMap.get_action_list("button_left")[0].scancode,
+				"right": InputMap.get_action_list("button_right")[0].scancode,
+				"jump": InputMap.get_action_list("button_jump")[0].scancode,
+			}
+		}
 	}
 	
 	# Saves the data into a JSON formatted string, then writes said string
@@ -68,6 +89,17 @@ func load_savegame():
 	death_count = data.stats.death_count
 
 	level_to = data.continue_level
+	
+	OS.window_fullscreen = data.options.fullscreen
+	AudioServer.set_bus_volume_db(master_bus, data.options.master_vol)
+	AudioServer.set_bus_volume_db(music_bus, data.options.music_vol)
+	AudioServer.set_bus_volume_db(sfx_bus, data.options.sfx_vol)
+	
+	change_key("button_up", data.options.controls.up)
+	change_key("button_down", data.options.controls.down)
+	change_key("button_left", data.options.controls.left)
+	change_key("button_right", data.options.controls.right)
+	change_key("button_jump", data.options.controls.jump)
 
 func delete_savegame():
 	if save_exists():
@@ -79,6 +111,18 @@ func delete_savegame():
 	coin_count = 0
 	death_count = 0
 	level_to = -1
+
+
+func change_key(map_key, new_key):
+	# Delete key of pressed button
+	if !InputMap.get_action_list(map_key).empty():
+		InputMap.action_erase_event(map_key, InputMap.get_action_list(map_key)[0])
+			
+	# Add new Key
+	var key = InputEventKey.new()
+	key.scancode = new_key
+	InputMap.action_add_event(map_key, key)
+
 
 # Runs when the game first starts
 func _ready():
