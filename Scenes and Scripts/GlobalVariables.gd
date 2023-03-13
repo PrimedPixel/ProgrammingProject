@@ -26,7 +26,7 @@ func write_savegame():
 	
 	# For whatever reason (I suspect since we're running from a singleton
 	# get_viewport() does not work, so it must be manually get
-	var current_level_path = get_tree().get_current_scene().get_node("ViewportContainer/Viewport").get_child(0).get_filename()
+#	var current_level_path = get_tree().get_current_scene().get_node("ViewportContainer/Viewport").get_child(0).get_filename()
 	
 	# Stores the data in a dictionary
 	var data = {
@@ -42,7 +42,7 @@ func write_savegame():
 			"death_count": death_count,
 		},
 		
-		"continue_level": current_level_path,
+		"continue_level": level_to,
 		
 		"options":
 		{

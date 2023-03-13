@@ -16,6 +16,7 @@ func _on_NextLevelCollider_body_entered(body):
 	var viewport_child = viewport.get_child(viewport.get_child_count() - 1)
 	viewport_child.queue_free()
 	
+	GlobalVariables.level_to = target_level_path
 	var new_scene = target_level_path.instance()
 	viewport.add_child(new_scene)
 	

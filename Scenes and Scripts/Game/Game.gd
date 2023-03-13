@@ -3,7 +3,7 @@ extends Node2D
 onready var viewport = $ViewportContainer/Viewport
 
 func _ready():
-	if GlobalVariables.level_to is String:
+	if GlobalVariables.level_to is String && GlobalVariables.level_to != "":
 		# Changes the default level in the "Game" scene to the new one
 		var viewport_child = viewport.get_child(0)
 		viewport_child.queue_free()

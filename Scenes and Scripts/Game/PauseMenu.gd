@@ -31,13 +31,16 @@ func _on_Options_pressed():
 
 func _on_Exit_pressed():
 	Transition.exit_level_transition()
+	
+	GlobalVariables.level_to = get_tree().get_current_scene().get_node("ViewportContainer/Viewport").get_child(0).get_filename()
+	GlobalVariables.write_savegame()
+	
 	yield(Transition, "transition_completed")
 	
 #	music.fade_out()
 #	yield(fade_out, "tween_completed")
 	get_tree().paused = false
-	
-	GlobalVariables.write_savegame()
+
 	get_tree().change_scene("res://Scenes and Scripts/Menus/Menu.tscn")
 	
 	Transition.enter_level_transition()
