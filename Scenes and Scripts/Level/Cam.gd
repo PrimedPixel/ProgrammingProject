@@ -6,9 +6,10 @@ onready var viewport = get_parent().get_parent()
 
 var mouse_pos = Vector2.ZERO
 
-var interpolate_val = 2
+const min_interpolate_val = 2
+var interpolate_val = min_interpolate_val
 
-var game_size = Vector2(320, 180)
+var game_size = Vector2(640, 360)
 onready var window_scale = (OS.window_size / game_size).x
 onready var actual_cam_pos = global_position
 
@@ -16,10 +17,8 @@ func _process(delta):
 	#Use player's velocity as the lerp value to stop player from going off screen
 	#But keep the minimum at 2 (any lower velocity will still allow camera to move)
 	var player_vel = player.motion.length() * 0.03
-	if player_vel > 2:
-		interpolate_val = player_vel
-	else:
-		interpolate_val = 2
+		
+	interpolate_val = min(min_interpolate_val, player_vel)
 	
 #	var target = player.get_global_position()
 #
