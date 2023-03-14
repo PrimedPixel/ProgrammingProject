@@ -18,7 +18,7 @@ func _process(delta):
 	#But keep the minimum at 2 (any lower velocity will still allow camera to move)
 	var player_vel = player.motion.length() * 0.03
 		
-	interpolate_val = min(min_interpolate_val, player_vel)
+	interpolate_val = max(min_interpolate_val, player_vel)
 	
 #	var target = player.get_global_position()
 #

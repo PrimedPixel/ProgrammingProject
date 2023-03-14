@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes and Scripts/Game/UI.gd" type="Script" id=1]
 [ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=2]
-[ext_resource path="res://ALL_PLAYER.png" type="Texture" id=3]
+[ext_resource path="res://Dynamic Assets/Player Atlas.png" type="Texture" id=3]
 [ext_resource path="res://Dynamic Assets/Pellet.png" type="Texture" id=4]
 
 [node name="UI" type="Control"]
@@ -18,15 +18,16 @@ mouse_filter = 2
 
 [node name="CoinCount" type="Label" parent="CanvasUI/CoinUI"]
 anchor_bottom = 0.404
-margin_left = 112.0
-margin_right = 228.0
-margin_bottom = 20.0
+margin_left = 192.0
+margin_top = 32.0
+margin_right = 308.0
+margin_bottom = 52.0
 rect_scale = Vector2( 6, 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "Hi, I am a label"
 
 [node name="Coin" type="Sprite" parent="CanvasUI/CoinUI"]
-position = Vector2( 56, 56 )
+position = Vector2( 96, 96 )
 scale = Vector2( 12, 12 )
 texture = ExtResource( 4 )
 
@@ -38,17 +39,18 @@ one_shot = true
 mouse_filter = 2
 
 [node name="DeathSkull" type="Sprite" parent="CanvasUI/DeathUI"]
-position = Vector2( 1864, 56 )
-scale = Vector2( 12, 12 )
+position = Vector2( 1829, 72 )
+scale = Vector2( 6, 6 )
 texture = ExtResource( 3 )
-hframes = 16
-vframes = 3
-frame = 5
+hframes = 6
+vframes = 2
+frame = 2
 
 [node name="DeathCount" type="Label" parent="CanvasUI/DeathUI"]
-margin_left = 1112.0
-margin_right = 1228.0
-margin_bottom = 20.0
+margin_left = 1032.0
+margin_top = 32.0
+margin_right = 1148.0
+margin_bottom = 52.0
 rect_scale = Vector2( 6, 6 )
 custom_fonts/font = ExtResource( 2 )
 text = "Hi, I am a label"

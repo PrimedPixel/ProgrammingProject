@@ -20,8 +20,8 @@ var ui_offscreen = 0
 func _ready():
 	# Multiply by 6 since the UI is 6 times the scale of the in game resolution
 	# (320, 180) * 6 = (1920, 1080)
-	ui_onscreen = coin_ui.rect_position.y * 6
-	ui_offscreen = -coin_count.rect_size.y * 6
+	ui_onscreen = death_ui.rect_position.y * 3
+	ui_offscreen = -(ui_onscreen + (64 * 3))
 	
 	coin_ui.rect_position.y = ui_offscreen
 	death_ui.rect_position.y = ui_offscreen
