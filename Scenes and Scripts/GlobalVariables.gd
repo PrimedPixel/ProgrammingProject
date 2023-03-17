@@ -58,8 +58,8 @@ func write_savegame():
 				"left": InputMap.get_action_list("button_left")[0].scancode,
 				"right": InputMap.get_action_list("button_right")[0].scancode,
 				"jump": InputMap.get_action_list("button_jump")[0].scancode,
-			}
-		}
+			},
+		},
 	}
 	
 	# Saves the data into a JSON formatted string, then writes said string

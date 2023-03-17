@@ -3,6 +3,7 @@ extends Camera2D
 onready var player = get_parent().get_node("Player")
 onready var viewpoint_container = get_parent().get_parent().get_parent()
 onready var viewport = get_parent().get_parent()
+onready var level_bottom = viewport.get_child(0).bottom
 
 var mouse_pos = Vector2.ZERO
 
@@ -30,6 +31,9 @@ func _process(delta):
 	var pos = viewport.get_mouse_position() / window_scale - (game_size / 2) + player.global_position
 
 	actual_cam_pos = lerp(actual_cam_pos, pos, interpolate_val * delta)
+	
+	actual_cam_pos.x = max(actual_cam_pos.x, (game_size / 2).x)
+	actual_cam_pos.y = clamp(actual_cam_pos.y, (game_size / 2).y, level_bottom - (game_size / 2).y)
 	
 	var subpixel_pos = actual_cam_pos.round() - actual_cam_pos
 	

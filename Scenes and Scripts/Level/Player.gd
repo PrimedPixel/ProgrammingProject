@@ -151,21 +151,22 @@ func initialise_rope():
 			player_state = state.swing
 
 func die():
-	animation.play("Die")
-	
-	SoundPlayer.stop_sound(SoundPlayer.Wind)
-	SoundPlayer.play_sound(SoundPlayer.Damage)
-	
-	Transition.exit_level_transition()
-	yield(Transition, "transition_completed")
-	
-	animation.play("Idle")
-	position = GlobalVariables.checkpoint_pos
-	GlobalVariables.death_count += 1
-	
-	reset_rope()
-	
-	Transition.enter_level_transition()
+	if animation.get_current_animation() != "Die":
+		animation.play("Die")
+		
+		SoundPlayer.stop_sound(SoundPlayer.Wind)
+		SoundPlayer.play_sound(SoundPlayer.Damage)
+		
+		Transition.exit_level_transition()
+		yield(Transition, "transition_completed")
+		
+		animation.play("Idle")
+		position = GlobalVariables.checkpoint_pos
+		GlobalVariables.death_count += 1
+		
+		reset_rope()
+		
+		Transition.enter_level_transition()
 
 func wind_noise():
 	# Gets the channel in which the wind sound is playing
