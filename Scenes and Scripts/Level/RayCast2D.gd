@@ -2,6 +2,7 @@ extends RayCast2D
 
 onready var rope_able = get_parent().get_parent().get_node("Tiles/RopeAble")
 onready var non_rope_able = get_parent().get_parent().get_node("Tiles/NonRopeAble")
+onready var non_rope_able_through = get_parent().get_parent().get_node("Tiles/NonRopeAbleThrough")
 
 onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor")
 
@@ -28,7 +29,7 @@ func _physics_process(_delta):
 					point = get_collision_point()
 					mouse_cursor.set_texture(rope_able_texture)
 					
-				non_rope_able:
+				non_rope_able, non_rope_able_through:
 					mouse_cursor.set_texture(non_rope_able_texture)
 	else:
 		mouse_cursor.set_texture(no_block_texture)
