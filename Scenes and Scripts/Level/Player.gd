@@ -150,10 +150,11 @@ func initialise_rope():
 			rope_pos = cast
 			rope_len = (position - rope_pos).length()
 			
-			angle_to = deg2rad(90) - (position - rope_pos).angle()
-			
-			SoundPlayer.play_sound(SoundPlayer.Grapple)
-			player_state = state.swing
+			if rope_len < max_rope_len:
+				angle_to = deg2rad(90) - (position - rope_pos).angle()
+				
+				SoundPlayer.play_sound(SoundPlayer.Grapple)
+				player_state = state.swing
 
 func die():
 	if animation.get_current_animation() != "Die":
@@ -201,6 +202,8 @@ func _process(delta):
 	var input_mouse = Input.is_action_just_pressed("mouse_left")
 	
 	var x_input = input_right - input_left
+	
+	colliding = get_slide_count() != 0
 	
 	match player_state:
 		state.normal:
@@ -250,8 +253,6 @@ func _process(delta):
 			
 		state.swing:
 			animation.play("Swing")
-			
-			colliding = get_slide_count() != 0
 			
 			rope_angle_changes(x_input)
 			
