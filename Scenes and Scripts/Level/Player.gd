@@ -46,6 +46,8 @@ var motion = Vector2.ZERO
 
 var colliding = false
 
+var global_mouse_pos = Vector2.ZERO
+
 # onready makes sure that the nodes have been initialised and loaded into the scene
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
@@ -283,6 +285,9 @@ func _process(delta):
 			motion.x = x_input * 500
 			motion.y = (input_down - input_up) * 500
 			
+			if input_mouse:
+				global_position = global_mouse_pos
+			
 	# Checks to see if the player is on the floor before the move_and_slide
 	# function updates the player's position
 	var floor_before_move = is_on_floor()
@@ -317,3 +322,6 @@ func _unhandled_input(event):
 					player_state = state.swing
 				KEY_3:
 					player_state = state.debug
+
+	if event is InputEventMouseMotion:
+			global_mouse_pos =  get_canvas_transform().affine_inverse() * event.position
