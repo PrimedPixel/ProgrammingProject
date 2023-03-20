@@ -25,7 +25,8 @@ var key_right = "button_d"
 # Gross
 enum state {
 	normal,
-	swing
+	swing,
+	debug,
 }
 
 var player_state = state.normal
@@ -53,6 +54,8 @@ onready var jump_buffer_timer = $JumpBufferTimer
 
 onready var rope_cast = get_parent().get_node("Player/RopeCast")
 onready var line = $RopeLine
+
+onready var level_bottom = get_viewport().get_child(0).bottom
 
 func horizontal_movement(x_input, delta):
 	motion.x += x_input * accel * delta
@@ -240,6 +243,9 @@ func _process(delta):
 			elif SoundPlayer.stop_sound(SoundPlayer.Wind) && !SoundPlayer.is_playing(SoundPlayer.Land):
 				SoundPlayer.play_sound(SoundPlayer.Land)
 			
+			if position.y > level_bottom + 32:
+				die()
+			
 		state.swing:
 			animation.play("Swing")
 			
@@ -273,7 +279,10 @@ func _process(delta):
 			# Resets player state out of rope state
 			if Input.is_action_just_released(key_jump) || is_on_floor():
 				reset_rope()
-	
+		state.debug:
+			motion.x = x_input * 500
+			motion.y = (input_down - input_up) * 500
+			
 	# Checks to see if the player is on the floor before the move_and_slide
 	# function updates the player's position
 	var floor_before_move = is_on_floor()
@@ -295,5 +304,16 @@ func _process(delta):
 	# Wind noise
 	wind_noise()
 	
-	if input_mouse:
+	if input_mouse && !is_on_floor():
 		initialise_rope()
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			match event.scancode:
+				KEY_1:
+					player_state = state.normal
+				KEY_2:
+					player_state = state.swing
+				KEY_3:
+					player_state = state.debug

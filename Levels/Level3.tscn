@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes and Scripts/Level/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes and Scripts/Level/Tiles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes and Scripts/Level/Cam.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes and Scripts/Level/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Music/Sub Bass.wav" type="AudioStream" id=6]
+[ext_resource path="res://Levels/Level.gd" type="Script" id=7]
+[ext_resource path="res://Scenes and Scripts/Level/Checkpoint.tscn" type="PackedScene" id=9]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 7 )
+bottom = 432
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 272 )
+
+[node name="Tiles" parent="." instance=ExtResource( 2 )]
+
+[node name="RopeAble" parent="Tiles" index="0"]
+tile_data = PoolIntArray( 1179655, 0, 262158, 1179656, 0, 262160, 1179657, 0, 262159, 1179658, 0, 262159, 1179659, 0, 262160, 1179660, 0, 262159, 1179661, 0, 262159, 1179662, 0, 262159, 1179663, 0, 262160, 1179664, 0, 262159, 1179665, 0, 262159, 1179666, 0, 262161, 1245192, 0, 65536, 1245193, 0, 16, 1245194, 0, 17, 1245195, 0, 18, 1245196, 0, 2, 1245197, 0, 262146, 1245198, 0, 13, 1245199, 0, 14, 1245200, 0, 15, 1245201, 0, 65540, 1310728, 0, 65536, 1310729, 0, 65552, 1310730, 0, 65553, 1310731, 0, 65554, 1310732, 0, 2, 1310733, 0, 327682, 1310734, 0, 65549, 1310735, 0, 65550, 1310736, 0, 65551, 1310737, 0, 4, 1376264, 0, 131072, 1376265, 0, 131088, 1376266, 0, 131089, 1376267, 0, 131090, 1376268, 0, 2, 1376269, 0, 262146, 1376270, 0, 131085, 1376271, 0, 131086, 1376272, 0, 131087, 1376273, 0, 65540, 1441800, 0, 65536, 1441801, 0, 196624, 1441802, 0, 196625, 1441803, 0, 196626, 1441804, 0, 2, 1441805, 0, 262146, 1441806, 0, 196621, 1441807, 0, 196622, 1441808, 0, 196623, 1441809, 0, 4, 1507336, 0, 65536, 1507337, 0, 2, 1507338, 0, 2, 1507339, 0, 2, 1507340, 0, 2, 1507341, 0, 262146, 1507342, 0, 2, 1507343, 0, 2, 1507344, 0, 2, 1507345, 0, 131076, 1572872, 0, 0, 1572873, 0, 13, 1572874, 0, 14, 1572875, 0, 15, 1572876, 0, 2, 1572877, 0, 262146, 1572878, 0, 13, 1572879, 0, 14, 1572880, 0, 15, 1572881, 0, 4, 1638408, 0, 65536, 1638409, 0, 65549, 1638410, 0, 65550, 1638411, 0, 65551, 1638412, 0, 2, 1638413, 0, 327682, 1638414, 0, 65546, 1638415, 0, 65547, 1638416, 0, 65548, 1638417, 0, 65540, 1703944, 0, 65536, 1703945, 0, 131085, 1703946, 0, 131086, 1703947, 0, 131087, 1703948, 0, 2, 1703949, 0, 262146, 1703950, 0, 131082, 1703951, 0, 131083, 1703952, 0, 131084, 1703953, 0, 131076, 1769480, 0, 0, 1769481, 0, 196621, 1769482, 0, 196622, 1769483, 0, 196623, 1769484, 0, 196610, 1769485, 0, 262146, 1769486, 0, 196618, 1769487, 0, 196619, 1769488, 0, 196620, 1769489, 0, 4 )
+
+[node name="NonRopeAbleThrough" parent="Tiles" index="2"]
+collision_mask = 2
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+
+[node name="Cam" parent="." instance=ExtResource( 4 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+bus = "Music"
+
+[node name="Spikes" type="Node" parent="."]
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 9 )]
+position = Vector2( 144, 272 )
+
+[node name="Coins" type="Node" parent="."]
+
+[editable path="Tiles"]

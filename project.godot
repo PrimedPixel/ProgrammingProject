@@ -30,6 +30,7 @@ config/windows_native_icon="res://Icons/Icon Windows.ico"
 GlobalVariables="*res://Scenes and Scripts/GlobalVariables.gd"
 Transition="*res://Scenes and Scripts/Transition.tscn"
 SoundPlayer="*res://Sounds/SoundPlayer.tscn"
+GlobalKeys="*res://Scenes and Scripts/GlobalKeys.tscn"
 
 [display]
 
