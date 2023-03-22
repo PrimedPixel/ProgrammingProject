@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample"
+
+[deps]
+
+source_file="res://Music/XEKONYX ATTACKS.wav"
+dest_files=[ "res://.import/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=105840
+edit/loop_end=10689840
+compress/mode=0

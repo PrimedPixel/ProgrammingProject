@@ -6,6 +6,8 @@ onready var non_rope_able_through = get_parent().get_parent().get_node("Tiles/No
 
 onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor")
 
+onready var player = get_parent()
+
 const rope_able_texture = preload("res://Dynamic Assets/Ropeable Cursor.png")
 const non_rope_able_texture = preload("res://Dynamic Assets/Non-Ropeable Cursor.png")
 const no_block_texture = preload("res://Dynamic Assets/No Tile Cursor.png")
@@ -31,6 +33,9 @@ func _physics_process(_delta):
 					
 				non_rope_able, non_rope_able_through:
 					mouse_cursor.set_texture(non_rope_able_texture)
+		
+			if (player.global_position - get_collision_point()).length() > player.max_rope_len:
+				mouse_cursor.set_texture(non_rope_able_texture)
 	else:
 		mouse_cursor.set_texture(no_block_texture)
 

@@ -31,7 +31,7 @@ func enable():
 	
 	fire = level.get_node_or_null("Fire")
 	
-	can_process = true
+	can_process = !can_process
 
 func _process(_delta):
 	visible = can_process
@@ -76,7 +76,8 @@ func _process(_delta):
 			"\nCoin Count: " + str(GlobalVariables.coin_count)
 			
 		if fire != null:
-			label.text += "\n\nFire Distance: " + str(fire.fire_distance)
+			label.text += "\nFire Distance: " + str(fire.fire_distance) +										\
+						  "\nFire Speed: " + str(fire.fire_speed)
 
 
 func _unhandled_input(event):

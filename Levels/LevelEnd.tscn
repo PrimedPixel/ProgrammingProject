@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes and Scripts/Level/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes and Scripts/Level/Tiles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes and Scripts/Menus/Logo.gd" type="Script" id=3]
+[ext_resource path="res://Scenes and Scripts/Level/Cam.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes and Scripts/Level/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Music/Sub Bass.wav" type="AudioStream" id=6]
+[ext_resource path="res://Levels/Level.gd" type="Script" id=7]
+[ext_resource path="res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png" type="Texture" id=8]
+[ext_resource path="res://Scenes and Scripts/Level/Checkpoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes and Scripts/Music.gd" type="Script" id=12]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 7 )
+bottom = 432
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 160, 208 )
+
+[node name="Tiles" parent="." instance=ExtResource( 2 )]
+
+[node name="RopeAble" parent="Tiles" index="0"]
+tile_data = PoolIntArray( 720899, 0, 262155, 720904, 0, 262155, 786435, 0, 327691, 786440, 0, 262157, 851969, 0, 327692, 851970, 0, 327692, 851971, 0, 327693, 851972, 0, 327692, 851973, 0, 327692, 851974, 0, 327692, 851975, 0, 327692, 851976, 0, 327693, 851977, 0, 327692, 851978, 0, 327692, 917504, 0, 262158, 917505, 0, 262159, 917506, 0, 262160, 917507, 0, 262159, 917508, 0, 262159, 917509, 0, 262159, 917510, 0, 262159, 917511, 0, 262159, 917512, 0, 262160, 917513, 0, 262159, 917514, 0, 262160, 917515, 0, 262161, 983041, 0, 0, 983042, 0, 1, 983043, 0, 196610, 983044, 0, 3, 983045, 0, 262146, 983046, 0, 196610, 983047, 0, 1, 983048, 0, 196610, 983049, 0, 3, 983050, 0, 4, 1048577, 0, 65536, 1048578, 0, 65537, 1048579, 0, 65538, 1048580, 0, 65539, 1048581, 0, 262146, 1048582, 0, 196610, 1048583, 0, 65537, 1048584, 0, 65538, 1048585, 0, 65539, 1048586, 0, 65540, 1114113, 0, 65536, 1114114, 0, 131073, 1114115, 0, 131074, 1114116, 0, 131075, 1114117, 0, 262146, 1114118, 0, 196610, 1114119, 0, 131073, 1114120, 0, 131074, 1114121, 0, 131075, 1114122, 0, 4, 1179649, 0, 131072, 1179650, 0, 196609, 1179651, 0, 196610, 1179652, 0, 196611, 1179653, 0, 327682, 1179654, 0, 196610, 1179655, 0, 196609, 1179656, 0, 196610, 1179657, 0, 196611, 1179658, 0, 65540, 1245184, 0, 262158, 1245185, 0, 262159, 1245186, 0, 262159, 1245187, 0, 262160, 1245188, 0, 262159, 1245189, 0, 262159, 1245190, 0, 262159, 1245191, 0, 262159, 1245192, 0, 262160, 1245193, 0, 262159, 1245194, 0, 262159, 1245195, 0, 262161, 1310721, 0, 0, 1310722, 0, 1, 1310723, 0, 196610, 1310724, 0, 3, 1310725, 0, 262153, 1310726, 0, 262154, 1310727, 0, 1, 1310728, 0, 196610, 1310729, 0, 3, 1310730, 0, 4, 1376257, 0, 131072, 1376258, 0, 65537, 1376259, 0, 65538, 1376260, 0, 65539, 1376261, 0, 327689, 1376262, 0, 327690, 1376263, 0, 65537, 1376264, 0, 65538, 1376265, 0, 65539, 1376266, 0, 4, 1441793, 0, 65536, 1441794, 0, 131073, 1441795, 0, 131074, 1441796, 0, 131075, 1441797, 0, 2, 1441798, 0, 2, 1441799, 0, 131073, 1441800, 0, 131074, 1441801, 0, 131075, 1441802, 0, 131076, 1507329, 0, 131072, 1507330, 0, 196609, 1507331, 0, 196610, 1507332, 0, 196611, 1507333, 0, 2, 1507334, 0, 2, 1507335, 0, 196609, 1507336, 0, 196610, 1507337, 0, 196611, 1507338, 0, 65540, 1572865, 0, 65536, 1572866, 0, 2, 1572867, 0, 2, 1572868, 0, 2, 1572869, 0, 2, 1572870, 0, 196610, 1572871, 0, 2, 1572872, 0, 2, 1572873, 0, 2, 1572874, 0, 131076, 1638401, 0, 65536, 1638402, 0, 1, 1638403, 0, 196610, 1638404, 0, 3, 1638405, 0, 2, 1638406, 0, 196610, 1638407, 0, 1, 1638408, 0, 196610, 1638409, 0, 3, 1638410, 0, 4, 1703937, 0, 65536, 1703938, 0, 65537, 1703939, 0, 65538, 1703940, 0, 65539, 1703941, 0, 2, 1703942, 0, 196610, 1703943, 0, 65537, 1703944, 0, 65538, 1703945, 0, 65539, 1703946, 0, 65540, 1769473, 0, 131072, 1769474, 0, 131073, 1769475, 0, 131074, 1769476, 0, 131075, 1769477, 0, 262147, 1769478, 0, 262149, 1769479, 0, 131073, 1769480, 0, 131074, 1769481, 0, 131075, 1769482, 0, 4 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+
+[node name="Cam" parent="." instance=ExtResource( 4 )]
+
+[node name="Logo" type="Sprite" parent="Cam"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+script = ExtResource( 3 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+bus = "Music"
+script = ExtResource( 12 )
+
+[node name="FadeOut" type="Tween" parent="Music"]
+
+[node name="Spikes" type="Node" parent="."]
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 9 )]
+position = Vector2( 32, 208 )
+default = true
+
+[node name="Coins" type="Node" parent="."]
+
+[connection signal="tween_all_completed" from="Music/FadeOut" to="Music" method="_on_FadeOut_tween_all_completed"]
+
+[editable path="Tiles"]

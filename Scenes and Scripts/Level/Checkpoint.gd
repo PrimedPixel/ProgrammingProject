@@ -1,12 +1,22 @@
 extends Area2D
 
+export var default = false
+
+var checked = false
 onready var animation = $CheckpointAnimation
 
 func _ready():
-	if GlobalVariables.checkpoint_pos == position:
+	if default:
+		GlobalVariables.checkpoint_pos = position
 		animation.play("Active")
 
 func _process(_delta):
+	if !checked && default:
+		GlobalVariables.checkpoint_pos = position
+		animation.play("Active")
+		
+		checked = true
+	
 	if GlobalVariables.checkpoint_pos != position:
 		animation.play("Inactive")
 

@@ -59,7 +59,8 @@ onready var jump_buffer_timer = $JumpBufferTimer
 onready var rope_cast = get_parent().get_node("Player/RopeCast")
 onready var line = $RopeLine
 
-onready var level_bottom = get_viewport().get_child(0).bottom
+onready var level = get_viewport().get_child(0)
+onready var level_bottom = level.bottom
 
 func horizontal_movement(x_input, delta):
 	motion.x += x_input * accel * delta
@@ -167,6 +168,14 @@ func die():
 		
 		Transition.exit_level_transition()
 		yield(Transition, "transition_completed")
+		
+		level = get_viewport().get_child(0)
+		
+		if level.get_filename() == "res://Levels/Level4.tscn":
+			level.get_node("Fire").fire_distance = 0
+			level.get_node("Fire").fire_speed = 0.3
+			
+			level.get_node("Music").seek(0)
 		
 		animation.play("Idle")
 		death_animation = "Die"
