@@ -5,7 +5,10 @@ func _unhandled_input(event):
 		if event.pressed:
 			match event.scancode:
 				KEY_R:
-					get_tree().reload_current_scene()
+					var error = get_tree().reload_current_scene()
+					
+					if error != OK:
+						printerr("Cannot reload scene!")
 				KEY_T:
 					Transition.exit_level_transition()
 				KEY_Y:

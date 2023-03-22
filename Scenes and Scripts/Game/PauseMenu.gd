@@ -41,6 +41,9 @@ func _on_Exit_pressed():
 #	yield(fade_out, "tween_completed")
 	get_tree().paused = false
 
-	get_tree().change_scene("res://Scenes and Scripts/Menus/Menu.tscn")
+	var error = get_tree().change_scene("res://Scenes and Scripts/Menus/Menu.tscn")
+	
+	if error != OK:
+		printerr("Cannot change scene!")
 	
 	Transition.enter_level_transition()

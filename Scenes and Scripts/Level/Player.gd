@@ -48,6 +48,8 @@ var colliding = false
 
 var global_mouse_pos = Vector2.ZERO
 
+var death_animation = "Die"
+
 # onready makes sure that the nodes have been initialised and loaded into the scene
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
@@ -157,8 +159,8 @@ func initialise_rope():
 				player_state = state.swing
 
 func die():
-	if animation.get_current_animation() != "Die":
-		animation.play("Die")
+	if animation.get_current_animation() != death_animation:
+		animation.play(death_animation)
 		
 		SoundPlayer.stop_sound(SoundPlayer.Wind)
 		SoundPlayer.play_sound(SoundPlayer.Damage)
@@ -167,6 +169,7 @@ func die():
 		yield(Transition, "transition_completed")
 		
 		animation.play("Idle")
+		death_animation = "Die"
 		position = GlobalVariables.checkpoint_pos
 		GlobalVariables.death_count += 1
 		

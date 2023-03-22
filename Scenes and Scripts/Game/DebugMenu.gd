@@ -12,6 +12,8 @@ var spikes = null
 var checkpoints = null
 var coins = null
 
+var fire = null
+
 onready var master_bus = AudioServer.get_bus_index("Master")
 onready var music_bus = AudioServer.get_bus_index("Music")
 onready var sfx_bus = AudioServer.get_bus_index("Sound Effects")
@@ -26,6 +28,8 @@ func enable():
 	spikes = level.get_node("Spikes")
 	checkpoints = level.get_node("Checkpoints")
 	coins = level.get_node("Coins")
+	
+	fire = level.get_node_or_null("Fire")
 	
 	can_process = true
 
@@ -70,6 +74,9 @@ func _process(_delta):
 			"\nCheckpoint Position: " + str(GlobalVariables.checkpoint_pos) +									\
 			"\nCoin Node Count: " + str(coins.get_child_count()) +												\
 			"\nCoin Count: " + str(GlobalVariables.coin_count)
+			
+		if fire != null:
+			label.text += "\n\nFire Distance: " + str(fire.fire_distance)
 
 
 func _unhandled_input(event):

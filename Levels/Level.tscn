@@ -10,7 +10,7 @@
 [ext_resource path="res://Scenes and Scripts/Level/Spikes.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes and Scripts/Level/Checkpoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes and Scripts/Level/Coin.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Levels/Level3.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Levels/Level4.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 7 )
