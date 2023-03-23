@@ -1046,6 +1046,7 @@ position = Vector2( 4480, 192 )
 position = Vector2( 448, 240 )
 
 [node name="Fire" type="Area2D" parent="."]
+z_index = 5
 script = ExtResource( 3 )
 
 [node name="FireRect" type="ColorRect" parent="Fire"]
@@ -1058,6 +1059,7 @@ shape = SubResource( 1 )
 
 [node name="FireSprite" type="Sprite" parent="Fire"]
 position = Vector2( 0, 224 )
+z_index = 6
 texture = ExtResource( 10 )
 hframes = 3
 region_enabled = true
