@@ -202,6 +202,7 @@ func _ready():
 # _physics_process causes jitter issues on !=60Hz monitors
 # _process seems to eliminate this issue without any caveats?
 func _process(delta):
+	
 	if Transition.rect_animation.is_playing():
 		return
 	

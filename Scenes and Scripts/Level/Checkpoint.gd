@@ -5,13 +5,8 @@ export var default = false
 var checked = 0
 onready var animation = $CheckpointAnimation
 
-func _ready():
-	if default:
-		GlobalVariables.checkpoint_pos = position
-		animation.play("Active")
-
 func _process(_delta):
-	if checked < 10 && default:
+	if checked < 10 && default && GlobalVariables.checkpoint_pos == Vector2.ZERO:
 		GlobalVariables.checkpoint_pos = position
 		animation.play("Active")
 		
