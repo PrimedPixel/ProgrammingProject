@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-# Equivalent to macros, I suppose
+# Equivalent to macros in gamemaker
 const accel = 512
 const max_air_spd = 128
 const max_ground_spd = 64
@@ -22,7 +22,7 @@ var key_down = "button_s"
 var key_left = "button_a"
 var key_right = "button_d"
 
-# Gross
+# Enumerator to store player states (represetns 0, 1, or 2 respectively)
 enum state {
 	normal,
 	swing,

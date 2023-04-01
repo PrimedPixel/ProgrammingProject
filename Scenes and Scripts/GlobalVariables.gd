@@ -24,10 +24,6 @@ func write_savegame():
 		printerr("Could not open save file for writing!")
 		return
 	
-	# For whatever reason (I suspect since we're running from a singleton
-	# get_viewport() does not work, so it must be manually get
-#	var current_level_path = get_tree().get_current_scene().get_node("ViewportContainer/Viewport").get_child(0).get_filename()
-	
 	# Stores the data in a dictionary
 	var data = {
 		"checkpoint_position":
