@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Theme Assets/Grabber Highlight.png" type="Texture" id=2]
+[ext_resource path="res://Theme Assets/Grabber Normal.png" type="Texture" id=3]
+[ext_resource path="res://SliderLine.tres" type="StyleBox" id=4]
+[ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 1, 1, 1 )
+
+[resource]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_focus = Color( 0, 1, 0.941176, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 0, 1, 0.941176, 1 )
+Button/styles/disabled = ExtResource( 5 )
+Button/styles/focus = ExtResource( 5 )
+Button/styles/hover = ExtResource( 5 )
+Button/styles/normal = ExtResource( 5 )
+Button/styles/pressed = ExtResource( 5 )
+HSeparator/styles/separator = SubResource( 1 )
+HSlider/icons/grabber = ExtResource( 3 )
+HSlider/icons/grabber_highlight = ExtResource( 2 )
+HSlider/styles/grabber_area = ExtResource( 4 )
+HSlider/styles/grabber_area_highlight = ExtResource( 4 )
+HSlider/styles/slider = ExtResource( 4 )

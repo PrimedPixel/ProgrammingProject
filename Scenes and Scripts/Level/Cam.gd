@@ -4,6 +4,7 @@ onready var player = get_parent().get_node("Player")
 onready var viewpoint_container = get_parent().get_parent().get_parent()
 onready var viewport = get_parent().get_parent()
 onready var level_bottom = viewport.get_child(0).bottom
+onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor")
 
 var mouse_pos = Vector2.ZERO
 
@@ -28,7 +29,7 @@ func _process(delta):
 #	var mid_x = (target.x + mouse_pos.x) / 2
 #	var mid_y = (target.y + mouse_pos.y) / 2
 
-	var pos = viewport.get_mouse_position() / window_scale - (game_size / 2) + player.global_position
+	var pos = mouse_cursor.global_position / window_scale - (game_size / 2) + player.global_position
 
 	actual_cam_pos = lerp(actual_cam_pos, pos, interpolate_val * delta)
 	

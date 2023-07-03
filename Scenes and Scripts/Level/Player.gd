@@ -22,6 +22,8 @@ var key_down = "button_s"
 var key_left = "button_a"
 var key_right = "button_d"
 
+var gamepad_id = -1
+
 # Enumerator to store player states (represetns 0, 1, or 2 respectively)
 enum state {
 	normal,
@@ -61,6 +63,16 @@ onready var line = $RopeLine
 
 onready var level = get_viewport().get_child(0)
 onready var level_bottom = level.bottom
+
+onready var wind_noise_player = $WindNoisePlayer
+
+# float max_abs(a: float, b: float)
+# Returns the value with the highest magnitude from zero
+func max_abs(a, b):
+	if max(abs(a), abs(b)) == abs(a):
+		return a
+	else:
+		return b
 
 func horizontal_movement(x_input, delta):
 	motion.x += x_input * accel * delta
@@ -158,13 +170,15 @@ func initialise_rope():
 				
 				SoundPlayer.play_sound(SoundPlayer.Grapple)
 				player_state = state.swing
+				Input.start_joy_vibration(gamepad_id, 1, 1, 0.25)
 
 func die():
 	if animation.get_current_animation() != death_animation:
 		animation.play(death_animation)
 		
-		SoundPlayer.stop_sound(SoundPlayer.Wind)
+#		SoundPlayer.stop_sound(SoundPlayer.Wind)
 		SoundPlayer.play_sound(SoundPlayer.Damage)
+		Input.start_joy_vibration(gamepad_id, 1, 1, 0.5)
 		
 		Transition.exit_level_transition()
 		yield(Transition, "transition_completed")
@@ -187,34 +201,78 @@ func die():
 		Transition.enter_level_transition()
 
 func wind_noise():
-	# Gets the channel in which the wind sound is playing
-	var sound_channel = SoundPlayer.is_playing(SoundPlayer.Wind)
-	var vel = motion.length()
-	if sound_channel && SoundPlayer.get_channel_pitch_scale(sound_channel) && vel > 40:
-		SoundPlayer.set_channel_pitch_scale(sound_channel, 0.6 * pow(vel / 100, 1.01))
-		SoundPlayer.set_channel_vol(sound_channel, -100 / pow(4, vel / 100))
+	var spd = motion.length() - max_ground_spd
+	var max_spd = max_rope_spd - max_ground_spd
+	
+	# The rope code multiplies the motion by 5, so it can, indeed, be larger than max_spd
+	if spd > max_spd:
+		spd = max_spd
+	
+	# Negative numbers hurt it :(
+	if spd < 0:
+		spd = 0
+	
+	var vol = spd / max_spd
+	
+	# Just in case, as well
+	if vol > 1:
+		vol = 1
+		printerr("Error: wind noise volume is too fat and large, unlike my cock")
+	
+	wind_noise_player.set_volume_db(linear2db(vol))
 
 func _ready():
+	var arr = Input.get_connected_joypads()
+	if !arr.empty():
+		gamepad_id = arr[0]	# should be device 0, but not necessarily
+	
 	if GlobalVariables.checkpoint_pos != Vector2.ZERO:
 		global_position = GlobalVariables.checkpoint_pos
+	
+	# This should be done already, perhaps unnecessary?
+	wind_noise_player.play()
+	wind_noise_player.set_volume_db(linear2db(0))
 
 # Built in function from KinematicBody2D
 # _physics_process causes jitter issues on !=60Hz monitors
 # _process seems to eliminate this issue without any caveats?
+# although this should be looked into
 func _process(delta):
 	
 	if Transition.rect_animation.is_playing():
 		return
 	
-	var input_up = Input.get_action_strength("button_up")
-	var input_down = Input.get_action_strength("button_down")
-	var input_left = Input.get_action_strength("button_left")
-	var input_right = Input.get_action_strength("button_right")
-	var input_jump = Input.get_action_strength("button_jump")
+	var input_keyboard_up = Input.get_action_strength("button_up")
+	var input_keyboard_down = Input.get_action_strength("button_down")
+	var input_keyboard_left = Input.get_action_strength("button_left")
+	var input_keyboard_right = Input.get_action_strength("button_right")
+	var input_keyboard_jump = Input.get_action_strength("button_jump")
+	
+	var input_controller_up = max(Input.get_action_strength("dpad_up"), Input.get_action_strength("lstick_up"))
+	var input_controller_down = max(Input.get_action_strength("dpad_down"), Input.get_action_strength("lstick_down"))
+	var input_controller_left = max(Input.get_action_strength("dpad_left"), Input.get_action_strength("lstick_left"))
+	var input_controller_right = max(Input.get_action_strength("dpad_right"), Input.get_action_strength("lstick_right"))
+	var input_controller_jump = Input.get_action_strength("gamepad_jump")
+	var input_controller_fire = Input.is_action_just_pressed("gamepad_fire")
+	
+	var input_up = max(input_keyboard_up, input_controller_up)
+	var input_down = max(input_keyboard_down, input_controller_down)
+	var input_left = max(input_keyboard_left, input_controller_left)
+	var input_right = max(input_keyboard_right, input_controller_right)
+	var input_jump = max(input_keyboard_jump, input_controller_jump)
 	
 	var input_mouse = Input.is_action_just_pressed("mouse_left")
+	var input_mouse_right = Input.is_action_just_pressed("mouse_right")
+	
+	var input_fire = max(float(input_mouse), float(input_controller_fire))
+	
+	# Mouse wheel events only have a "just_released" event, for some reason
+	var input_mouse_up = Input.is_action_just_released("mouse_up")
+	var input_mouse_down = Input.is_action_just_released("mouse_down")
 	
 	var x_input = input_right - input_left
+	var y_input = input_down - input_up
+	var trig_input = Input.get_action_strength("gamepad_r_trig") - Input.get_action_strength("gamepad_l_trig")
 	
 	colliding = get_slide_count() != 0
 	
@@ -258,8 +316,8 @@ func _process(delta):
 				
 				# Sets the player's animation to jump / in air
 				animation.play("Jump")
-			elif SoundPlayer.stop_sound(SoundPlayer.Wind) && !SoundPlayer.is_playing(SoundPlayer.Land):
-				SoundPlayer.play_sound(SoundPlayer.Land)
+#			elif SoundPlayer.stop_sound(SoundPlayer.Wind) && !SoundPlayer.is_playing(SoundPlayer.Land):
+#				SoundPlayer.play_sound(SoundPlayer.Land)
 			
 			if position.y > level_bottom + 32:
 				die()
@@ -269,11 +327,15 @@ func _process(delta):
 			
 			rope_angle_changes(x_input)
 			
+			var alt_input = max_abs((int(input_mouse_down) - int(input_mouse_up)) * 4, trig_input * 2)
+			
+			var len_change = max_abs(y_input * 2, alt_input)
+			
 			if !colliding:
 				# Changes the length of the rope based on up / down
-				rope_len = clamp(rope_len + ((input_down - input_up) * 2), min_rope_len, max_rope_len)
+				rope_len = clamp(rope_len + len_change, min_rope_len, max_rope_len)
 			else:
-				rope_len = clamp(rope_len - (abs(input_down - input_up) * 2), min_rope_len, max_rope_len)
+				rope_len = clamp(rope_len - abs(len_change), min_rope_len, max_rope_len)
 						
 			# Calculates new rope position
 			var position_to = Vector2(
@@ -285,6 +347,7 @@ func _process(delta):
 			motion = position_to - position
 			
 			if motion.length() > max_rope_spd:
+				print("normalised length")
 				motion = motion.normalized() * max_rope_spd
 			
 			# Will move quicker to the target position if not colliding
@@ -293,11 +356,11 @@ func _process(delta):
 				motion *= 5
 			
 			# Resets player state out of rope state
-			if Input.is_action_just_released(key_jump) || is_on_floor():
+			if input_jump || input_mouse_right || Input.is_action_just_pressed("gamepad_release") || is_on_floor():
 				reset_rope()
 		state.debug:
 			motion.x = x_input * 500
-			motion.y = (input_down - input_up) * 500
+			motion.y = y_input * 500
 			
 			if input_mouse:
 				global_position = global_mouse_pos
@@ -312,8 +375,8 @@ func _process(delta):
 	
 	# If the player's new position is not on the floor, but it was the previous frame
 	if floor_before_move && !is_on_floor():
-		var channel = SoundPlayer.play_sound(SoundPlayer.Wind)
-		SoundPlayer.set_channel_vol(channel, -100)
+#		var channel = SoundPlayer.play_sound(SoundPlayer.Wind)
+#		SoundPlayer.set_channel_vol(channel, -100)
 		coyote_timer.start()
 	
 	# Rope animation
@@ -323,7 +386,7 @@ func _process(delta):
 	# Wind noise
 	wind_noise()
 	
-	if input_mouse && !is_on_floor():
+	if input_fire && !is_on_floor():
 		initialise_rope()
 
 func _unhandled_input(event):
