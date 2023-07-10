@@ -82,16 +82,17 @@ func _physics_process(_delta):
 	else:
 		mouse_cursor.set_texture(no_block_texture)
 	
-	var temp_pos_x = global_position.x - cam.global_position.x + 320 + aimed_point.x
-	var temp_pos_y = global_position.y - cam.global_position.y + 180 + aimed_point.y
-	
-	var pos_to = Vector2(temp_pos_x, temp_pos_y)
-	
-	mouse_cursor.position = pos_to * 3
-	
-	line_2d.clear_points()
-	line_2d.add_point(position)
-	line_2d.add_point(aimed_point)
+	if gamepad:
+		var temp_pos_x = global_position.x - cam.global_position.x + 320 + aimed_point.x
+		var temp_pos_y = global_position.y - cam.global_position.y + 180 + aimed_point.y
+		
+		var pos_to = Vector2(temp_pos_x, temp_pos_y)
+		
+		mouse_cursor.position = pos_to * 3
+		
+		line_2d.clear_points()
+		line_2d.add_point(position)
+		line_2d.add_point(aimed_point)
 
 # Sets the raycast to the mouse_position
 # The viewport mode in Godot transforms

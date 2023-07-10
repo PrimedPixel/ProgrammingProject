@@ -33,6 +33,8 @@ enum state {
 
 var player_state = state.normal
 
+var was_on_floor = true
+
 # Variables for the rope that cannot be re-initialised
 var cast = -1
 var rope_len = 0
@@ -294,8 +296,16 @@ func _process(delta):
 			if input_jump:
 				jump_buffer_timer.start()
 			
+			# Runs if the player is on the floor, or coyote in the air
 			if coyote_on_floor:
+				# Runs if the player has just landed
+				if !was_on_floor:
+					was_on_floor = true
 					
+					SoundPlayer.play_sound(SoundPlayer.Land)
+					
+					Input.start_joy_vibration(gamepad_id, 1, 1, 0.25)
+				
 				ground_speed_modifiers(x_input)
 				
 				# Allows the player to jump if the jump buffer timer has not stopped
@@ -308,6 +318,8 @@ func _process(delta):
 			if !is_on_floor():
 				air_speed_modifiers()
 				
+				was_on_floor = false
+				
 				# Variable jump height
 				# Checks that jump button isn't pressed and moving up quickly											
 				if Input.is_action_just_released(key_jump) and motion.y < (-jump_force * 0.5):
@@ -316,8 +328,6 @@ func _process(delta):
 				
 				# Sets the player's animation to jump / in air
 				animation.play("Jump")
-#			elif SoundPlayer.stop_sound(SoundPlayer.Wind) && !SoundPlayer.is_playing(SoundPlayer.Land):
-#				SoundPlayer.play_sound(SoundPlayer.Land)
 			
 			if position.y > level_bottom + 32:
 				die()
