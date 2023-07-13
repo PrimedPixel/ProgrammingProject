@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample"
+type="AudioStreamWAV"
+uid="uid://b5nfwetcq20oc"
+path="res://.godot/imported/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample"
 
 [deps]
 
 source_file="res://Music/XEKONYX ATTACKS.wav"
-dest_files=[ "res://.import/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample" ]
+dest_files=["res://.godot/imported/XEKONYX ATTACKS.wav-e2f91900ff6181f7848f4a030811e297.sample"]
 
 [params]
 

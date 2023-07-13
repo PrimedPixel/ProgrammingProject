@@ -1,16 +1,16 @@
 extends RayCast2D
 
-onready var rope_able = get_parent().get_parent().get_node("Tiles/RopeAble")
-onready var non_rope_able = get_parent().get_parent().get_node("Tiles/NonRopeAble")
-onready var non_rope_able_through = get_parent().get_parent().get_node("Tiles/NonRopeAbleThrough")
+@onready var rope_able = get_parent().get_parent().get_node("Tiles/RopeAble")
+@onready var non_rope_able = get_parent().get_parent().get_node("Tiles/NonRopeAble")
+@onready var non_rope_able_through = get_parent().get_parent().get_node("Tiles/NonRopeAbleThrough")
 
-onready var cam = get_parent().get_parent().get_node("Cam")
+@onready var cam = get_parent().get_parent().get_node("Cam")
 
-onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor")
+@onready var mouse_cursor = get_tree().get_current_scene().get_node("MouseCursor")
 
-onready var player = get_parent()
+@onready var player = get_parent()
 
-onready var line_2d = $Line2D
+@onready var line_2d = $Line2D
 
 const rope_able_texture = preload("res://Dynamic Assets/Ropeable Cursor.png")
 const non_rope_able_texture = preload("res://Dynamic Assets/Non-Ropeable Cursor.png")
@@ -25,7 +25,7 @@ var gamepad = false
 
 func _ready():
 	# Gamepad is connected
-	if !Input.get_connected_joypads().empty():
+	if !Input.get_connected_joypads().is_empty():
 		gamepad = true
 
 # This raycast will occur every frame
@@ -41,25 +41,7 @@ func _physics_process(_delta):
 		
 		aim_vector = Vector2(x_axis, y_axis).normalized() * player.max_rope_len
 		
-		set_cast_to(aim_vector)
-		
-#		mouse_cursor.position = get_canvas_transform().affine_inverse() * to_global(position)
-#		mouse_cursor.position = (to_global(aim_vector) * 3) - (cam.position * 0.5)
-#		mouse_cursor.position = (to_global(aim_vector) - cam.position) * 3
-#		mouse_cursor.position = (global_position * 3) - (cam.position) - Vector2(320, 180)
-
-#		print(to_global(aim_vector))
-
-		# Get global position in the world
-		# Remove any camera movement
-		# Multiply by three
-		
-#		var cam_extra_pos_x = fmod(cam.global_position.x, 320.0)
-#		var cam_extra_pos_y = fmod(cam.global_position.y, 180.0)
-#
-#		print(Vector2(cam_extra_pos_x, cam_extra_pos_y))
-		
-		
+		set_target_position(aim_vector)
 	
 	var aimed_point = aim_vector
 	
@@ -101,5 +83,6 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if !gamepad && (event is InputEventMouseMotion):
 		mouse_pos =  get_canvas_transform().affine_inverse() * event.position
+		print("aa")
 		
-		set_cast_to(to_local(mouse_pos))
+		set_target_position(to_local(mouse_pos))

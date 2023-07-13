@@ -7,4 +7,4 @@ func _ready():
 
 
 func update_text():
-	set_text(InputMap.get_action_list("button_up")[0].as_text())
+	set_text(InputMap.action_get_events("button_up")[0].as_text())

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Swing.wav-ec191f18317eaeff8584c4ee4307d7e7.sample"
+type="AudioStreamWAV"
+uid="uid://crd3gtcdchnvh"
+path="res://.godot/imported/Swing.wav-ec191f18317eaeff8584c4ee4307d7e7.sample"
 
 [deps]
 
 source_file="res://Sounds/Swing.wav"
-dest_files=[ "res://.import/Swing.wav-ec191f18317eaeff8584c4ee4307d7e7.sample" ]
+dest_files=["res://.godot/imported/Swing.wav-ec191f18317eaeff8584c4ee4307d7e7.sample"]
 
 [params]
 

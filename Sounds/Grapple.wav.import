@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Grapple.wav-0a178fe78eb4aa176865a4ef539e961c.sample"
+type="AudioStreamWAV"
+uid="uid://cifeqq26j4f74"
+path="res://.godot/imported/Grapple.wav-0a178fe78eb4aa176865a4ef539e961c.sample"
 
 [deps]
 
 source_file="res://Sounds/Grapple.wav"
-dest_files=[ "res://.import/Grapple.wav-0a178fe78eb4aa176865a4ef539e961c.sample" ]
+dest_files=["res://.godot/imported/Grapple.wav-0a178fe78eb4aa176865a4ef539e961c.sample"]
 
 [params]
 

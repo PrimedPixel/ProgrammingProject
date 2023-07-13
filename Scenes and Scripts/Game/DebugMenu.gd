@@ -14,14 +14,14 @@ var coins = null
 
 var fire = null
 
-onready var master_bus = AudioServer.get_bus_index("Master")
-onready var music_bus = AudioServer.get_bus_index("Music")
-onready var sfx_bus = AudioServer.get_bus_index("Sound Effects")
+@onready var master_bus = AudioServer.get_bus_index("Master")
+@onready var music_bus = AudioServer.get_bus_index("Music")
+@onready var sfx_bus = AudioServer.get_bus_index("Sound Effects")
 
 func enable():
 	label = $Label
 
-	level = get_parent().get_node("ViewportContainer/Viewport").get_child(0)
+	level = get_parent().get_node("SubViewportContainer/SubViewport").get_child(0)
 	player = level.get_node("Player")
 	cam = level.get_node("Cam")
 	
@@ -44,10 +44,10 @@ func _process(_delta):
 		var rope_angle = fmod(player.angle_to, (2 * PI))
 		
 		label.text = "FPS: " + str(Engine.get_frames_per_second()) + 											\
-			"\nFullscreen: " + str(OS.window_fullscreen) +														\
-			"\nMaster Vol: " + str(master_vol) + "db, " + str(db2linear(master_vol)) +							\
-			"\nMusic Vol: " + str(music_vol) + "db, " + str(db2linear(music_vol)) +								\
-			"\nSFX Vol: " + str(sfx_vol) + "db, " + str(db2linear(sfx_vol)) +									\
+			"\nFullscreen: " + str(((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) +														\
+			"\nMaster Vol: " + str(master_vol) + "db, " + str(db_to_linear(master_vol)) +							\
+			"\nMusic Vol: " + str(music_vol) + "db, " + str(db_to_linear(music_vol)) +								\
+			"\nSFX Vol: " + str(sfx_vol) + "db, " + str(db_to_linear(sfx_vol)) +									\
 																												\
 			"\n\nPlayer Velocity: " + str(player.motion) +														\
 			"\nPlayer Speed: " + str(player.motion.length()) +													\
@@ -62,7 +62,7 @@ func _process(_delta):
 			"\n\nRope Pos Player: " + str(player.rope_pos) +													\
 			"\nRope Pos Caset: " + str(player.cast) +															\
 			"\nRope Length: " + str(player.rope_len) +															\
-			"\nRope Angle: " + str(rope_angle) + ", " + str(rad2deg(rope_angle)) + "°" + 						\
+			"\nRope Angle: " + str(rope_angle) + ", " + str(rad_to_deg(rope_angle)) + "°" + 						\
 																												\
 			"\n\nCamera Position: " + str(cam.position) +														\
 			"\nCamera Global Position: " + str(cam.global_position) +											\
@@ -83,6 +83,6 @@ func _process(_delta):
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
-			match event.scancode:
+			match event.keycode:
 				KEY_F3:
 					enable()

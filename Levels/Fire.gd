@@ -1,8 +1,8 @@
 extends Area2D
 
-onready var fire_rect = $FireRect
-onready var fire_collision = $FireCollision
-onready var fire_sprite = $FireSprite
+@onready var fire_rect = $FireRect
+@onready var fire_collision = $FireCollision
+@onready var fire_sprite = $FireSprite
 
 const fire_accel = 0.001
 var fire_speed = 0.3
@@ -15,7 +15,7 @@ func _process(_delta):
 	fire_distance += fire_speed
 	fire_speed = min(fire_speed + fire_accel, max_fire_speed)
 	
-	fire_rect.margin_right = fire_distance
+	fire_rect.offset_right = fire_distance
 	fire_sprite.position.x = fire_distance
 	fire_collision.scale.x = fire_distance * 2
 

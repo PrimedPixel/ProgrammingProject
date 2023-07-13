@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
-[ext_resource path="res://KennyMiniSquare.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Theme Assets/Grabber Highlight.png" type="Texture" id=2]
-[ext_resource path="res://Theme Assets/Grabber Normal.png" type="Texture" id=3]
+[ext_resource path="res://KennyMiniSquare.tres" type="FontFile" id=1]
+[ext_resource path="res://Theme Assets/Grabber Highlight.png" type="Texture2D" id=2]
+[ext_resource path="res://Theme Assets/Grabber Normal.png" type="Texture2D" id=3]
 [ext_resource path="res://SliderLine.tres" type="StyleBox" id=4]
 [ext_resource path="res://EmptyUIBox.tres" type="StyleBox" id=5]
 

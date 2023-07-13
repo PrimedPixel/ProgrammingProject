@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample"
+type="AudioStreamWAV"
+uid="uid://cfqunotuktkkx"
+path="res://.godot/imported/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample"
 
 [deps]
 
 source_file="res://Music/Soft and Sweet.wav"
-dest_files=[ "res://.import/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample" ]
+dest_files=["res://.godot/imported/Soft and Sweet.wav-f8d97e0b69d8cc8fd8962a3a13dc98eb.sample"]
 
 [params]
 

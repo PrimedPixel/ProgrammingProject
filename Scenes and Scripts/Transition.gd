@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var rect_animation = $RectAnimation
+@onready var rect_animation = $RectAnimation
 
 signal transition_completed 
 

@@ -3,7 +3,7 @@ extends Node
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
-			match event.scancode:
+			match event.keycode:
 				KEY_R:
 					var error = get_tree().reload_current_scene()
 					
@@ -17,4 +17,4 @@ func _unhandled_input(event):
 					GlobalVariables.write_savegame()
 					print("Saved game!")
 				KEY_F11:
-					OS.window_fullscreen = !OS.window_fullscreen
+					get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (!((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED

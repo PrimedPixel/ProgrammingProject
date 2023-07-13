@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player
 
 # Equivalent to macros in gamemaker
@@ -46,7 +46,7 @@ var rope_angle_vel = 0
 var offset = Vector2(9, -9)
 
 # A vector - magnitude and direction (essentially velocity)
-var motion = Vector2.ZERO
+var motion = Vector2(0.0, 0.0)
 
 var colliding = false
 
@@ -55,18 +55,18 @@ var global_mouse_pos = Vector2.ZERO
 var death_animation = "Die"
 
 # onready makes sure that the nodes have been initialised and loaded into the scene
-onready var sprite = $Sprite
-onready var animation = $AnimationPlayer
-onready var coyote_timer = $CoyoteTimer
-onready var jump_buffer_timer = $JumpBufferTimer
+@onready var sprite = $Sprite2D
+@onready var animation = $AnimationPlayer
+@onready var coyote_timer = $CoyoteTimer
+@onready var jump_buffer_timer = $JumpBufferTimer
 
-onready var rope_cast = get_parent().get_node("Player/RopeCast")
-onready var line = $RopeLine
+@onready var rope_cast = get_parent().get_node("Player/RopeCast")
+@onready var line = $RopeLine
 
-onready var level = get_viewport().get_child(0)
-onready var level_bottom = level.bottom
+@onready var level = get_viewport().get_child(0)
+@onready var level_bottom = level.bottom
 
-onready var wind_noise_player = $WindNoisePlayer
+@onready var wind_noise_player = $WindNoisePlayer
 
 # float max_abs(a: float, b: float)
 # Returns the value with the highest magnitude from zero
@@ -96,14 +96,14 @@ func ground_speed_modifiers(x_input):
 	
 	# Ground friction - slowly decelerating the player (if no input)
 	if x_input == 0:
-		motion.x = lerp(motion.x, 0, ground_frict)
+		motion.x = lerpf(motion.x, 0.0, ground_frict)
 		
 func air_speed_modifiers():
 	# Maximum horizontal speed in air
 	motion.x = clamp(motion.x, -max_air_spd, max_air_spd)
 	
 	# Air friction - slowly decelerating the player
-	motion.x = lerp(motion.x, 0, air_frict)
+	motion.x = lerp(motion.x, 0.0, air_frict)
 
 func rope_angle_changes(x_input):
 	# Pendulum
@@ -134,7 +134,7 @@ func rope_angle_changes(x_input):
 
 func reset_rope():
 	line.clear_points()
-	animation.playback_speed = 1 	# Reset animation speed
+	animation.speed_scale = 1.0 	# Reset animation speed
 	player_state = state.normal
 
 func rope_animation(x_input):
@@ -168,7 +168,7 @@ func initialise_rope():
 			rope_len = (position - rope_pos).length()
 			
 			if rope_len < max_rope_len:
-				angle_to = deg2rad(90) - (position - rope_pos).angle()
+				angle_to = deg_to_rad(90) - (position - rope_pos).angle()
 				
 				SoundPlayer.play_sound(SoundPlayer.Grapple)
 				player_state = state.swing
@@ -183,11 +183,11 @@ func die():
 		Input.start_joy_vibration(gamepad_id, 1, 1, 0.5)
 		
 		Transition.exit_level_transition()
-		yield(Transition, "transition_completed")
+		await Transition.transition_completed
 		
 		level = get_viewport().get_child(0)
 		
-		if level.get_filename() == "res://Levels/Level4.tscn":
+		if level.get_scene_file_path() == "res://Levels/Level4.tscn":
 			level.get_node("Fire").fire_distance = 0
 			level.get_node("Fire").fire_speed = 0.3
 			
@@ -221,11 +221,11 @@ func wind_noise():
 		vol = 1
 		printerr("Error: wind noise volume is too fat and large, unlike my cock")
 	
-	wind_noise_player.set_volume_db(linear2db(vol))
+	wind_noise_player.set_volume_db(linear_to_db(vol))
 
 func _ready():
 	var arr = Input.get_connected_joypads()
-	if !arr.empty():
+	if !arr.is_empty():
 		gamepad_id = arr[0]	# should be device 0, but not necessarily
 	
 	if GlobalVariables.checkpoint_pos != Vector2.ZERO:
@@ -233,7 +233,7 @@ func _ready():
 	
 	# This should be done already, perhaps unnecessary?
 	wind_noise_player.play()
-	wind_noise_player.set_volume_db(linear2db(0))
+	wind_noise_player.set_volume_db(linear_to_db(0))
 
 # Built in function from KinematicBody2D
 # _physics_process causes jitter issues on !=60Hz monitors
@@ -276,7 +276,7 @@ func _process(delta):
 	var y_input = input_down - input_up
 	var trig_input = Input.get_action_strength("gamepad_r_trig") - Input.get_action_strength("gamepad_l_trig")
 	
-	colliding = get_slide_count() != 0
+	colliding = get_slide_collision_count() != 0
 	
 	match player_state:
 		state.normal:
@@ -379,7 +379,10 @@ func _process(delta):
 	# function updates the player's position
 	var floor_before_move = is_on_floor()
 	
-	motion = move_and_slide(motion, Vector2.UP)	# Moves the player node by the vector + automatically collides
+	set_velocity(motion)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	motion = velocity	# Moves the player node by the vector + automatically collides
 												# Also returns left over motion, meaning if collided
 												# It will return no movement, and stop for the next frame
 	
@@ -402,7 +405,7 @@ func _process(delta):
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
-			match event.scancode:
+			match event.keycode:
 				KEY_1:
 					player_state = state.normal
 				KEY_2:

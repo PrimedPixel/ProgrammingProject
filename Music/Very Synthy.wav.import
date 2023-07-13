@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Very Synthy.wav-f03d3928ddbb7ad54e3075f0cce44e76.sample"
+type="AudioStreamWAV"
+uid="uid://nwa6f722a326"
+path="res://.godot/imported/Very Synthy.wav-f03d3928ddbb7ad54e3075f0cce44e76.sample"
 
 [deps]
 
 source_file="res://Music/Very Synthy.wav"
-dest_files=[ "res://.import/Very Synthy.wav-f03d3928ddbb7ad54e3075f0cce44e76.sample" ]
+dest_files=["res://.godot/imported/Very Synthy.wav-f03d3928ddbb7ad54e3075f0cce44e76.sample"]
 
 [params]
 

@@ -1,9 +1,9 @@
 extends Area2D
 
-export var default = false
+@export var default = false
 
 var checked = 0
-onready var animation = $CheckpointAnimation
+@onready var animation = $CheckpointAnimation
 
 func _process(_delta):
 	if checked < 10 && default && GlobalVariables.checkpoint_pos == Vector2.ZERO:

@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var sprite = $Sprite
+@onready var sprite = $Sprite2D
 
 func _process(_delta):
 	sprite.offset = Vector2(0, sin(float(Time.get_ticks_msec()) / 100) * 2)

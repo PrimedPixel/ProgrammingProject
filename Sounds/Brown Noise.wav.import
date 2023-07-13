@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Brown Noise.wav-5e6af8115a404f2f67dde8fd6e2e94bc.sample"
+type="AudioStreamWAV"
+uid="uid://jqrim4m710by"
+path="res://.godot/imported/Brown Noise.wav-5e6af8115a404f2f67dde8fd6e2e94bc.sample"
 
 [deps]
 
 source_file="res://Sounds/Brown Noise.wav"
-dest_files=[ "res://.import/Brown Noise.wav-5e6af8115a404f2f67dde8fd6e2e94bc.sample" ]
+dest_files=["res://.godot/imported/Brown Noise.wav-5e6af8115a404f2f67dde8fd6e2e94bc.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -13,7 +13,7 @@ const Wind = preload("res://Sounds/Brown Noise.wav")
 #const Swing = preload("res://Sounds/Whiter Noise.wav")
 const Land = preload("res://Sounds/Land.wav")
 
-onready var audio_player = $AudioPlayers
+@onready var audio_player = $AudioPlayers
 
 func play_sound(sound):
 	# Loops through each audio channel

@@ -1,9 +1,9 @@
 extends AudioStreamPlayer
 
-onready var tween_out = $FadeOut
+@onready var tween_out = $FadeOut
 
-export var transition_duration = 1.00
-export var transition_type = 1 # TRANS_SINE
+@export var transition_duration = 1.00
+@export var transition_type = 1 # TRANS_SINE
 
 func fade_out():
 	# tween music volume down to 0

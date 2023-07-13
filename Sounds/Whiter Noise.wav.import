@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Whiter Noise.wav-d221aedaa7ec7fc698b46240c7aef907.sample"
+type="AudioStreamWAV"
+uid="uid://c3qkmv4f14tch"
+path="res://.godot/imported/Whiter Noise.wav-d221aedaa7ec7fc698b46240c7aef907.sample"
 
 [deps]
 
 source_file="res://Sounds/Whiter Noise.wav"
-dest_files=[ "res://.import/Whiter Noise.wav-d221aedaa7ec7fc698b46240c7aef907.sample" ]
+dest_files=["res://.godot/imported/Whiter Noise.wav-d221aedaa7ec7fc698b46240c7aef907.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes and Scripts/Game/MouseCursor.gd" type="Script" id=1]
-[ext_resource path="res://Dynamic Assets/Ropeable Cursor.png" type="Texture" id=2]
+[ext_resource path="res://Dynamic Assets/Ropeable Cursor.png" type="Texture2D" id=2]
 
-[node name="MouseCursor" type="Sprite"]
+[node name="MouseCursor" type="Sprite2D"]
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
