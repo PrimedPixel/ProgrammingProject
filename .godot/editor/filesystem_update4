@@ -1,0 +1,6 @@
+res://default_env.tres
+res://Scenes and Scripts/Menus/Menu.tscn
+res://Theme Assets/Theme.tres
+res://Scenes and Scripts/Level/Cam.gd
+res://Scenes and Scripts/Game/Game.tscn
+res://Levels/Level.tscn
