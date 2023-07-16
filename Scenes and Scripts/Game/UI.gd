@@ -35,9 +35,9 @@ func update_count(count_node, count_var, ui_node, timer_node, previous):
 	if !timer_node.is_stopped():
 		previous = count_var
 		
-		ui_node.position.y = lerp(ui_node.position.y, ui_onscreen, 0.1)
+		ui_node.position.y = lerp(ui_node.position.y, ui_onscreen, 0.005)
 	else:
-		ui_node.position.y = lerp(ui_node.position.y, ui_offscreen, 0.1)
+		ui_node.position.y = lerp(ui_node.position.y, ui_offscreen, 0.005)
 	
 	return previous
 

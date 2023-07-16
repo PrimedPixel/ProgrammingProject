@@ -83,6 +83,5 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if !gamepad && (event is InputEventMouseMotion):
 		mouse_pos =  get_canvas_transform().affine_inverse() * event.position
-		print("aa")
 		
 		set_target_position(to_local(mouse_pos))

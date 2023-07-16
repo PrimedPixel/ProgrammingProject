@@ -2,10 +2,9 @@ extends Control
 
 @onready var sound_player = $SoundPlayer
 @onready var music = $Music
-@onready var fade_out = $Music/FadeOut
 
-@onready var main_menu_container = $FirstMenu
-@onready var main_menu_container_new_game = $FirstMenu/NewGame
+@onready var main_menu_container = $FirstMenu/MenuContainer
+@onready var main_menu_container_new_game = $FirstMenu/MenuContainer/NewGame
 
 @onready var options_container = $OptionsMenu/OptionsContainer
 @onready var options_container_back = $OptionsMenu/OptionsContainer/OptionsBack
@@ -19,7 +18,7 @@ func _on_NewGame_pressed():
 	await Transition.transition_completed
 	
 	music.fade_out()
-	await fade_out.tween_completed
+	await music.tween_out.finished
 	
 	GlobalVariables.delete_savegame()
 	get_tree().change_scene_to_file("res://Scenes and Scripts/Game/Game.tscn")
@@ -31,7 +30,7 @@ func _on_Continue_pressed():
 	await Transition.transition_completed
 	
 	music.fade_out()
-	await fade_out.tween_completed
+	await music.tween_out.finished
 	
 	get_tree().change_scene_to_file("res://Scenes and Scripts/Game/Game.tscn")
 	

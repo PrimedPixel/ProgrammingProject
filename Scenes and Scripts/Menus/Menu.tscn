@@ -11,16 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://1uweo11bn7lp" path="res://Static Assets/Far Buildings.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://dlko2esk3uon5" path="res://Static Assets/Near Buildings.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://voai0ucudc1i" path="res://Static Assets/Skyline Blank.png" id="11"]
-[ext_resource type="FontFile" path="res://KennyMiniSquare.tres" id="12"]
+[ext_resource type="FontFile" uid="uid://ctqc0nr02e2tg" path="res://KennyMiniSquare.tres" id="12"]
 [ext_resource type="Script" path="res://Scenes and Scripts/Menus/Cursor.gd" id="13"]
 [ext_resource type="StyleBox" path="res://EmptyUIBox.tres" id="14"]
 [ext_resource type="Texture2D" uid="uid://b147lxlmjrts1" path="res://Dynamic Assets/No Tile Cursor.png" id="15"]
 [ext_resource type="PackedScene" path="res://Scenes and Scripts/Menus/OptionsMenu.tscn" id="16"]
 
 [node name="GUI" type="SubViewportContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 scale = Vector2(3, 3)
 script = ExtResource("2")
 
@@ -35,28 +34,20 @@ autoplay = true
 bus = &"Music"
 script = ExtResource("5")
 
-[node name="FadeOut" type="Tween" parent="Music"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-script = null
-
 [node name="Cursor" type="Sprite2D" parent="."]
 z_index = 10
 texture = ExtResource("15")
 script = ExtResource("13")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
 texture = ExtResource("8")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
 
 [node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
 position = Vector2(0, 32)
 texture = ExtResource("11")
 centered = false
@@ -70,6 +61,7 @@ centered = false
 region_rect = Rect2(0, 0, 128, 240)
 
 [node name="FarBuildings" type="Sprite2D" parent="."]
+texture_repeat = 2
 position = Vector2(2.83122e-07, 174.667)
 texture = ExtResource("9")
 centered = false
@@ -77,6 +69,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 640, 124)
 
 [node name="NearBuildings" type="Sprite2D" parent="."]
+texture_repeat = 2
 position = Vector2(2.83122e-07, 151)
 texture = ExtResource("10")
 centered = false
@@ -89,11 +82,19 @@ scale = Vector2(2, 2)
 texture = ExtResource("1")
 script = ExtResource("3")
 
-[node name="FirstMenu" type="VBoxContainer" parent="."]
+[node name="FirstMenu" type="Control" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 0
 
-[node name="NewGame" type="Button" parent="FirstMenu"]
+[node name="MenuContainer" type="VBoxContainer" parent="FirstMenu"]
+layout_mode = 2
+anchor_right = 15.992
+anchor_bottom = 8.997
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NewGame" type="Button" parent="FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Exit")
 focus_neighbor_top = NodePath("../Exit")
@@ -114,7 +115,7 @@ theme_override_styles/disabled = ExtResource("14")
 theme_override_styles/focus = ExtResource("14")
 text = "New Game"
 
-[node name="Continue" type="Button" parent="FirstMenu"]
+[node name="Continue" type="Button" parent="FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../NewGame")
 focus_neighbor_top = NodePath("../NewGame")
@@ -135,7 +136,7 @@ theme_override_styles/disabled = ExtResource("14")
 theme_override_styles/focus = ExtResource("14")
 text = "Continue"
 
-[node name="Options" type="Button" parent="FirstMenu"]
+[node name="Options" type="Button" parent="FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Continue")
 focus_neighbor_top = NodePath("../Continue")
@@ -156,7 +157,7 @@ theme_override_styles/disabled = ExtResource("14")
 theme_override_styles/focus = ExtResource("14")
 text = "Options"
 
-[node name="Exit" type="Button" parent="FirstMenu"]
+[node name="Exit" type="Button" parent="FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Options")
 focus_neighbor_top = NodePath("../Options")
@@ -180,15 +181,15 @@ text = "Exit"
 [node name="OptionsMenu" parent="." instance=ExtResource("16")]
 layout_mode = 2
 
-[connection signal="focus_entered" from="FirstMenu/NewGame" to="." method="_on_focus_entered"]
-[connection signal="mouse_entered" from="FirstMenu/NewGame" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="FirstMenu/NewGame" to="." method="_on_NewGame_pressed"]
-[connection signal="focus_entered" from="FirstMenu/Continue" to="." method="_on_focus_entered"]
-[connection signal="mouse_entered" from="FirstMenu/Continue" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="FirstMenu/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="focus_entered" from="FirstMenu/Options" to="." method="_on_focus_entered"]
-[connection signal="mouse_entered" from="FirstMenu/Options" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="FirstMenu/Options" to="." method="_on_Options_pressed"]
-[connection signal="focus_entered" from="FirstMenu/Exit" to="." method="_on_focus_entered"]
-[connection signal="mouse_entered" from="FirstMenu/Exit" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="FirstMenu/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="focus_entered" from="FirstMenu/MenuContainer/NewGame" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="FirstMenu/MenuContainer/NewGame" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="FirstMenu/MenuContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="focus_entered" from="FirstMenu/MenuContainer/Continue" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="FirstMenu/MenuContainer/Continue" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="FirstMenu/MenuContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="focus_entered" from="FirstMenu/MenuContainer/Options" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="FirstMenu/MenuContainer/Options" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="FirstMenu/MenuContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="focus_entered" from="FirstMenu/MenuContainer/Exit" to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="FirstMenu/MenuContainer/Exit" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="FirstMenu/MenuContainer/Exit" to="." method="_on_Exit_pressed"]

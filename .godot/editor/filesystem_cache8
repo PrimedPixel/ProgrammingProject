@@ -1,12 +1,12 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1689333639
+::res://::1689517930
 DebugRoom.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Cam.tscn<>res://Scenes and Scripts/GlobalKeys.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Scenes and Scripts/Level/Background.tscn<>res://Scenes and Scripts/Level/Spikes.tscn<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Scenes and Scripts/Level/Coin.tscn<>res://Scenes and Scripts/Game/LevelGUI.tscn
 default_bus_layout.tres::AudioBusLayout::-1::1689032282::0::1::::<><>::
-default_env.tres::Environment::5409734031978832101::1689263431::0::1::::<><>::
+default_env.tres::Environment::5409734031978832101::1689422905::0::1::::<><>::
 EmptyUIBox.tres::StyleBoxEmpty::-1::1689032282::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1671576272::0::1::::<><>::
-Kenney Mini Square.ttf::FontFile::7835382696405865968::1671576272::1689263416::1::::<><>::
-KennyMiniSquare.tres::FontFile::-1::1689032282::0::1::::<><>::res://Kenney Mini Square.ttf
+Kenney Mini Square.ttf::FontFile::7835382696405865968::1671576272::1689421762::1::::<><>::
+KennyMiniSquare.tres::FontFile::6139626229644311848::1689421852::0::1::::<><>::uid://djvruxerd5xka::::res://Kenney Mini Square.ttf
 logo idea.png::CompressedTexture2D::7263022125473916304::1689019724::1689263416::1::::<><>::
 New Writeup WIP.txt::TextFile::-1::1688732365::0::1::::<><>::
 README.md::TextFile::-1::1671576272::0::1::::<><>::
@@ -32,13 +32,13 @@ Icon 64x.png::CompressedTexture2D::8097424686709302964::1678451322::1689263416::
 Icon 128x.png::CompressedTexture2D::3652267637666283041::1678451338::1689263416::1::::<><>::
 Icon 256x.png::CompressedTexture2D::577373486148715298::1678451372::1689263416::1::::<><>::
 Icon 512x.png::CompressedTexture2D::763614026808109488::1678451386::1689263416::1::::<><>::
-::res://Levels/::1689263360
+::res://Levels/::1689422764
 Fire.gd::GDScript::-1::1689032283::0::1::::<>Area2D<>::
 Level2.tscn::PackedScene::-1::1689032283::0::1::::<><>::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Scenes and Scripts/Level/Coin.tscn<>res://Scenes and Scripts/Level/Cam.tscn<>res://Scenes and Scripts/Level/Background.tscn<>res://Music/Very Synthy.wav<>res://Levels/Level.gd<>res://Scenes and Scripts/Level/Spikes.tscn<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Scenes and Scripts/Music.gd<>res://Scenes and Scripts/Level/NextLevelCollider.tscn<>res://Levels/Level3.tscn
 Level3.tscn::PackedScene::-1::1689032283::0::1::::<><>::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Scenes and Scripts/Level/Coin.tscn<>res://Scenes and Scripts/Level/Cam.tscn<>res://Scenes and Scripts/Level/Background.tscn<>res://Music/XEKONYX ATTACKS.wav<>res://Levels/Level.gd<>res://Scenes and Scripts/Level/Spikes.tscn<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Scenes and Scripts/Music.gd<>res://Scenes and Scripts/Level/NextLevelCollider.tscn<>res://Levels/Level4.tscn
 Level4.tscn::PackedScene::-1::1689032283::0::1::::<><>::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Levels/Fire.gd<>res://Scenes and Scripts/Level/Cam.tscn<>res://Scenes and Scripts/Level/Background.tscn<>res://Music/Fire in the City.wav<>res://Levels/Level.gd<>res://Scenes and Scripts/Level/Spikes.tscn<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Dynamic Assets/Fire.png<>res://Scenes and Scripts/Level/Coin.tscn<>res://Scenes and Scripts/Music.gd<>res://Scenes and Scripts/Level/NextLevelCollider.tscn<>res://Levels/LevelEnd.tscn
 Level.gd::GDScript::-1::1689032283::0::1::::<>Node2D<>::
-Level.tscn::PackedScene::9052652326859044278::1689094301::0::1::::<><>::uid://biy6ysriql07p
+Level.tscn::PackedScene::9052652326859044278::1689422764::0::1::::<><>::uid://biy6ysriql07p::::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Scenes and Scripts/Level/NextLevelCollider.tscn<>res://Scenes and Scripts/Level/Cam.tscn<>uid://ce0egli6qvgka::::res://Scenes and Scripts/Level/Background.tscn<>uid://dpuiwsb71ljvq::::res://Music/Sub Bass.wav<>res://Levels/Level.gd<>res://Scenes and Scripts/Level/Spikes.tscn<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Scenes and Scripts/Level/Coin.tscn<>res://Levels/Level4.tscn<>res://Scenes and Scripts/Music.gd<>res://Levels/LevelEnd.tscn<>res://Levels/Level2.tscn<>res://Levels/Level3.tscn
 LevelEnd.tscn::PackedScene::-1::1689032283::0::1::::<><>::res://Scenes and Scripts/Level/Player.tscn<>res://Scenes and Scripts/Level/Tiles.tscn<>res://Scenes and Scripts/Menus/LogoMenu.gd<>res://Scenes and Scripts/Level/Cam.tscn<>res://Scenes and Scripts/Level/Background.tscn<>res://Music/Soft and Sweet.wav<>res://Levels/Level.gd<>res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png<>res://Scenes and Scripts/Level/Checkpoint.tscn<>res://Theme Assets/Theme.tres<>res://Logos/Primed Pixel Games Logo - No Outline - Pixel Perfect.png<>res://Scenes and Scripts/Music.gd
 Music.gd::GDScript::-1::1689032283::0::1::::<>AudioStreamPlayer<>::
 ::res://Logos/::1689263416
@@ -53,19 +53,19 @@ Soft and Sweet.wav::AudioStreamWAV::5158053950418429835::1678400760::1689263417:
 Sub Bass.wav::AudioStreamWAV::8253908232593252662::1678401727::1689263417::1::::<><>::
 Very Synthy.wav::AudioStreamWAV::957926950808150709::1679518234::1689263417::1::::<><>::
 XEKONYX ATTACKS.wav::AudioStreamWAV::4519266015624616986::1679521742::1689263417::1::::<><>::
-::res://Scenes and Scripts/::1689263360
+::res://Scenes and Scripts/::1689422390
 GlobalKeys.gd::GDScript::-1::1689032282::0::1::::<>Node<>::
 GlobalKeys.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/GlobalKeys.gd
 GlobalVariables.gd::GDScript::-1::1689032689::0::1::::<>Node<>::
-Music.gd::GDScript::-1::1689032282::0::1::::<>AudioStreamPlayer<>::
+Music.gd::GDScript::-1::1689422390::0::1::::<>AudioStreamPlayer<>::
 Transition.gd::GDScript::-1::1689032282::0::1::::<>CanvasLayer<>::
 Transition.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Transition.gd
-::res://Scenes and Scripts/Game/::1689263431
+::res://Scenes and Scripts/Game/::1689422905
 DebugMenu.gd::GDScript::-1::1689032282::0::1::::<>Control<>::
 DownButton.gd::GDScript::-1::1689032282::0::1::::<>Button<>::
 Fullscreen.gd::GDScript::-1::1689032819::0::1::::<>Button<>::
-Game.gd::GDScript::-1::1689032282::0::1::::<>Node2D<>::
-Game.tscn::PackedScene::1884634815985561259::1689263431::0::1::::<><>::res://Scenes and Scripts/Game/MouseCursor.tscn<>uid://d18f4jtfxm3eo::::res://Levels/Level.tscn<>res://Scenes and Scripts/Game/Game.gd<>res://KennyMiniSquare.tres<>res://EmptyUIBox.tres<>uid://hv3irqay4mnd::::res://Scenes and Scripts/Game/LevelGUI.tscn<>res://Scenes and Scripts/Game/PauseMenu.gd<>res://Scenes and Scripts/Menus/OptionsMenu.tscn<>res://Scenes and Scripts/Game/DebugMenu.gd
+Game.gd::GDScript::-1::1689343826::0::1::::<>Node2D<>::
+Game.tscn::PackedScene::1884634815985561259::1689422905::0::1::::<><>::res://Scenes and Scripts/Game/MouseCursor.tscn<>uid://d18f4jtfxm3eo::::res://Levels/Level.tscn<>res://Scenes and Scripts/Game/Game.gd<>uid://ctqc0nr02e2tg::::res://KennyMiniSquare.tres<>res://EmptyUIBox.tres<>uid://hv3irqay4mnd::::res://Scenes and Scripts/Game/LevelGUI.tscn<>res://Scenes and Scripts/Game/PauseMenu.gd<>res://Scenes and Scripts/Menus/OptionsMenu.tscn<>res://Scenes and Scripts/Game/DebugMenu.gd
 JumpButton.gd::GDScript::-1::1689032282::0::1::::<>Button<>::
 LeftButton.gd::GDScript::-1::1689032282::0::1::::<>Button<>::
 LevelGUI.tscn::PackedScene::536389118097231445::1689093616::0::1::::<><>::res://Scenes and Scripts/Game/UI.gd<>res://KennyMiniSquare.tres<>uid://ct1uhnin1x82g
@@ -73,15 +73,15 @@ MasterVolS.gd::GDScript::-1::1689032282::0::1::::<>HSlider<>::
 MouseCursor.gd::GDScript::-1::1689032282::0::1::::<>Sprite2D<>::
 MouseCursor.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Game/MouseCursor.gd<>res://Dynamic Assets/Ropeable Cursor.png
 MusicVolS.gd::GDScript::-1::1689032282::0::1::::<>HSlider<>::
-OptionsMenu.gd::GDScript::-1::1689032282::0::1::::<>Control<>::
-PauseMenu.gd::GDScript::-1::1689032282::0::1::::<>Control<>::
+OptionsMenu.gd::GDScript::-1::1689422570::0::1::::<>Control<>::
+PauseMenu.gd::GDScript::-1::1689422694::0::1::::<>Control<>::
 RightButton.gd::GDScript::-1::1689032282::0::1::::<>Button<>::
 SFXVolS.gd::GDScript::-1::1689032282::0::1::::<>HSlider<>::
-UI.gd::GDScript::-1::1689092869::0::1::::<>Control<>::
+UI.gd::GDScript::-1::1689344624::0::1::::<>Control<>::
 UpButton.gd::GDScript::-1::1689032282::0::1::::<>Button<>::
-::res://Scenes and Scripts/Level/::1689263360
-Background.tscn::PackedScene::5105460360070320372::1689094426::0::1::::<><>::uid://voai0ucudc1i
-Cam.gd::GDScript::-1::1689094443::0::1::::<>Camera2D<>::
+::res://Scenes and Scripts/Level/::1689422764
+Background.tscn::PackedScene::5105460360070320372::1689422764::0::1::::<><>::uid://voai0ucudc1i::::res://Static Assets/Skyline Blank.png<>uid://dlko2esk3uon5::::res://Static Assets/Near Buildings.png<>uid://1uweo11bn7lp::::res://Static Assets/Far Buildings.png<>uid://b8ng2c5gb5vd5::::res://Static Assets/Dark Blue.png
+Cam.gd::GDScript::-1::1689343278::0::1::::<>Camera2D<>::
 Cam.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Level/Cam.gd
 Checkpoint.gd::GDScript::-1::1689032282::0::1::::<>Area2D<>::
 Checkpoint.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Dynamic Assets/Checkpoint Atlas.png<>res://Scenes and Scripts/Level/Checkpoint.gd
@@ -89,21 +89,21 @@ Coin.gd::GDScript::-1::1689032282::0::1::::<>Area2D<>::
 Coin.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Dynamic Assets/Pellet.png<>res://Scenes and Scripts/Level/Coin.gd
 NextLevelCollider.gd::GDScript::-1::1689032282::0::1::::<>Area2D<>::
 NextLevelCollider.tscn::PackedScene::-1::1689032283::0::1::::<><>::res://Scenes and Scripts/Level/NextLevelCollider.gd<>res://Static Assets/End.png
-Player.gd::GDScript::-1::1689093570::0::1::::Player<>CharacterBody2D<>::
-Player.tscn::PackedScene::2999402556791577419::1689094034::0::1::::<><>::uid://ct1uhnin1x82g
-RayCast2D.gd::GDScript::-1::1689092977::0::1::::<>RayCast2D<>::
+Player.gd::GDScript::-1::1689344426::0::1::::Player<>CharacterBody2D<>::
+Player.tscn::PackedScene::2999402556791577419::1689422764::0::1::::<><>::uid://ct1uhnin1x82g::::res://Dynamic Assets/Player Atlas.png<>res://Scenes and Scripts/Level/Player.gd<>res://Scenes and Scripts/Level/RayCast2D.gd<>uid://jqrim4m710by::::res://Sounds/Brown Noise.wav
+RayCast2D.gd::GDScript::-1::1689344183::0::1::::<>RayCast2D<>::
 Rope.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Level/RayCast2D.gd
 Spikes.gd::GDScript::-1::1689032282::0::1::::<>Area2D<>::
 Spikes.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Dynamic Assets/Electric Rail Atlas.png<>res://Scenes and Scripts/Level/Spikes.gd
 Tiles.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Static Assets/Warped City Atlas.png<>res://Static Assets/Non-Ropeable.png<>res://Static Assets/Non-Ropeable Through.png
-::res://Scenes and Scripts/Menus/::1689263430
+::res://Scenes and Scripts/Menus/::1689422764
 Cursor.gd::GDScript::-1::1689032282::0::1::::<>Sprite2D<>::
 LogoMenu.gd::GDScript::-1::1689032282::0::1::::<>Sprite2D<>::
-Menu.gd::GDScript::-1::1689032282::0::1::::<>Control<>::
-Menu.tscn::PackedScene::2900372513242749765::1689263430::0::1::::<><>::uid://o3hri1gcy8ui::::res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png<>res://Scenes and Scripts/Menus/Menu.gd<>res://Scenes and Scripts/Menus/LogoMenu.gd<>uid://cfqunotuktkkx::::res://Music/Soft and Sweet.wav<>res://Scenes and Scripts/Music.gd<>res://Scenes and Scripts/GlobalKeys.tscn<>uid://b8nttsotcmpwd::::res://Static Assets/Skyline Moon.png<>uid://b8ng2c5gb5vd5::::res://Static Assets/Dark Blue.png<>uid://1uweo11bn7lp::::res://Static Assets/Far Buildings.png<>uid://dlko2esk3uon5::::res://Static Assets/Near Buildings.png<>uid://voai0ucudc1i::::res://Static Assets/Skyline Blank.png<>res://KennyMiniSquare.tres<>res://Scenes and Scripts/Menus/Cursor.gd<>res://EmptyUIBox.tres<>uid://b147lxlmjrts1::::res://Dynamic Assets/No Tile Cursor.png<>res://Scenes and Scripts/Menus/OptionsMenu.tscn
+Menu.gd::GDScript::-1::1689422631::0::1::::<>Control<>::
+Menu.tscn::PackedScene::2900372513242749765::1689422764::0::1::::<><>::uid://o3hri1gcy8ui::::res://Logos/XEKINO Logo - White Outline - Pixel Perfect.png<>res://Scenes and Scripts/Menus/Menu.gd<>res://Scenes and Scripts/Menus/LogoMenu.gd<>uid://cfqunotuktkkx::::res://Music/Soft and Sweet.wav<>res://Scenes and Scripts/Music.gd<>res://Scenes and Scripts/GlobalKeys.tscn<>uid://b8nttsotcmpwd::::res://Static Assets/Skyline Moon.png<>uid://b8ng2c5gb5vd5::::res://Static Assets/Dark Blue.png<>uid://1uweo11bn7lp::::res://Static Assets/Far Buildings.png<>uid://dlko2esk3uon5::::res://Static Assets/Near Buildings.png<>uid://voai0ucudc1i::::res://Static Assets/Skyline Blank.png<>uid://ctqc0nr02e2tg::::res://KennyMiniSquare.tres<>res://Scenes and Scripts/Menus/Cursor.gd<>res://EmptyUIBox.tres<>uid://b147lxlmjrts1::::res://Dynamic Assets/No Tile Cursor.png<>res://Scenes and Scripts/Menus/OptionsMenu.tscn
 OptionsMenu.tscn::PackedScene::-1::1689032282::0::1::::<><>::res://Scenes and Scripts/Game/LeftButton.gd<>res://Scenes and Scripts/Game/DownButton.gd<>res://KennyMiniSquare.tres<>res://Scenes and Scripts/Game/JumpButton.gd<>res://Scenes and Scripts/Game/MasterVolS.gd<>res://Scenes and Scripts/Game/MusicVolS.gd<>res://Scenes and Scripts/Game/RightButton.gd<>res://Scenes and Scripts/Game/SFXVolS.gd<>res://Scenes and Scripts/Game/UpButton.gd<>res://Scenes and Scripts/Game/Fullscreen.gd<>res://EmptyUIBox.tres<>res://Theme Assets/Theme.tres<>res://Scenes and Scripts/Game/OptionsMenu.gd
-::res://Sounds/::1689263416
-Brown Noise.wav::AudioStreamWAV::665776787704085422::1671576272::1689263416::1::::<><>::
+::res://Sounds/::1689344490
+Brown Noise.wav::AudioStreamWAV::665776787704085422::1671576272::1689344490::1::::<><>::
 Checkpoint.wav::AudioStreamWAV::5058776400763563968::1671576272::1689263416::1::::<><>::
 Coin.wav::AudioStreamWAV::871026150891022034::1671576272::1689263416::1::::<><>::
 Damage.wav::AudioStreamWAV::2043285642761127681::1671576272::1689263416::1::::<><>::
@@ -128,8 +128,8 @@ Non-Ropeable.png::CompressedTexture2D::8070494242927451959::1679180601::16892634
 Skyline Blank.png::CompressedTexture2D::1502882635404316700::1678353817::1689263416::1::::<><>::
 Skyline Moon.png::CompressedTexture2D::4730677955411702539::1678353817::1689263416::1::::<><>::
 Warped City Atlas.png::CompressedTexture2D::1119781430605403125::1678356706::1689263416::1::::<><>::
-::res://Theme Assets/::1689263430
+::res://Theme Assets/::1689421399
 Grabber Highlight.png::CompressedTexture2D::7095614084851716658::1678542522::1689263416::1::::<><>::
 Grabber Normal.png::CompressedTexture2D::6885897736591741261::1678542506::1689263416::1::::<><>::
-Theme.tres::Theme::7015854248455064857::1689263430::0::1::::<><>::res://KennyMiniSquare.tres<>uid://c8dfyy0u6by2e::::res://Theme Assets/Grabber Highlight.png<>uid://c5dty2rk4wfq0::::res://Theme Assets/Grabber Normal.png<>res://SliderLine.tres<>res://EmptyUIBox.tres
+Theme.tres::Theme::7015854248455064857::1689421399::0::1::::<><>::uid://ctqc0nr02e2tg::::res://KennyMiniSquare.tres<>uid://c8dfyy0u6by2e::::res://Theme Assets/Grabber Highlight.png<>uid://c5dty2rk4wfq0::::res://Theme Assets/Grabber Normal.png<>res://SliderLine.tres<>res://EmptyUIBox.tres
 ThemeEasyRead.tres::Theme::-1::1689032282::0::1::::<><>::res://KennyMiniSquare.tres<>res://Theme Assets/Grabber Highlight.png<>res://Theme Assets/Grabber Normal.png<>res://SliderLine.tres<>res://EmptyUIBox.tres

@@ -36,7 +36,6 @@ format = 2
 format = 2
 
 [node name="Background" parent="." instance=ExtResource("5")]
-visible = false
 
 [node name="Cam" parent="." instance=ExtResource("4")]
 position = Vector2(500, 152)

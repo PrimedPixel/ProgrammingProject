@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://c67sdhf8qfm78"]
 
-[ext_resource type="FontFile" path="res://KennyMiniSquare.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://ctqc0nr02e2tg" path="res://KennyMiniSquare.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://c8dfyy0u6by2e" path="res://Theme Assets/Grabber Highlight.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://c5dty2rk4wfq0" path="res://Theme Assets/Grabber Normal.png" id="3"]
 [ext_resource type="StyleBox" path="res://SliderLine.tres" id="4"]

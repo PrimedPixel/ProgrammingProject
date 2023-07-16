@@ -1,6 +1,11 @@
 res://default_env.tres
-res://Scenes and Scripts/Menus/Menu.tscn
-res://Theme Assets/Theme.tres
-res://Scenes and Scripts/Level/Cam.gd
 res://Scenes and Scripts/Game/Game.tscn
+res://Theme Assets/Theme.tres
+res://Scenes and Scripts/GlobalVariables.gd
+res://Scenes and Scripts/Menus/Menu.tscn
+res://Scenes and Scripts/Level/Player.tscn
 res://Levels/Level.tscn
+res://Scenes and Scripts/Level/Background.tscn
+res://Scenes and Scripts/Menus/Menu.gd
+res://Scenes and Scripts/Game/Game.gd
+res://Scenes and Scripts/Game/DebugMenu.gd

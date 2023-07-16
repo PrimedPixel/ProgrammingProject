@@ -6,7 +6,7 @@ extends Control
 @onready var controls_container = $ControlsContainer
 @onready var controls_container_back = $ControlsContainer/ControlsBack
 
-@onready var first_menu = get_parent().get_node("FirstMenu")
+@onready var first_menu = get_parent().get_node("FirstMenu/MenuContainer")
 @onready var first_menu_node = first_menu.get_child(0)
 
 var changing = false

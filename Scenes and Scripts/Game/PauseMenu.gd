@@ -1,7 +1,7 @@
 extends Control
 
-@onready var pause_container = $FirstMenu
-@onready var pause_container_resume = $FirstMenu/Resume
+@onready var pause_container = $FirstMenu/MenuContainer
+@onready var pause_container_resume = $FirstMenu/MenuContainer/Resume
 
 @onready var options_container = $OptionsMenu/OptionsContainer
 @onready var options_container_back = $OptionsMenu/OptionsContainer/OptionsBack

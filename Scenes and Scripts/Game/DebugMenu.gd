@@ -60,7 +60,7 @@ func _process(_delta):
 			"\nPlayer is_on_ceil: " + str(player.is_on_ceiling()) +												\
 																												\
 			"\n\nRope Pos Player: " + str(player.rope_pos) +													\
-			"\nRope Pos Caset: " + str(player.cast) +															\
+			"\nRope Pos Cast: " + str(player.cast) +															\
 			"\nRope Length: " + str(player.rope_len) +															\
 			"\nRope Angle: " + str(rope_angle) + ", " + str(rad_to_deg(rope_angle)) + "°" + 						\
 																												\

@@ -221,6 +221,9 @@ func wind_noise():
 		vol = 1
 		printerr("Error: wind noise volume is too fat and large, unlike my cock")
 	
+	if !wind_noise_player.playing:
+		printerr("Error: wind noise killed itself")
+	
 	wind_noise_player.set_volume_db(linear_to_db(vol))
 
 func _ready():
@@ -232,14 +235,14 @@ func _ready():
 		global_position = GlobalVariables.checkpoint_pos
 	
 	# This should be done already, perhaps unnecessary?
-	wind_noise_player.play()
-	wind_noise_player.set_volume_db(linear_to_db(0))
+#	wind_noise_player.play()
+#	wind_noise_player.set_volume_db(linear_to_db(0))
 
 # Built in function from KinematicBody2D
 # _physics_process causes jitter issues on !=60Hz monitors
 # _process seems to eliminate this issue without any caveats?
 # although this should be looked into
-func _process(delta):
+func _physics_process(delta):
 	
 	if Transition.rect_animation.is_playing():
 		return
@@ -302,7 +305,8 @@ func _process(delta):
 				if !was_on_floor:
 					was_on_floor = true
 					
-					SoundPlayer.play_sound(SoundPlayer.Land)
+					if !SoundPlayer.is_playing(SoundPlayer.Land):
+						SoundPlayer.play_sound(SoundPlayer.Land)
 					
 					Input.start_joy_vibration(gamepad_id, 1, 1, 0.25)
 				

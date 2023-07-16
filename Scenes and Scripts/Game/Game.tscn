@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://Scenes and Scripts/Game/MouseCursor.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://d18f4jtfxm3eo" path="res://Levels/Level.tscn" id="2"]
 [ext_resource type="Script" path="res://Scenes and Scripts/Game/Game.gd" id="3"]
-[ext_resource type="FontFile" path="res://KennyMiniSquare.tres" id="4"]
+[ext_resource type="FontFile" uid="uid://ctqc0nr02e2tg" path="res://KennyMiniSquare.tres" id="4"]
 [ext_resource type="StyleBox" path="res://EmptyUIBox.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://hv3irqay4mnd" path="res://Scenes and Scripts/Game/LevelGUI.tscn" id="6"]
 [ext_resource type="Script" path="res://Scenes and Scripts/Game/PauseMenu.gd" id="7"]
@@ -55,15 +55,23 @@ offset_right = 642.0
 offset_bottom = 362.0
 color = Color(0, 0, 0, 0.588235)
 
-[node name="FirstMenu" type="VBoxContainer" parent="SubViewportContainer/PauseMenu"]
-layout_mode = 0
+[node name="FirstMenu" type="Control" parent="SubViewportContainer/PauseMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuContainer" type="VBoxContainer" parent="SubViewportContainer/PauseMenu/FirstMenu"]
+layout_mode = 1
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 128.0
-offset_right = 640.0
+offset_right = 641.0
+offset_bottom = 148.0
+grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="Resume" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu"]
+[node name="Resume" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Exit")
 focus_neighbor_top = NodePath("../Exit")
@@ -84,7 +92,7 @@ theme_override_styles/disabled = ExtResource("5")
 theme_override_styles/focus = ExtResource("5")
 text = "Resume"
 
-[node name="Options" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu"]
+[node name="Options" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Resume")
 focus_neighbor_top = NodePath("../Resume")
@@ -105,7 +113,7 @@ theme_override_styles/disabled = ExtResource("5")
 theme_override_styles/focus = ExtResource("5")
 text = "Options"
 
-[node name="Exit" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu"]
+[node name="Exit" type="Button" parent="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Options")
 focus_neighbor_top = NodePath("../Options")
@@ -163,6 +171,6 @@ Collected Count:"
 process_mode = 3
 scale = Vector2(3.1, 3.1)
 
-[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/Resume" to="SubViewportContainer/PauseMenu" method="_on_Resume_pressed"]
-[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/Options" to="SubViewportContainer/PauseMenu" method="_on_Options_pressed"]
-[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/Exit" to="SubViewportContainer/PauseMenu" method="_on_Exit_pressed"]
+[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer/Resume" to="SubViewportContainer/PauseMenu" method="_on_Resume_pressed"]
+[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer/Options" to="SubViewportContainer/PauseMenu" method="_on_Options_pressed"]
+[connection signal="pressed" from="SubViewportContainer/PauseMenu/FirstMenu/MenuContainer/Exit" to="SubViewportContainer/PauseMenu" method="_on_Exit_pressed"]
